@@ -1,0 +1,13 @@
+*.py[cod]
+*.sqlite3*
+*.png
+*.jpeg
+*.jpg
+
+**__pycache__
+migrations/????_*.py
+
+/static
+/media
+/templates
+*.zip
