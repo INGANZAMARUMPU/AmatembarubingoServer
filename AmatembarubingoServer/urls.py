@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from . import settings
 
-admin.site.site_header = 'AMAZI MEZA'
+admin.site.site_header = 'AMAZI MEZA HOSE'
 admin.site.index_title = 'haruguru'
 admin.site.site_title = 'Ubugenduzi'
 
