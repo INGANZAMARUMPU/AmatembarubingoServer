@@ -93,6 +93,9 @@ class ReseauDAlimentation(models.Model):
 
 class Ibombo(models.Model):
     id = models.BigAutoField(primary_key=True)
+    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
+    localisation = models.ForeignKey(Localisation, on_delete=models.PROTECT)
+    date = models.DateField(default=timezone.now)
     nom = models.CharField(max_length=32, help_text="serugo, ishure, ivuriro, ishengero...")
     umugende = models.CharField(max_length=32)
     fonctionnel = models.BooleanField()
@@ -107,6 +110,8 @@ class Ibombo(models.Model):
 
 class BranchementPrive(models.Model):
     id = models.BigAutoField(primary_key=True)
+    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
+    localisation = models.ForeignKey(Localisation, on_delete=models.PROTECT)
     nom = models.CharField(max_length=32, help_text="izina serugo canke ry'inyubakwa rusangi")
     umugende = models.CharField(max_length=32)
     date = models.DateField(default=timezone.now)
@@ -120,6 +125,7 @@ class BranchementPrive(models.Model):
 
 class Pompe(models.Model):
     id = models.BigAutoField(primary_key=True)
+    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
     code = models.CharField(max_length=32)
     code_reseau = models.CharField(max_length=32)
     nom = models.CharField(max_length=32)
@@ -134,6 +140,7 @@ class Pompe(models.Model):
 
 class Puit(models.Model):
     id = models.BigAutoField(primary_key=True)
+    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
     nature = models.CharField(max_length=32)
     nom = models.CharField(max_length=32)
     date_forage = models.DateField()
@@ -152,6 +159,7 @@ class Puit(models.Model):
 
 class Reservoir(models.Model):
     id = models.BigAutoField(primary_key=True)
+    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
     code_reservoir = models.CharField(max_length=32)
     code_reseau = models.CharField(max_length=32)
     nom = models.CharField(max_length=32)
@@ -167,6 +175,7 @@ class Reservoir(models.Model):
 
 class RusengoYubakiye(models.Model):
     id = models.BigAutoField(primary_key=True)
+    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
     nom = models.CharField(max_length=32)
     date = models.DateField(default=timezone.now)
     sous_colline = models.ForeignKey(SousColline, on_delete=models.PROTECT)
@@ -183,6 +192,7 @@ class RusengoYubakiye(models.Model):
 
 class SourceNonAmenage(models.Model):
     id = models.BigAutoField(primary_key=True)
+    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
     code = models.CharField(max_length=32)
     nom = models.CharField(max_length=32)
     date = models.DateField(default=timezone.now)
@@ -199,6 +209,7 @@ class SourceNonAmenage(models.Model):
 
 class VillageModerne(models.Model):
     id = models.BigAutoField(primary_key=True)
+    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
     code = models.CharField(max_length=32)
     nom = models.CharField(max_length=32)
     date = models.DateField(default=timezone.now)
@@ -214,6 +225,7 @@ class VillageModerne(models.Model):
 
 class VillageCollinaire(models.Model):
     id = models.BigAutoField(primary_key=True)
+    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
     code = models.CharField(max_length=32)
     nom = models.CharField(max_length=32)
     date = models.DateField(default=timezone.now)
