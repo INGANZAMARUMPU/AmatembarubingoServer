@@ -115,6 +115,9 @@ class BranchementPrive(models.Model):
     nb_menages = models.IntegerField()
     observations = models.CharField(max_length=128)
 
+    def __str__(self):
+        return self.nom
+
 class Pompe(models.Model):
     id = models.BigAutoField(primary_key=True)
     code_ouvrage = models.CharField(max_length=32)
@@ -125,6 +128,9 @@ class Pompe(models.Model):
     localisation = models.ForeignKey(Localisation, on_delete=models.PROTECT)
     fonctionnel = models.BooleanField()
     observations = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.nom
 
 class Puit(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -137,9 +143,12 @@ class Puit(models.Model):
     fonctionnel = models.BooleanField()
     coloration = models.BooleanField()
     nb_menages = models.IntegerField()
-    parfois_sec = models.BooleanField()
+    tarissement = models.BooleanField()
     cloturee = models.BooleanField()
     observations = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.nom
 
 class Reservoir(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -153,4 +162,38 @@ class Reservoir(models.Model):
     volume_en_m3 = models.FloatField(help_text="le volume en mettres cube")
     observations = models.CharField(max_length=128)
 
-# class RusengoYubakiye(models.Model):
+    def __str__(self):
+        return self.nom
+
+class RusengoYubakiye(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    nom = models.CharField(max_length=32)
+    date = models.DateField(default=timezone.now)
+    sous_colline = models.ForeignKey(SousColline, on_delete=models.PROTECT)
+    localisation = models.ForeignKey(Localisation, on_delete=models.PROTECT)
+    fonctionnel = models.BooleanField()
+    coloration = models.BooleanField()
+    tarissement = models.BooleanField()
+    cloturee = models.BooleanField()
+    nb_menages = models.IntegerField()
+    observations = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.nom
+
+class SourceNonAmenage(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    code_ouvrage = models.CharField(max_length=32)
+    nom = models.CharField(max_length=32)
+    date = models.DateField(default=timezone.now)
+    sous_colline = models.ForeignKey(SousColline, on_delete=models.PROTECT)
+    localisation = models.ForeignKey(Localisation, on_delete=models.PROTECT)
+    coloration = models.BooleanField()
+    odeur = models.BooleanField()
+    tarissement = models.BooleanField()
+    debit = models.FloatField()
+    observations = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.nom
+
