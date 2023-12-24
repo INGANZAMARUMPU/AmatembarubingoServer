@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User, Group
+from django.utils import timezone
 
 def getFullname(user: User):
     full_name = f"{user.first_name} {user.last_name}".strip()
@@ -38,31 +39,45 @@ class Colline(models.Model):
     def __str__(self):
         return f"{self.nom} - {self.commune}"
 
+class SousColline(models.Model):
+    id = models.SmallAutoField(primary_key=True)
+    nom = models.CharField(max_length=16)
+    colline = models.ForeignKey(Colline, on_delete=models.CASCADE)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+
+    def __str__(self):
+        return f"{self.nom} - {self.colline}"
+
 class Enqueteur(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     telephone = models.CharField(max_length=12)
     colline = models.ForeignKey(Colline, on_delete=models.CASCADE)
 
-class Fiche(models.Model):
-    id = models.SmallAutoField(primary_key=True)
-    nom = models.CharField(max_length=32)
-
-class Branchement(models.Model):
-    id = models.SmallAutoField(primary_key=True)
-    proprietaire = models.CharField(max_length=32)
-
-class Resultat(models.Model):
+class Localite(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
     altitude = models.FloatField()
     precision = models.FloatField()
+
+class ReseauDAlimentation(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    code = models.CharField(max_length=16)
     nom = models.CharField(max_length=32)
-    fiche = models.ForeignKey(Fiche, on_delete=models.PROTECT)
-    branchement = models.ForeignKey(Branchement, on_delete=models.PROTECT)
-    source = models.CharField(max_length=32)
-    eau_accessible = models.BooleanField()
-    nb_menages = models.SmallIntegerField()
+    date = models.DateField(default=timezone.now)
+    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
+    localite = models.ForeignKey(Localite, on_delete=models.PROTECT)
+    sous_colline = models.ForeignKey(SousColline, on_delete=models.PROTECT)
+    gravitaire = models.BooleanField(max_length=8)
+    pompage = models.BooleanField(max_length=8)
+    lineaire_km = models.FloatField(max_length=8)
+    gestionnaire = models.CharField(max_length=32)
+    nb_captages = models.IntegerField()
+    nb_pompes = models.IntegerField()
+    nb_reservoirs = models.IntegerField()
+    nb_bornes_fontaines_publiques  = models.IntegerField()
+    nb_branchements_prives = models.IntegerField()
+    nb_menages = models.IntegerField()
     observations = models.CharField(max_length=128)
