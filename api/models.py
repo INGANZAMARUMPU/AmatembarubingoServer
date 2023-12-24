@@ -120,7 +120,7 @@ class BranchementPrive(models.Model):
 
 class Pompe(models.Model):
     id = models.BigAutoField(primary_key=True)
-    code_ouvrage = models.CharField(max_length=32)
+    code = models.CharField(max_length=32)
     code_reseau = models.CharField(max_length=32)
     nom = models.CharField(max_length=32)
     date = models.DateField(default=timezone.now)
@@ -144,7 +144,7 @@ class Puit(models.Model):
     coloration = models.BooleanField()
     nb_menages = models.IntegerField()
     tarissement = models.BooleanField()
-    cloturee = models.BooleanField()
+    cloture = models.BooleanField()
     observations = models.CharField(max_length=128)
 
     def __str__(self):
@@ -174,7 +174,7 @@ class RusengoYubakiye(models.Model):
     fonctionnel = models.BooleanField()
     coloration = models.BooleanField()
     tarissement = models.BooleanField()
-    cloturee = models.BooleanField()
+    cloture = models.BooleanField()
     nb_menages = models.IntegerField()
     observations = models.CharField(max_length=128)
 
@@ -183,7 +183,7 @@ class RusengoYubakiye(models.Model):
 
 class SourceNonAmenage(models.Model):
     id = models.BigAutoField(primary_key=True)
-    code_ouvrage = models.CharField(max_length=32)
+    code = models.CharField(max_length=32)
     nom = models.CharField(max_length=32)
     date = models.DateField(default=timezone.now)
     sous_colline = models.ForeignKey(SousColline, on_delete=models.PROTECT)
@@ -197,3 +197,32 @@ class SourceNonAmenage(models.Model):
     def __str__(self):
         return self.nom
 
+class VillageModerne(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    code = models.CharField(max_length=32)
+    nom = models.CharField(max_length=32)
+    date = models.DateField(default=timezone.now)
+    sous_colline = models.ForeignKey(SousColline, on_delete=models.PROTECT)
+    alimentation_potable = models.BooleanField()
+    source_a_capter = models.CharField(max_length=32)
+    debit = models.FloatField()
+    localisation = models.ForeignKey(Localisation, on_delete=models.PROTECT)
+    observations = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.nom
+
+class VillageCollinaire(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    code = models.CharField(max_length=32)
+    nom = models.CharField(max_length=32)
+    date = models.DateField(default=timezone.now)
+    sous_colline = models.ForeignKey(SousColline, on_delete=models.PROTECT)
+    alimentation_potable = models.BooleanField()
+    source_a_capter = models.CharField(max_length=32)
+    debit = models.FloatField()
+    localisation = models.ForeignKey(Localisation, on_delete=models.PROTECT)
+    observations = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.nom
