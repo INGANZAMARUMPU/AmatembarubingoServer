@@ -58,7 +58,7 @@ class Enqueteur(models.Model):
     def __str__(self):
         return str(self.user)
 
-class Localite(models.Model):
+class Localisation(models.Model):
     id = models.BigAutoField(primary_key=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -74,7 +74,7 @@ class ReseauDAlimentation(models.Model):
     nom = models.CharField(max_length=32)
     date = models.DateField(default=timezone.now)
     enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
-    localite = models.ForeignKey(Localite, on_delete=models.PROTECT)
+    localisation = models.ForeignKey(Localisation, on_delete=models.PROTECT)
     sous_colline = models.ForeignKey(SousColline, on_delete=models.PROTECT)
     gravitaire = models.BooleanField()
     pompage = models.BooleanField()
@@ -93,7 +93,7 @@ class ReseauDAlimentation(models.Model):
 
 class Ibombo(models.Model):
     id = models.BigAutoField(primary_key=True)
-    serugo = models.CharField(max_length=32)
+    izina = models.CharField(max_length=32, help_text="serugo, ishure, ivuriro, ishengero...")
     umugende = models.CharField(max_length=32)
     rirakora = models.BooleanField()
     nb_menages = models.IntegerField()
@@ -103,5 +103,26 @@ class Ibombo(models.Model):
         verbose_name_plural = "amabombo"
 
     def __str__(self):
-        return self.serugo
+        return self.izina
+
+class BranchementPrive(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    izina = models.CharField(max_length=32, help_text="izina serugo canke ry'inyubakwa rusangi")
+    umugende = models.CharField(max_length=32)
+    date = models.DateField(default=timezone.now)
+    sous_colline = models.ForeignKey(SousColline, on_delete=models.PROTECT)
+    rirakora = models.BooleanField()
+    nb_menages = models.IntegerField()
+    observations = models.CharField(max_length=128)
+
+class Pompe(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    code_ouvrage = models.CharField(max_length=32)
+    code_reseau = models.CharField(max_length=32)
+    nom_reseau = models.CharField(max_length=32)
+    date = models.DateField(default=timezone.now)
+    sous_colline = models.ForeignKey(SousColline, on_delete=models.PROTECT)
+    localisation = models.ForeignKey(Localisation, on_delete=models.PROTECT)
+    fonctionnel = models.BooleanField()
+    observations = models.CharField(max_length=128)
 
