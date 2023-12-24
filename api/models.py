@@ -14,7 +14,7 @@ class GROUPS(models.TextChoices):
 
 print("Chargement des groupes")
 for value, key in GROUPS.choices:
-    Group.objects.get_or_create(value)
+    Group.objects.get_or_create(name=value)
 
 class Province(models.Model):
     id = models.SmallAutoField(primary_key=True)

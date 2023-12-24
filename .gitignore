@@ -5,7 +5,8 @@
 *.jpg
 
 **__pycache__
-migrations/????_*.py
+**migrations
+!__init__.py
 
 /static
 /media
