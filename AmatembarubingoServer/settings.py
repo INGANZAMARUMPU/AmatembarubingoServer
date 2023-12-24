@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'api',
     'admin_extra_buttons',
+    'import_export'
 ]
 
 MIDDLEWARE = [
@@ -128,3 +129,6 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=6),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=5),
 }
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
+IMPORT_EXPORT_IMPORT_PERMISSION_CODE = "add",
