@@ -90,6 +90,9 @@ class ReseauDAlimentation(models.Model):
 
     def __str__(self):
         return self.nom
+    
+    class Meta:
+        verbose_name_plural = "reseaux d'alimentation"
 
 class Ibombo(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -189,8 +192,11 @@ class RusengoYubakiye(models.Model):
 
     def __str__(self):
         return self.nom
+    
+    class Meta:
+        verbose_name_plural = "rusengo zubakiye"
 
-class SourceNonAmenage(models.Model):
+class SourceNonAmenagee(models.Model):
     id = models.BigAutoField(primary_key=True)
     enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
     code = models.CharField(max_length=32)
@@ -206,6 +212,9 @@ class SourceNonAmenage(models.Model):
 
     def __str__(self):
         return self.nom
+    
+    class Meta:
+        verbose_name_plural = "Sources non-aménagées"
 
 class VillageModerne(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -222,6 +231,9 @@ class VillageModerne(models.Model):
 
     def __str__(self):
         return self.nom
+    
+    class Meta:
+        verbose_name_plural = "villages modernes"
 
 class VillageCollinaire(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -238,3 +250,6 @@ class VillageCollinaire(models.Model):
 
     def __str__(self):
         return self.nom
+    
+    class Meta:
+        verbose_name_plural = "villages collinaires"
