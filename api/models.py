@@ -55,12 +55,18 @@ class Enqueteur(models.Model):
     telephone = models.CharField(max_length=12)
     colline = models.ForeignKey(Colline, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return str(self.user)
+
 class Localite(models.Model):
     id = models.BigAutoField(primary_key=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
     altitude = models.FloatField()
     precision = models.FloatField()
+
+    def __str__(self):
+        return f"Lat. {self.latitude}, Long {self.longitude}"
 
 class ReseauDAlimentation(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -70,14 +76,32 @@ class ReseauDAlimentation(models.Model):
     enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
     localite = models.ForeignKey(Localite, on_delete=models.PROTECT)
     sous_colline = models.ForeignKey(SousColline, on_delete=models.PROTECT)
-    gravitaire = models.BooleanField(max_length=8)
-    pompage = models.BooleanField(max_length=8)
+    gravitaire = models.BooleanField()
+    pompage = models.BooleanField()
     lineaire_km = models.FloatField(max_length=8)
     gestionnaire = models.CharField(max_length=32)
     nb_captages = models.IntegerField()
     nb_pompes = models.IntegerField()
     nb_reservoirs = models.IntegerField()
-    nb_bornes_fontaines_publiques  = models.IntegerField()
+    nb_bornes_fontaines_publiques = models.IntegerField()
     nb_branchements_prives = models.IntegerField()
     nb_menages = models.IntegerField()
     observations = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.nom
+
+class Ibombo(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    serugo = models.CharField(max_length=32)
+    umugende = models.CharField(max_length=32)
+    rirakora = models.BooleanField()
+    nb_menages = models.IntegerField()
+    observations = models.CharField(max_length=128)
+    
+    class Meta:
+        verbose_name_plural = "amabombo"
+
+    def __str__(self):
+        return self.serugo
+
