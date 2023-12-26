@@ -27,11 +27,6 @@ class EnqueteurResource(resources.ModelResource):
         model = Enqueteur
 
 
-class LocalisationResource(resources.ModelResource):
-    class Meta:
-        model = Localisation
-
-
 class ReseauDAlimentationResource(resources.ModelResource):
     class Meta:
         model = ReseauDAlimentation
@@ -45,6 +40,11 @@ class IbomboResource(resources.ModelResource):
 class BranchementPriveResource(resources.ModelResource):
     class Meta:
         model = BranchementPrive
+
+
+class CaptageResource(resources.ModelResource):
+    class Meta:
+        model = Captage
 
 
 class PompeResource(resources.ModelResource):

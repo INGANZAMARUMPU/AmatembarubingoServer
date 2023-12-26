@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 from . import settings
 
 admin.site.site_header = 'AMAZI MEZA HOSE'
-admin.site.index_title = 'haruguru'
+admin.site.index_title = 'Administration'
 admin.site.site_title = 'Ubugenduzi'
 
 urlpatterns = [

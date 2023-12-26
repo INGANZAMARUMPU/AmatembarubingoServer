@@ -128,6 +128,23 @@ class BranchementPrive(models.Model):
     def __str__(self):
         return self.nom
 
+class Captage(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
+    code = models.CharField(max_length=32)
+    code_reseau = models.CharField(max_length=32)
+    nom = models.CharField(max_length=32)
+    date = models.DateField(default=timezone.now)
+    sous_colline = models.ForeignKey(SousColline, on_delete=models.PROTECT)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    altitude = models.FloatField()
+    precision = models.FloatField()
+    fonctionnel = models.BooleanField()
+    tarissement = models.BooleanField()
+    cloture = models.BooleanField()
+    observations = models.CharField(max_length=128)
+
 class Pompe(models.Model):
     id = models.BigAutoField(primary_key=True)
     enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)

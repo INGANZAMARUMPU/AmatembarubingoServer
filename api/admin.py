@@ -49,6 +49,12 @@ class BranchementPriveAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     display_fields = "enqueteur", "latitude", "longitude", "altitude", "nom", "umugende", "date", "sous_colline", "fonctionnel", "nb_menages", "observations"
 
 
+@admin.register(Captage)
+class CaptageAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = CaptageResource
+    display_fields = "enqueteur", "code", "code_reseau", "nom", "date", "sous_colline", "latitude", "longitude", "altitude", "precision", "fonctionnel", "tarissement", "cloture", "observations"
+
+
 @admin.register(Pompe)
 class PompeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = PompeResource
