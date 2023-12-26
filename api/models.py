@@ -32,7 +32,7 @@ class Commune(models.Model):
         return f"{self.nom} - {self.province}"
 
 class Colline(models.Model):
-    id = models.SmallAutoField(primary_key=True)
+    code = models.CharField(primary_key=True)
     nom = models.CharField(max_length=16)
     commune = models.ForeignKey(Commune, on_delete=models.CASCADE)
 
@@ -43,8 +43,6 @@ class SousColline(models.Model):
     id = models.SmallAutoField(primary_key=True)
     nom = models.CharField(max_length=16)
     colline = models.ForeignKey(Colline, on_delete=models.CASCADE)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
 
     def __str__(self):
         return f"{self.nom} - {self.colline}"
