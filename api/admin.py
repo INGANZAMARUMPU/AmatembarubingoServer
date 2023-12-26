@@ -52,31 +52,37 @@ class BranchementPriveAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register(Captage)
 class CaptageAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = CaptageResource
-    display_fields = "enqueteur", "code", "code_reseau", "nom", "date", "sous_colline", "latitude", "longitude", "altitude", "precision", "fonctionnel", "tarissement", "cloture", "observations"
+    display_fields = "enqueteur", "code", "code_reseau", "nom", "date", "sous_colline", "latitude", "longitude", "altitude", "precision", "fonctionnel", "tarissement", "protection", "debit", "observations"
 
 
 @admin.register(Pompe)
 class PompeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = PompeResource
-    display_fields = "enqueteur", "code", "code_reseau", "nom", "date", "sous_colline", "latitude", "longitude", "altitude", "fonctionnel", "observations"
+    display_fields = "enqueteur", "code", "code_reseau", "nom", "date", "sous_colline", "latitude", "longitude", "altitude", "fonctionnel", "debit", "observations"
 
 
 @admin.register(Puit)
 class PuitAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = PuitResource
-    display_fields = "enqueteur", "nature", "nom", "date_forage", "date", "sous_colline", "latitude", "longitude", "altitude", "fonctionnel", "coloration", "nb_menages", "tarissement", "cloture", "observations"
+    display_fields = "enqueteur", "nature", "nom", "date_forage", "date", "sous_colline", "latitude", "longitude", "altitude", "fonctionnel", "coloration", "nb_menages", "tarissement", "protection", "observations"
+
+
+@admin.register(Forage)
+class ForageAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = ForageResource
+    display_fields = "enqueteur", "nature", "nom", "date_forage", "date", "sous_colline", "latitude", "longitude", "altitude", "fonctionnel", "coloration", "nb_menages", "tarissement", "observations"
 
 
 @admin.register(Reservoir)
 class ReservoirAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = ReservoirResource
-    display_fields = "enqueteur", "code_reservoir", "code_reseau", "nom", "date", "sous_colline", "latitude", "longitude", "altitude", "fonctionnel", "volume_en_m3", "observations"
+    display_fields = "enqueteur", "code_reservoir", "code_reseau", "nom", "date", "sous_colline", "latitude", "longitude", "altitude", "fonctionnel", "volume", "observations"
 
 
-@admin.register(RusengoYubakiye)
-class RusengoYubakiyeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    resource_class = RusengoYubakiyeResource
-    display_fields = "enqueteur", "nom", "date", "sous_colline", "latitude", "longitude", "altitude", "fonctionnel", "coloration", "tarissement", "cloture", "nb_menages", "observations"
+@admin.register(SourceAmenagee)
+class SourceAmenageeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = SourceAmenageeResource
+    display_fields = "enqueteur", "nom", "date", "sous_colline", "latitude", "longitude", "altitude", "fonctionnel", "coloration", "tarissement", "protection", "nb_menages", "observations"
 
 
 @admin.register(SourceNonAmenagee)

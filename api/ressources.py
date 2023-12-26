@@ -57,14 +57,19 @@ class PuitResource(resources.ModelResource):
         model = Puit
 
 
+class ForageResource(resources.ModelResource):
+    class Meta:
+        model = Forage
+
+
 class ReservoirResource(resources.ModelResource):
     class Meta:
         model = Reservoir
 
 
-class RusengoYubakiyeResource(resources.ModelResource):
+class SourceAmenageeResource(resources.ModelResource):
     class Meta:
-        model = RusengoYubakiye
+        model = SourceAmenagee
 
 
 class SourceNonAmenageeResource(resources.ModelResource):

@@ -142,7 +142,8 @@ class Captage(models.Model):
     precision = models.FloatField()
     fonctionnel = models.BooleanField()
     tarissement = models.BooleanField()
-    cloture = models.BooleanField()
+    protection = models.BooleanField()
+    debit = models.FloatField(help_text="nombre de littres par seconde")
     observations = models.CharField(max_length=128)
 
 class Pompe(models.Model):
@@ -158,6 +159,7 @@ class Pompe(models.Model):
     altitude = models.FloatField()
     precision = models.FloatField()
     fonctionnel = models.BooleanField()
+    debit = models.FloatField(help_text="nombre de littres par seconde")
     observations = models.CharField(max_length=128)
 
     def __str__(self):
@@ -179,7 +181,28 @@ class Puit(models.Model):
     coloration = models.BooleanField()
     nb_menages = models.IntegerField()
     tarissement = models.BooleanField()
-    cloture = models.BooleanField()
+    protection = models.BooleanField()
+    observations = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.nom
+
+class Forage(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
+    nature = models.CharField(max_length=32)
+    nom = models.CharField(max_length=32)
+    date_forage = models.DateField()
+    date = models.DateField(default=timezone.now)
+    sous_colline = models.ForeignKey(SousColline, on_delete=models.PROTECT)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    altitude = models.FloatField()
+    precision = models.FloatField()
+    fonctionnel = models.BooleanField()
+    coloration = models.BooleanField()
+    nb_menages = models.IntegerField()
+    tarissement = models.BooleanField()
     observations = models.CharField(max_length=128)
 
     def __str__(self):
@@ -198,13 +221,13 @@ class Reservoir(models.Model):
     altitude = models.FloatField()
     precision = models.FloatField()
     fonctionnel = models.BooleanField()
-    volume_en_m3 = models.FloatField(help_text="le volume en mettres cube")
+    volume = models.FloatField(help_text="le volume en mettres cube")
     observations = models.CharField(max_length=128)
 
     def __str__(self):
         return self.nom
 
-class RusengoYubakiye(models.Model):
+class SourceAmenagee(models.Model):
     id = models.BigAutoField(primary_key=True)
     enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
     nom = models.CharField(max_length=32)
@@ -217,7 +240,7 @@ class RusengoYubakiye(models.Model):
     fonctionnel = models.BooleanField()
     coloration = models.BooleanField()
     tarissement = models.BooleanField()
-    cloture = models.BooleanField()
+    protection = models.BooleanField()
     nb_menages = models.IntegerField()
     observations = models.CharField(max_length=128)
 
@@ -225,7 +248,7 @@ class RusengoYubakiye(models.Model):
         return self.nom
     
     class Meta:
-        verbose_name_plural = "rusengo zubakiye"
+        verbose_name_plural = "Sources aménagées"
 
 class SourceNonAmenagee(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -239,7 +262,6 @@ class SourceNonAmenagee(models.Model):
     altitude = models.FloatField()
     precision = models.FloatField()
     coloration = models.BooleanField()
-    odeur = models.BooleanField()
     tarissement = models.BooleanField()
     debit = models.FloatField()
     observations = models.CharField(max_length=128)
