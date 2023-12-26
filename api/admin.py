@@ -14,16 +14,17 @@ class CommuneAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     display_fields = "nom", "province"
 
 
+@admin.register(Zone)
+class ZoneAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = ZoneResource
+    display_fields = "nom", "colline", "latitude", "longitude"
+
+
 @admin.register(Colline)
 class CollineAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = CollineResource
-    display_fields = "nom", "commune"
-
-
-@admin.register(SousColline)
-class SousCollineAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    resource_class = SousCollineResource
-    display_fields = "nom", "colline", "latitude", "longitude"
+    display_fields = "nom", "zone"
+    search_fields = "nom", "zone__nom"
 
 
 @admin.register(Enqueteur)
@@ -34,7 +35,7 @@ class EnqueteurAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register(ReseauDAlimentation)
 class ReseauDAlimentationAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = ReseauDAlimentationResource
-    display_fields = "code", "nom", "date", "enqueteur", "latitude", "longitude", "altitude", "sous_colline", "gravitaire", "pompage", "lineaire_km", "gestionnaire", "nb_captages", "nb_pompes", "nb_reservoirs", "nb_bornes_fontaines_publiques", "nb_branchements_prives", "nb_menages", "observations"
+    display_fields = "code", "nom", "date", "enqueteur", "latitude", "longitude", "altitude", "colline", "gravitaire", "pompage", "lineaire_km", "gestionnaire", "nb_captages", "nb_pompes", "nb_reservoirs", "nb_bornes_fontaines_publiques", "nb_branchements_prives", "nb_menages", "observations"
 
 
 @admin.register(Ibombo)
@@ -46,60 +47,60 @@ class IbomboAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register(BranchementPrive)
 class BranchementPriveAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = BranchementPriveResource
-    display_fields = "enqueteur", "latitude", "longitude", "altitude", "nom", "umugende", "date", "sous_colline", "fonctionnel", "nb_menages", "observations"
+    display_fields = "enqueteur", "latitude", "longitude", "altitude", "nom", "umugende", "date", "colline", "fonctionnel", "nb_menages", "observations"
 
 
 @admin.register(Captage)
 class CaptageAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = CaptageResource
-    display_fields = "enqueteur", "code", "code_reseau", "nom", "date", "sous_colline", "latitude", "longitude", "altitude", "precision", "fonctionnel", "tarissement", "protection", "debit", "observations"
+    display_fields = "enqueteur", "code", "code_reseau", "nom", "date", "colline", "latitude", "longitude", "altitude", "precision", "fonctionnel", "tarissement", "protection", "debit", "observations"
 
 
 @admin.register(Pompe)
 class PompeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = PompeResource
-    display_fields = "enqueteur", "code", "code_reseau", "nom", "date", "sous_colline", "latitude", "longitude", "altitude", "fonctionnel", "debit", "observations"
+    display_fields = "enqueteur", "code", "code_reseau", "nom", "date", "colline", "latitude", "longitude", "altitude", "fonctionnel", "debit", "observations"
 
 
 @admin.register(Puit)
 class PuitAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = PuitResource
-    display_fields = "enqueteur", "nature", "nom", "date_forage", "date", "sous_colline", "latitude", "longitude", "altitude", "fonctionnel", "coloration", "nb_menages", "tarissement", "protection", "observations"
+    display_fields = "enqueteur", "nature", "nom", "date_forage", "date", "colline", "latitude", "longitude", "altitude", "fonctionnel", "coloration", "nb_menages", "tarissement", "protection", "observations"
 
 
 @admin.register(Forage)
 class ForageAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = ForageResource
-    display_fields = "enqueteur", "nature", "nom", "date_forage", "date", "sous_colline", "latitude", "longitude", "altitude", "fonctionnel", "coloration", "nb_menages", "tarissement", "observations"
+    display_fields = "enqueteur", "nature", "nom", "date_forage", "date", "colline", "latitude", "longitude", "altitude", "fonctionnel", "coloration", "nb_menages", "tarissement", "observations"
 
 
 @admin.register(Reservoir)
 class ReservoirAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = ReservoirResource
-    display_fields = "enqueteur", "code_reservoir", "code_reseau", "nom", "date", "sous_colline", "latitude", "longitude", "altitude", "fonctionnel", "volume", "observations"
+    display_fields = "enqueteur", "code_reservoir", "code_reseau", "nom", "date", "colline", "latitude", "longitude", "altitude", "fonctionnel", "volume", "observations"
 
 
 @admin.register(SourceAmenagee)
 class SourceAmenageeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = SourceAmenageeResource
-    display_fields = "enqueteur", "nom", "date", "sous_colline", "latitude", "longitude", "altitude", "fonctionnel", "coloration", "tarissement", "protection", "nb_menages", "observations"
+    display_fields = "enqueteur", "nom", "date", "colline", "latitude", "longitude", "altitude", "fonctionnel", "coloration", "tarissement", "protection", "nb_menages", "observations"
 
 
 @admin.register(SourceNonAmenagee)
 class SourceNonAmenageeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = SourceNonAmenageeResource
-    display_fields = "enqueteur", "code", "nom", "date", "sous_colline", "latitude", "longitude", "altitude", "coloration", "odeur", "tarissement", "debit", "observations"
+    display_fields = "enqueteur", "code", "nom", "date", "colline", "latitude", "longitude", "altitude", "coloration", "odeur", "tarissement", "debit", "observations"
 
 
 @admin.register(VillageModerne)
 class VillageModerneAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = VillageModerneResource
-    display_fields = "enqueteur", "code", "nom", "date", "sous_colline", "alimentation_potable", "source_a_capter", "debit", "latitude", "longitude", "altitude", "observations"
+    display_fields = "enqueteur", "code", "nom", "date", "colline", "alimentation_potable", "source_a_capter", "debit", "latitude", "longitude", "altitude", "observations"
 
 
 @admin.register(VillageCollinaire)
 class VillageCollinaireAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = VillageCollinaireResource
-    display_fields = "enqueteur", "code", "nom", "date", "sous_colline", "alimentation_potable", "source_a_capter", "debit", "latitude", "longitude", "altitude", "observations"
+    display_fields = "enqueteur", "code", "nom", "date", "colline", "alimentation_potable", "source_a_capter", "debit", "latitude", "longitude", "altitude", "observations"
 
 

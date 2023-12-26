@@ -12,14 +12,14 @@ class CommuneResource(resources.ModelResource):
         model = Commune
 
 
+class ZoneResource(resources.ModelResource):
+    class Meta:
+        model = Zone
+
+
 class CollineResource(resources.ModelResource):
     class Meta:
         model = Colline
-
-
-class SousCollineResource(resources.ModelResource):
-    class Meta:
-        model = SousColline
 
 
 class EnqueteurResource(resources.ModelResource):
