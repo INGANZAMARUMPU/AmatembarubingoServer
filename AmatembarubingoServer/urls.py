@@ -9,11 +9,7 @@ admin.site.index_title = 'Administration'
 admin.site.site_title = 'Ubugenduzi'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
 	path('api-auth/', include('rest_framework.urls')),
-    re_path(
-        "^(?!media)(?!admin)(?!api)(?!static).*$",
-        TemplateView.as_view(template_name='index.html')
-    ),
+    path('', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

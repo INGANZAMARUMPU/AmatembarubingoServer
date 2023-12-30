@@ -34,7 +34,7 @@ class Commune(models.Model):
         return f"{self.nom} - {self.province}"
 
 class Zone(models.Model):
-    id = models.AutoField(primary_key=True, max_length=10)
+    id = models.AutoField(primary_key=True)
     nom = models.CharField(max_length=16)
     commune = models.ForeignKey(Commune, on_delete=models.CASCADE)
 
