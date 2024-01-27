@@ -21,6 +21,7 @@ class ZoneAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 class CollineAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = CollineResource
     display_fields = "nom", "zone"
+    search_fields = "nom", "zone__nom", "zone__commune__nom"
 
 @admin.register(Enqueteur)
 class EnqueteurAdmin(ImportExportModelAdmin, admin.ModelAdmin):

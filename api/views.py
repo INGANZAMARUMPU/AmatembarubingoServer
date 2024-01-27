@@ -21,7 +21,9 @@ class ReseauDAlimentationViewset(mixins.ListModelMixin, mixins.RetrieveModelMixi
     serializer_class = ReseauDAlimentationSerializer
     filter_backends = filters.DjangoFilterBackend,
     filterset_fields = {
-        'colline': ['exact']
+        'colline': ['exact'],
+        'colline__zone': ['exact'],
+        'colline__zone__commune': ['exact']
     }
 
 class IbomboViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -30,7 +32,9 @@ class IbomboViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.G
     serializer_class = IbomboSerializer
     filter_backends = filters.DjangoFilterBackend,
     filterset_fields = {
-        'colline': ['exact']
+        'colline': ['exact'],
+        'colline__zone': ['exact'],
+        'colline__zone__commune': ['exact']
     }
 
 class BranchementPriveViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -39,7 +43,9 @@ class BranchementPriveViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, 
     serializer_class = BranchementPriveSerializer
     filter_backends = filters.DjangoFilterBackend,
     filterset_fields = {
-        'colline': ['exact']
+        'colline': ['exact'],
+        'colline__zone': ['exact'],
+        'colline__zone__commune': ['exact']
     }
 
 class CaptageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -48,7 +54,9 @@ class CaptageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.
     serializer_class = CaptageSerializer
     filter_backends = filters.DjangoFilterBackend,
     filterset_fields = {
-        'colline': ['exact']
+        'colline': ['exact'],
+        'colline__zone': ['exact'],
+        'colline__zone__commune': ['exact']
     }
 
 class PompeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -57,7 +65,9 @@ class PompeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.Ge
     serializer_class = PompeSerializer
     filter_backends = filters.DjangoFilterBackend,
     filterset_fields = {
-        'colline': ['exact']
+        'colline': ['exact'],
+        'colline__zone': ['exact'],
+        'colline__zone__commune': ['exact']
     }
 
 class PuitViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -66,7 +76,9 @@ class PuitViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.Gen
     serializer_class = PuitSerializer
     filter_backends = filters.DjangoFilterBackend,
     filterset_fields = {
-        'colline': ['exact']
+        'colline': ['exact'],
+        'colline__zone': ['exact'],
+        'colline__zone__commune': ['exact']
     }
 
 class ForageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -75,7 +87,9 @@ class ForageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.G
     serializer_class = ForageSerializer
     filter_backends = filters.DjangoFilterBackend,
     filterset_fields = {
-        'colline': ['exact']
+        'colline': ['exact'],
+        'colline__zone': ['exact'],
+        'colline__zone__commune': ['exact']
     }
 
 class ReservoirViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -84,7 +98,9 @@ class ReservoirViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewset
     serializer_class = ReservoirSerializer
     filter_backends = filters.DjangoFilterBackend,
     filterset_fields = {
-        'colline': ['exact']
+        'colline': ['exact'],
+        'colline__zone': ['exact'],
+        'colline__zone__commune': ['exact']
     }
 
 class SourceAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -93,7 +109,9 @@ class SourceAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, vi
     serializer_class = SourceAmenageeSerializer
     filter_backends = filters.DjangoFilterBackend,
     filterset_fields = {
-        'colline': ['exact']
+        'colline': ['exact'],
+        'colline__zone': ['exact'],
+        'colline__zone__commune': ['exact']
     }
 
 class SourceNonAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -102,7 +120,9 @@ class SourceNonAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin,
     serializer_class = SourceNonAmenageeSerializer
     filter_backends = filters.DjangoFilterBackend,
     filterset_fields = {
-        'colline': ['exact']
+        'colline': ['exact'],
+        'colline__zone': ['exact'],
+        'colline__zone__commune': ['exact']
     }
 
 class VillageModerneViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -111,7 +131,9 @@ class VillageModerneViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, vi
     serializer_class = VillageModerneSerializer
     filter_backends = filters.DjangoFilterBackend,
     filterset_fields = {
-        'colline': ['exact']
+        'colline': ['exact'],
+        'colline__zone': ['exact'],
+        'colline__zone__commune': ['exact']
     }
 
 class VillageCollinaireViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -120,5 +142,7 @@ class VillageCollinaireViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin,
     serializer_class = VillageCollinaireSerializer
     filter_backends = filters.DjangoFilterBackend,
     filterset_fields = {
-        'colline': ['exact']
+        'colline': ['exact'],
+        'colline__zone': ['exact'],
+        'colline__zone__commune': ['exact']
     }
