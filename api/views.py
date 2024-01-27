@@ -10,6 +10,18 @@ from rest_framework.filters import SearchFilter
 from .models import *
 from .serializers import *
 
+def getCentre(queryset:models.QuerySet) -> tuple:
+    by_latitudes = queryset.order_by("-latitude")
+    by_longitudes = queryset.order_by("-longitude")
+    
+    max_long = by_longitudes.first().longitude
+    min_long = by_longitudes.last().longitude
+
+    max_lat = by_latitudes.first().latitude
+    min_lat = by_latitudes.last().latitude
+
+    return max_lat+min_lat/2, max_long+min_long/2
+
 class CollineViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = Colline.objects.all()
