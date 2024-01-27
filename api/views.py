@@ -6,6 +6,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from django_filters import rest_framework as filters
 from rest_framework.filters import SearchFilter
+from tqdm import tqdm
 
 from .models import *
 from .serializers import *
@@ -21,6 +22,30 @@ def getCentre(queryset:models.QuerySet) -> tuple:
     min_lat = by_latitudes.last().latitude
 
     return max_lat+min_lat/2, max_long+min_long/2
+
+def groupedTemplate(queryset:models.QuerySet, serializer):
+    provinces = Province.objects.all()
+    response = {
+        "count": queryset.count()
+    }
+    response["data"] = ProvinceSerializer(provinces, many=True).data
+    for province in response["data"]:
+        province_query = queryset.filter(colline__zone__commune__province_id=province["id"])
+        province["count"] = province_query.count()
+        province["data"] = CommuneSerializer(Commune.objects.filter(province_id=province["id"]), many=True).data
+        for commune in tqdm(province["data"]):
+            commune_query = queryset.filter(colline__zone__commune_id=commune["id"])
+            commune["count"] = commune_query.count()
+            commune["data"] = ZoneSerializer(Zone.objects.filter(commune_id=commune["id"]), many=True).data
+            for zone in commune["data"]:
+                zone_query = queryset.filter(colline__zone_id=zone["id"])
+                zone["count"] = zone_query.count()
+                zone["data"] = CollineSerializer(Colline.objects.filter(zone_id=zone["id"]), many=True).data
+                for colline in zone["data"]:
+                    colline_query = queryset.filter(colline_id=colline["id"])
+                    colline["count"] = colline_query.count()
+                    colline["data"] = serializer(colline_query.filter(colline_id=colline["id"]), many=True).data
+    return response
 
 class CollineViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = AllowAny,
@@ -38,6 +63,11 @@ class ReseauDAlimentationViewset(mixins.ListModelMixin, mixins.RetrieveModelMixi
         'colline__zone__commune': ['exact']
     }
 
+    @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
+    def grouped(self, request):
+        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+
+
 class IbomboViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = Ibombo.objects.all()
@@ -48,6 +78,11 @@ class IbomboViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.G
         'colline__zone': ['exact'],
         'colline__zone__commune': ['exact']
     }
+
+    @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
+    def grouped(self, request):
+        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+
 
 class BranchementPriveViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = AllowAny,
@@ -60,6 +95,11 @@ class BranchementPriveViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, 
         'colline__zone__commune': ['exact']
     }
 
+    @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
+    def grouped(self, request):
+        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+
+
 class CaptageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = Captage.objects.all()
@@ -70,6 +110,11 @@ class CaptageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.
         'colline__zone': ['exact'],
         'colline__zone__commune': ['exact']
     }
+
+    @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
+    def grouped(self, request):
+        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+
 
 class PompeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = AllowAny,
@@ -82,6 +127,11 @@ class PompeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.Ge
         'colline__zone__commune': ['exact']
     }
 
+    @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
+    def grouped(self, request):
+        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+
+
 class PuitViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = Puit.objects.all()
@@ -92,6 +142,11 @@ class PuitViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.Gen
         'colline__zone': ['exact'],
         'colline__zone__commune': ['exact']
     }
+
+    @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
+    def grouped(self, request):
+        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+
 
 class ForageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = AllowAny,
@@ -104,6 +159,11 @@ class ForageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.G
         'colline__zone__commune': ['exact']
     }
 
+    @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
+    def grouped(self, request):
+        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+
+
 class ReservoirViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = Reservoir.objects.all()
@@ -114,6 +174,11 @@ class ReservoirViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewset
         'colline__zone': ['exact'],
         'colline__zone__commune': ['exact']
     }
+
+    @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
+    def grouped(self, request):
+        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+
 
 class SourceAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = AllowAny,
@@ -126,6 +191,11 @@ class SourceAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, vi
         'colline__zone__commune': ['exact']
     }
 
+    @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
+    def grouped(self, request):
+        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+
+
 class SourceNonAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = SourceNonAmenagee.objects.all()
@@ -136,6 +206,11 @@ class SourceNonAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin,
         'colline__zone': ['exact'],
         'colline__zone__commune': ['exact']
     }
+
+    @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
+    def grouped(self, request):
+        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+
 
 class VillageModerneViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = AllowAny,
@@ -148,6 +223,11 @@ class VillageModerneViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, vi
         'colline__zone__commune': ['exact']
     }
 
+    @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
+    def grouped(self, request):
+        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+
+
 class VillageCollinaireViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = VillageCollinaire.objects.all()
@@ -158,3 +238,8 @@ class VillageCollinaireViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin,
         'colline__zone': ['exact'],
         'colline__zone__commune': ['exact']
     }
+
+    @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
+    def grouped(self, request):
+        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+
