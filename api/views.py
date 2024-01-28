@@ -61,7 +61,6 @@ class CollineViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.
 
     @action( methods=["GET"], detail=False, url_name=r"generate_summaries", url_path=r"generate_summaries" )
     def generate_summaries(self, request):
-        groupedTemplate(Colline.objects.all(), CollineSerializer)
         groupedTemplate(ReseauDAlimentation.objects.all(), ReseauDAlimentationSerializer)
         groupedTemplate(Ibombo.objects.all(), IbomboSerializer)
         groupedTemplate(BranchementPrive.objects.all(), BranchementPriveSerializer)
@@ -74,7 +73,7 @@ class CollineViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.
         groupedTemplate(SourceNonAmenagee.objects.all(), SourceNonAmenageeSerializer)
         groupedTemplate(VillageModerne.objects.all(), VillageModerneSerializer)
         groupedTemplate(VillageCollinaire.objects.all(), VillageCollinaireSerializer)
-        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+        return Response({"status": "Vyose vyashizwe ku gihe"}, 200)
 
 class ReseauDAlimentationViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = AllowAny,
@@ -112,7 +111,15 @@ class IbomboViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.G
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response({"location": os.listdir()}, 200)
+        filename = self.get_queryset().model.__name__
+        response = None
+        try:
+            with open(filename, "r") as file:
+                content = file.read()
+                response = json.loads(content)
+                return Response(response, 200)
+        except Exception as e:
+                return Response({"status": str(e)}, 400)
 
 
 class BranchementPriveViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -128,7 +135,15 @@ class BranchementPriveViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, 
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response({"location": os.listdir()}, 200)
+        filename = self.get_queryset().model.__name__
+        response = None
+        try:
+            with open(filename, "r") as file:
+                content = file.read()
+                response = json.loads(content)
+                return Response(response, 200)
+        except Exception as e:
+                return Response({"status": str(e)}, 400)
 
 
 class CaptageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -144,7 +159,15 @@ class CaptageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response({"location": os.listdir()}, 200)
+        filename = self.get_queryset().model.__name__
+        response = None
+        try:
+            with open(filename, "r") as file:
+                content = file.read()
+                response = json.loads(content)
+                return Response(response, 200)
+        except Exception as e:
+                return Response({"status": str(e)}, 400)
 
 
 class PompeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -160,7 +183,15 @@ class PompeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.Ge
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response({"location": os.listdir()}, 200)
+        filename = self.get_queryset().model.__name__
+        response = None
+        try:
+            with open(filename, "r") as file:
+                content = file.read()
+                response = json.loads(content)
+                return Response(response, 200)
+        except Exception as e:
+                return Response({"status": str(e)}, 400)
 
 
 class PuitViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -176,7 +207,15 @@ class PuitViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.Gen
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response({"location": os.listdir()}, 200)
+        filename = self.get_queryset().model.__name__
+        response = None
+        try:
+            with open(filename, "r") as file:
+                content = file.read()
+                response = json.loads(content)
+                return Response(response, 200)
+        except Exception as e:
+                return Response({"status": str(e)}, 400)
 
 
 class ForageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -192,7 +231,15 @@ class ForageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.G
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response({"location": os.listdir()}, 200)
+        filename = self.get_queryset().model.__name__
+        response = None
+        try:
+            with open(filename, "r") as file:
+                content = file.read()
+                response = json.loads(content)
+                return Response(response, 200)
+        except Exception as e:
+                return Response({"status": str(e)}, 400)
 
 
 class ReservoirViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -208,7 +255,15 @@ class ReservoirViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewset
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response({"location": os.listdir()}, 200)
+        filename = self.get_queryset().model.__name__
+        response = None
+        try:
+            with open(filename, "r") as file:
+                content = file.read()
+                response = json.loads(content)
+                return Response(response, 200)
+        except Exception as e:
+                return Response({"status": str(e)}, 400)
 
 
 class SourceAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -224,7 +279,15 @@ class SourceAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, vi
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response({"location": os.listdir()}, 200)
+        filename = self.get_queryset().model.__name__
+        response = None
+        try:
+            with open(filename, "r") as file:
+                content = file.read()
+                response = json.loads(content)
+                return Response(response, 200)
+        except Exception as e:
+                return Response({"status": str(e)}, 400)
 
 
 class SourceNonAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -240,7 +303,15 @@ class SourceNonAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin,
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response({"location": os.listdir()}, 200)
+        filename = self.get_queryset().model.__name__
+        response = None
+        try:
+            with open(filename, "r") as file:
+                content = file.read()
+                response = json.loads(content)
+                return Response(response, 200)
+        except Exception as e:
+                return Response({"status": str(e)}, 400)
 
 
 class VillageModerneViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -256,7 +327,15 @@ class VillageModerneViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, vi
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response({"location": os.listdir()}, 200)
+        filename = self.get_queryset().model.__name__
+        response = None
+        try:
+            with open(filename, "r") as file:
+                content = file.read()
+                response = json.loads(content)
+                return Response(response, 200)
+        except Exception as e:
+                return Response({"status": str(e)}, 400)
 
 
 class VillageCollinaireViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -272,5 +351,13 @@ class VillageCollinaireViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin,
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response({"location": os.listdir()}, 200)
+        filename = self.get_queryset().model.__name__
+        response = None
+        try:
+            with open(filename, "r") as file:
+                content = file.read()
+                response = json.loads(content)
+                return Response(response, 200)
+        except Exception as e:
+                return Response({"status": str(e)}, 400)
 
