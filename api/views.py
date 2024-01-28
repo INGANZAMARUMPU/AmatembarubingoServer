@@ -14,6 +14,7 @@ from .models import *
 from .serializers import *
 
 def getCentre(queryset:models.QuerySet) -> tuple:
+    if not queryset: return None
     by_latitudes = queryset.order_by("-latitude")
     by_longitudes = queryset.order_by("-longitude")
     
@@ -28,7 +29,8 @@ def getCentre(queryset:models.QuerySet) -> tuple:
 def groupedTemplate(queryset:models.QuerySet, serializer):
     provinces = Province.objects.all()
     response = {
-        "count": queryset.count()
+        "count": queryset.count(),
+        "centre": getCentre(queryset)
     }
     response["data"] = ProvinceSerializer(provinces, many=True).data
     filename = queryset.model.__name__
@@ -37,18 +39,22 @@ def groupedTemplate(queryset:models.QuerySet, serializer):
     for province in tqdm(response["data"]):
         province_query = queryset.filter(colline__zone__commune__province_id=province["id"])
         province["count"] = province_query.count()
+        province["centre"] = getCentre(province_query)
         province["data"] = CommuneSerializer(Commune.objects.filter(province_id=province["id"]), many=True).data
         for commune in province["data"]:
             commune_query = queryset.filter(colline__zone__commune_id=commune["id"])
             commune["count"] = commune_query.count()
+            commune["centre"] = getCentre(commune_query)
             commune["data"] = ZoneSerializer(Zone.objects.filter(commune_id=commune["id"]), many=True).data
             for zone in commune["data"]:
                 zone_query = queryset.filter(colline__zone_id=zone["id"])
                 zone["count"] = zone_query.count()
+                zone["centre"] = getCentre(zone_query)
                 zone["data"] = CollineSerializer(Colline.objects.filter(zone_id=zone["id"]), many=True).data
                 for colline in zone["data"]:
                     colline_query = queryset.filter(colline_id=colline["id"])
                     colline["count"] = colline_query.count()
+                    colline["centre"] = getCentre(colline_query)
                     colline["data"] = serializer(colline_query.filter(colline_id=colline["id"]), many=True).data
 
     with open(filename, "w") as file:
