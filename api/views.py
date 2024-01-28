@@ -1,3 +1,5 @@
+import json
+import os
 from rest_framework import viewsets, generics, mixins
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -29,11 +31,14 @@ def groupedTemplate(queryset:models.QuerySet, serializer):
         "count": queryset.count()
     }
     response["data"] = ProvinceSerializer(provinces, many=True).data
-    for province in response["data"]:
+    filename = queryset.model.__name__
+    
+    print(f"[GUPAKURURA] {filename}")
+    for province in tqdm(response["data"]):
         province_query = queryset.filter(colline__zone__commune__province_id=province["id"])
         province["count"] = province_query.count()
         province["data"] = CommuneSerializer(Commune.objects.filter(province_id=province["id"]), many=True).data
-        for commune in tqdm(province["data"]):
+        for commune in province["data"]:
             commune_query = queryset.filter(colline__zone__commune_id=commune["id"])
             commune["count"] = commune_query.count()
             commune["data"] = ZoneSerializer(Zone.objects.filter(commune_id=commune["id"]), many=True).data
@@ -45,12 +50,31 @@ def groupedTemplate(queryset:models.QuerySet, serializer):
                     colline_query = queryset.filter(colline_id=colline["id"])
                     colline["count"] = colline_query.count()
                     colline["data"] = serializer(colline_query.filter(colline_id=colline["id"]), many=True).data
-    return response
+
+    with open(filename, "w") as file:
+        print(json.dumps(response), file=file)
 
 class CollineViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = Colline.objects.all()
     serializer_class = CollineSerializer
+
+    @action( methods=["GET"], detail=False, url_name=r"generate_summaries", url_path=r"generate_summaries" )
+    def generate_summaries(self, request):
+        groupedTemplate(Colline.objects.all(), CollineSerializer)
+        groupedTemplate(ReseauDAlimentation.objects.all(), ReseauDAlimentationSerializer)
+        groupedTemplate(Ibombo.objects.all(), IbomboSerializer)
+        groupedTemplate(BranchementPrive.objects.all(), BranchementPriveSerializer)
+        groupedTemplate(Captage.objects.all(), CaptageSerializer)
+        groupedTemplate(Pompe.objects.all(), PompeSerializer)
+        groupedTemplate(Puit.objects.all(), PuitSerializer)
+        groupedTemplate(Forage.objects.all(), ForageSerializer)
+        groupedTemplate(Reservoir.objects.all(), ReservoirSerializer)
+        groupedTemplate(SourceAmenagee.objects.all(), SourceAmenageeSerializer)
+        groupedTemplate(SourceNonAmenagee.objects.all(), SourceNonAmenageeSerializer)
+        groupedTemplate(VillageModerne.objects.all(), VillageModerneSerializer)
+        groupedTemplate(VillageCollinaire.objects.all(), VillageCollinaireSerializer)
+        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
 
 class ReseauDAlimentationViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = AllowAny,
@@ -65,8 +89,15 @@ class ReseauDAlimentationViewset(mixins.ListModelMixin, mixins.RetrieveModelMixi
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
-
+        filename = self.get_queryset().model.__name__
+        response = None
+        try:
+            with open(filename, "r") as file:
+                content = file.read()
+                response = json.loads(content)
+                return Response(response, 200)
+        except Exception as e:
+                return Response({"status": str(e)}, 400)
 
 class IbomboViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = AllowAny,
@@ -81,7 +112,7 @@ class IbomboViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.G
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+        return Response({"location": os.listdir()}, 200)
 
 
 class BranchementPriveViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -97,7 +128,7 @@ class BranchementPriveViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, 
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+        return Response({"location": os.listdir()}, 200)
 
 
 class CaptageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -113,7 +144,7 @@ class CaptageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+        return Response({"location": os.listdir()}, 200)
 
 
 class PompeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -129,7 +160,7 @@ class PompeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.Ge
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+        return Response({"location": os.listdir()}, 200)
 
 
 class PuitViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -145,7 +176,7 @@ class PuitViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.Gen
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+        return Response({"location": os.listdir()}, 200)
 
 
 class ForageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -161,7 +192,7 @@ class ForageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.G
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+        return Response({"location": os.listdir()}, 200)
 
 
 class ReservoirViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -177,7 +208,7 @@ class ReservoirViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewset
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+        return Response({"location": os.listdir()}, 200)
 
 
 class SourceAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -193,7 +224,7 @@ class SourceAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, vi
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+        return Response({"location": os.listdir()}, 200)
 
 
 class SourceNonAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -209,7 +240,7 @@ class SourceNonAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin,
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+        return Response({"location": os.listdir()}, 200)
 
 
 class VillageModerneViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -225,7 +256,7 @@ class VillageModerneViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, vi
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+        return Response({"location": os.listdir()}, 200)
 
 
 class VillageCollinaireViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -241,5 +272,5 @@ class VillageCollinaireViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin,
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
-        return Response(groupedTemplate(self.get_queryset(), self.get_serializer_class()), 200)
+        return Response({"location": os.listdir()}, 200)
 
