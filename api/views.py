@@ -60,7 +60,11 @@ def groupedTemplate(queryset:models.QuerySet, serializer):
     with open(filename, "w") as file:
         print(json.dumps(response), file=file)
 
-class CollineViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class CollineViewset(
+        mixins.ListModelMixin,
+        mixins.RetrieveModelMixin,
+        mixins.CreateModelMixin,
+        viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = Colline.objects.all()
     serializer_class = CollineSerializer
@@ -81,7 +85,11 @@ class CollineViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.
         groupedTemplate(VillageCollinaire.objects.all(), VillageCollinaireSerializer)
         return Response({"status": "Vyose vyashizwe ku gihe"}, 200)
 
-class ReseauDAlimentationViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class ReseauDAlimentationViewset(
+        mixins.ListModelMixin,
+        mixins.RetrieveModelMixin,
+        mixins.CreateModelMixin,
+        viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = ReseauDAlimentation.objects.all()
     serializer_class = ReseauDAlimentationSerializer
@@ -104,7 +112,11 @@ class ReseauDAlimentationViewset(mixins.ListModelMixin, mixins.RetrieveModelMixi
         except Exception as e:
                 return Response({"status": str(e)}, 400)
 
-class IbomboViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class IbomboViewset(
+        mixins.ListModelMixin,
+        mixins.RetrieveModelMixin,
+        mixins.CreateModelMixin,
+        viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = Ibombo.objects.all()
     serializer_class = IbomboSerializer
@@ -128,7 +140,11 @@ class IbomboViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.G
                 return Response({"status": str(e)}, 400)
 
 
-class BranchementPriveViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class BranchementPriveViewset(
+        mixins.ListModelMixin,
+        mixins.RetrieveModelMixin,
+        mixins.CreateModelMixin,
+        viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = BranchementPrive.objects.all()
     serializer_class = BranchementPriveSerializer
@@ -152,7 +168,11 @@ class BranchementPriveViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, 
                 return Response({"status": str(e)}, 400)
 
 
-class CaptageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class CaptageViewset(
+        mixins.ListModelMixin,
+        mixins.RetrieveModelMixin,
+        mixins.CreateModelMixin,
+        viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = Captage.objects.all()
     serializer_class = CaptageSerializer
@@ -176,7 +196,11 @@ class CaptageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.
                 return Response({"status": str(e)}, 400)
 
 
-class PompeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class PompeViewset(
+        mixins.ListModelMixin,
+        mixins.RetrieveModelMixin,
+        mixins.CreateModelMixin,
+        viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = Pompe.objects.all()
     serializer_class = PompeSerializer
@@ -200,7 +224,11 @@ class PompeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.Ge
                 return Response({"status": str(e)}, 400)
 
 
-class PuitViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class PuitViewset(
+        mixins.ListModelMixin,
+        mixins.RetrieveModelMixin,
+        mixins.CreateModelMixin,
+        viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = Puit.objects.all()
     serializer_class = PuitSerializer
@@ -224,7 +252,11 @@ class PuitViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.Gen
                 return Response({"status": str(e)}, 400)
 
 
-class ForageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class ForageViewset(
+        mixins.ListModelMixin,
+        mixins.RetrieveModelMixin,
+        mixins.CreateModelMixin,
+        viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = Forage.objects.all()
     serializer_class = ForageSerializer
@@ -248,7 +280,11 @@ class ForageViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.G
                 return Response({"status": str(e)}, 400)
 
 
-class ReservoirViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class ReservoirViewset(
+        mixins.ListModelMixin,
+        mixins.RetrieveModelMixin,
+        mixins.CreateModelMixin,
+        viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = Reservoir.objects.all()
     serializer_class = ReservoirSerializer
@@ -272,7 +308,11 @@ class ReservoirViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewset
                 return Response({"status": str(e)}, 400)
 
 
-class SourceAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class SourceAmenageeViewset(
+        mixins.ListModelMixin,
+        mixins.RetrieveModelMixin,
+        mixins.CreateModelMixin,
+        viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = SourceAmenagee.objects.all()
     serializer_class = SourceAmenageeSerializer
@@ -296,7 +336,11 @@ class SourceAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, vi
                 return Response({"status": str(e)}, 400)
 
 
-class SourceNonAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class SourceNonAmenageeViewset(
+        mixins.ListModelMixin,
+        mixins.RetrieveModelMixin,
+        mixins.CreateModelMixin,
+        viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = SourceNonAmenagee.objects.all()
     serializer_class = SourceNonAmenageeSerializer
@@ -320,7 +364,11 @@ class SourceNonAmenageeViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin,
                 return Response({"status": str(e)}, 400)
 
 
-class VillageModerneViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class VillageModerneViewset(
+        mixins.ListModelMixin,
+        mixins.RetrieveModelMixin,
+        mixins.CreateModelMixin,
+        viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = VillageModerne.objects.all()
     serializer_class = VillageModerneSerializer
@@ -344,7 +392,11 @@ class VillageModerneViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, vi
                 return Response({"status": str(e)}, 400)
 
 
-class VillageCollinaireViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class VillageCollinaireViewset(
+        mixins.ListModelMixin,
+        mixins.RetrieveModelMixin,
+        mixins.CreateModelMixin,
+        viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = VillageCollinaire.objects.all()
     serializer_class = VillageCollinaireSerializer
