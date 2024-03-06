@@ -100,6 +100,12 @@ class ReseauDAlimentationViewset(
         'colline__zone__commune': ['exact']
     }
 
+    def perform_create(self, serializer):
+        if(self.request.user):
+            serializer.save(enqueteur = self.request.user)
+        else:
+            serializer.save()
+
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
         filename = self.get_queryset().model.__name__
@@ -126,6 +132,12 @@ class IbomboViewset(
         'colline__zone': ['exact'],
         'colline__zone__commune': ['exact']
     }
+
+    def perform_create(self, serializer):
+        if(self.request.user):
+            serializer.save(enqueteur = self.request.user)
+        else:
+            serializer.save()
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
@@ -155,6 +167,12 @@ class BranchementPriveViewset(
         'colline__zone__commune': ['exact']
     }
 
+    def perform_create(self, serializer):
+        if(self.request.user):
+            serializer.save(enqueteur = self.request.user)
+        else:
+            serializer.save()
+
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
         filename = self.get_queryset().model.__name__
@@ -182,6 +200,12 @@ class CaptageViewset(
         'colline__zone': ['exact'],
         'colline__zone__commune': ['exact']
     }
+
+    def perform_create(self, serializer):
+        if(self.request.user):
+            serializer.save(enqueteur = self.request.user)
+        else:
+            serializer.save()
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
@@ -211,6 +235,12 @@ class PompeViewset(
         'colline__zone__commune': ['exact']
     }
 
+    def perform_create(self, serializer):
+        if(self.request.user):
+            serializer.save(enqueteur = self.request.user)
+        else:
+            serializer.save()
+
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
         filename = self.get_queryset().model.__name__
@@ -238,6 +268,12 @@ class PuitViewset(
         'colline__zone': ['exact'],
         'colline__zone__commune': ['exact']
     }
+
+    def perform_create(self, serializer):
+        if(self.request.user):
+            serializer.save(enqueteur = self.request.user)
+        else:
+            serializer.save()
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
@@ -267,6 +303,12 @@ class ForageViewset(
         'colline__zone__commune': ['exact']
     }
 
+    def perform_create(self, serializer):
+        if(self.request.user):
+            serializer.save(enqueteur = self.request.user)
+        else:
+            serializer.save()
+
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
         filename = self.get_queryset().model.__name__
@@ -294,6 +336,12 @@ class ReservoirViewset(
         'colline__zone': ['exact'],
         'colline__zone__commune': ['exact']
     }
+
+    def perform_create(self, serializer):
+        if(self.request.user):
+            serializer.save(enqueteur = self.request.user)
+        else:
+            serializer.save()
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
@@ -323,6 +371,12 @@ class SourceAmenageeViewset(
         'colline__zone__commune': ['exact']
     }
 
+    def perform_create(self, serializer):
+        if(self.request.user):
+            serializer.save(enqueteur = self.request.user)
+        else:
+            serializer.save()
+
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
         filename = self.get_queryset().model.__name__
@@ -350,6 +404,12 @@ class SourceNonAmenageeViewset(
         'colline__zone': ['exact'],
         'colline__zone__commune': ['exact']
     }
+
+    def perform_create(self, serializer):
+        if(self.request.user):
+            serializer.save(enqueteur = self.request.user)
+        else:
+            serializer.save()
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
@@ -379,6 +439,12 @@ class VillageModerneViewset(
         'colline__zone__commune': ['exact']
     }
 
+    def perform_create(self, serializer):
+        if(self.request.user):
+            serializer.save(enqueteur = self.request.user)
+        else:
+            serializer.save()
+
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):
         filename = self.get_queryset().model.__name__
@@ -406,6 +472,12 @@ class VillageCollinaireViewset(
         'colline__zone': ['exact'],
         'colline__zone__commune': ['exact']
     }
+
+    def perform_create(self, serializer):
+        if(self.request.user):
+            serializer.save(enqueteur = self.request.user)
+        else:
+            serializer.save()
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
     def grouped(self, request):

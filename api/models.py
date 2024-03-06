@@ -63,7 +63,7 @@ class Enqueteur(models.Model):
 
 class ReseauDAlimentation(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
+    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -92,7 +92,7 @@ class ReseauDAlimentation(models.Model):
 
 class Ibombo(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
+    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -113,7 +113,7 @@ class Ibombo(models.Model):
 
 class BranchementPrive(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
+    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -131,7 +131,7 @@ class BranchementPrive(models.Model):
 
 class Captage(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
+    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -152,7 +152,7 @@ class Captage(models.Model):
 
 class Pompe(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
+    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -171,7 +171,7 @@ class Pompe(models.Model):
 
 class Puit(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
+    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -193,7 +193,7 @@ class Puit(models.Model):
 
 class Forage(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
+    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -214,7 +214,7 @@ class Forage(models.Model):
 
 class Reservoir(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
+    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -233,7 +233,7 @@ class Reservoir(models.Model):
 
 class SourceAmenagee(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
+    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -256,7 +256,7 @@ class SourceAmenagee(models.Model):
 
 class SourceNonAmenagee(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
+    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -278,7 +278,7 @@ class SourceNonAmenagee(models.Model):
 
 class VillageModerne(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
+    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -300,7 +300,7 @@ class VillageModerne(models.Model):
 
 class VillageCollinaire(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, on_delete=models.PROTECT)
+    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
