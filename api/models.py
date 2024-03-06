@@ -71,7 +71,7 @@ class ReseauDAlimentation(models.Model):
     precision = models.FloatField()
     code = models.CharField(max_length=16)
     nom = models.CharField(max_length=32)
-    date = models.DateField(default=timezone.now)
+    date = models.DateField(default=timezone.now, editable=False)
     gravitaire = models.BooleanField()
     pompage = models.BooleanField()
     lineaire_km = models.FloatField(max_length=8)
@@ -82,7 +82,7 @@ class ReseauDAlimentation(models.Model):
     nb_bornes_fontaines_publiques = models.IntegerField()
     nb_branchements_prives = models.IntegerField()
     nb_menages = models.IntegerField()
-    observations = models.CharField(max_length=128)
+    observations = models.CharField(max_length=128, blank=True, null=True)
 
     def __str__(self):
         return self.nom
@@ -98,12 +98,12 @@ class Ibombo(models.Model):
     longitude = models.FloatField()
     altitude = models.FloatField()
     precision = models.FloatField()
-    date = models.DateField(default=timezone.now)
+    date = models.DateField(default=timezone.now, editable=False)
     nom = models.CharField(max_length=32, help_text="serugo, ishure, ivuriro, ishengero...")
     umugende = models.CharField(max_length=32)
     fonctionnel = models.BooleanField()
     nb_menages = models.IntegerField()
-    observations = models.CharField(max_length=128)
+    observations = models.CharField(max_length=128, blank=True, null=True)
     
     class Meta:
         verbose_name_plural = "amabombo"
@@ -121,10 +121,10 @@ class BranchementPrive(models.Model):
     precision = models.FloatField()
     nom = models.CharField(max_length=32, help_text="izina serugo canke ry'inyubakwa rusangi")
     umugende = models.CharField(max_length=32)
-    date = models.DateField(default=timezone.now)
+    date = models.DateField(default=timezone.now, editable=False)
     fonctionnel = models.BooleanField()
     nb_menages = models.IntegerField()
-    observations = models.CharField(max_length=128)
+    observations = models.CharField(max_length=128, blank=True, null=True)
 
     def __str__(self):
         return self.nom
@@ -139,13 +139,13 @@ class Captage(models.Model):
     code = models.CharField(max_length=32)
     code_reseau = models.CharField(max_length=32)
     nom = models.CharField(max_length=32)
-    date = models.DateField(default=timezone.now)
+    date = models.DateField(default=timezone.now, editable=False)
     precision = models.FloatField()
     fonctionnel = models.BooleanField()
     tarissement = models.BooleanField()
     protection = models.BooleanField()
     debit = models.FloatField(help_text="nombre de littres par seconde")
-    observations = models.CharField(max_length=128)
+    observations = models.CharField(max_length=128, blank=True, null=True)
 
     def __str__(self):
         return self.nom
@@ -160,11 +160,11 @@ class Pompe(models.Model):
     code = models.CharField(max_length=32)
     code_reseau = models.CharField(max_length=32)
     nom = models.CharField(max_length=32)
-    date = models.DateField(default=timezone.now)
+    date = models.DateField(default=timezone.now, editable=False)
     precision = models.FloatField()
     fonctionnel = models.BooleanField()
     debit = models.FloatField(help_text="nombre de littres par seconde")
-    observations = models.CharField(max_length=128)
+    observations = models.CharField(max_length=128, blank=True, null=True)
 
     def __str__(self):
         return self.nom
@@ -180,13 +180,13 @@ class Puit(models.Model):
     nature = models.CharField(max_length=32)
     nom = models.CharField(max_length=32)
     date_forage = models.DateField()
-    date = models.DateField(default=timezone.now)
+    date = models.DateField(default=timezone.now, editable=False)
     fonctionnel = models.BooleanField()
     coloration = models.BooleanField()
     nb_menages = models.IntegerField()
     tarissement = models.BooleanField()
     protection = models.BooleanField()
-    observations = models.CharField(max_length=128)
+    observations = models.CharField(max_length=128, blank=True, null=True)
 
     def __str__(self):
         return self.nom
@@ -202,12 +202,12 @@ class Forage(models.Model):
     nature = models.CharField(max_length=32)
     nom = models.CharField(max_length=32)
     date_forage = models.DateField()
-    date = models.DateField(default=timezone.now)
+    date = models.DateField(default=timezone.now, editable=False)
     fonctionnel = models.BooleanField()
     coloration = models.BooleanField()
     nb_menages = models.IntegerField()
     tarissement = models.BooleanField()
-    observations = models.CharField(max_length=128)
+    observations = models.CharField(max_length=128, blank=True, null=True)
 
     def __str__(self):
         return self.nom
@@ -223,10 +223,10 @@ class Reservoir(models.Model):
     code_reservoir = models.CharField(max_length=32)
     code_reseau = models.CharField(max_length=32)
     nom = models.CharField(max_length=32)
-    date = models.DateField(default=timezone.now)
+    date = models.DateField(default=timezone.now, editable=False)
     fonctionnel = models.BooleanField()
     volume = models.FloatField(help_text="le volume en mettres cube")
-    observations = models.CharField(max_length=128)
+    observations = models.CharField(max_length=128, blank=True, null=True)
 
     def __str__(self):
         return self.nom
@@ -240,13 +240,13 @@ class SourceAmenagee(models.Model):
     altitude = models.FloatField()
     precision = models.FloatField()
     nom = models.CharField(max_length=32)
-    date = models.DateField(default=timezone.now)
+    date = models.DateField(default=timezone.now, editable=False)
     fonctionnel = models.BooleanField()
     coloration = models.BooleanField()
     tarissement = models.BooleanField()
     protection = models.BooleanField()
     nb_menages = models.IntegerField()
-    observations = models.CharField(max_length=128)
+    observations = models.CharField(max_length=128, blank=True, null=True)
 
     def __str__(self):
         return self.nom
@@ -264,11 +264,11 @@ class SourceNonAmenagee(models.Model):
     precision = models.FloatField()
     code = models.CharField(max_length=32)
     nom = models.CharField(max_length=32)
-    date = models.DateField(default=timezone.now)
+    date = models.DateField(default=timezone.now, editable=False)
     coloration = models.BooleanField()
     tarissement = models.BooleanField()
     debit = models.FloatField()
-    observations = models.CharField(max_length=128)
+    observations = models.CharField(max_length=128, blank=True, null=True)
 
     def __str__(self):
         return self.nom
@@ -286,11 +286,11 @@ class VillageModerne(models.Model):
     precision = models.FloatField()
     code = models.CharField(max_length=32)
     nom = models.CharField(max_length=32)
-    date = models.DateField(default=timezone.now)
+    date = models.DateField(default=timezone.now, editable=False)
     alimentation_potable = models.BooleanField()
     source_a_capter = models.CharField(max_length=32)
     debit = models.FloatField()
-    observations = models.CharField(max_length=128)
+    observations = models.CharField(max_length=128, blank=True, null=True)
 
     def __str__(self):
         return self.nom
@@ -308,11 +308,11 @@ class VillageCollinaire(models.Model):
     precision = models.FloatField()
     code = models.CharField(max_length=32)
     nom = models.CharField(max_length=32)
-    date = models.DateField(default=timezone.now)
+    date = models.DateField(default=timezone.now, editable=False)
     alimentation_potable = models.BooleanField()
     source_a_capter = models.CharField(max_length=32)
     debit = models.FloatField()
-    observations = models.CharField(max_length=128)
+    observations = models.CharField(max_length=128, blank=True, null=True)
 
     def __str__(self):
         return self.nom
