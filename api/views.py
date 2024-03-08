@@ -60,10 +60,17 @@ def groupedTemplate(queryset:models.QuerySet, serializer):
     with open(filename, "w") as file:
         print(json.dumps(response), file=file)
 
+class ProvinceViewset(
+        mixins.ListModelMixin,
+        mixins.RetrieveModelMixin,
+        viewsets.GenericViewSet):
+    permission_classes = AllowAny,
+    queryset = Province.objects.all()
+    serializer_class = ProvinceSerializer
+
 class CollineViewset(
         mixins.ListModelMixin,
         mixins.RetrieveModelMixin,
-        mixins.CreateModelMixin,
         viewsets.GenericViewSet):
     permission_classes = AllowAny,
     queryset = Colline.objects.all()

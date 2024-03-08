@@ -1,24 +1,46 @@
 from rest_framework import serializers
 from.models import *
 
-class ProvinceSerializer(serializers.ModelSerializer):
+class CollineSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Province
+        model = Colline
         fields = "__all__"
 
-class CommuneSerializer(serializers.ModelSerializer):
+class ZoneSerializer(serializers.ModelSerializer):
+    collines = serializers.SerializerMethodField()
+    
+    def get_collines(self, obj):
+        collines = Colline.objects.filter(zone = obj)
+        return CollineSerializer(collines, many=True).data
+    
     class Meta:
         model = Commune
         fields = "__all__"
 
-class ZoneSerializer(serializers.ModelSerializer):
     class Meta:
         model = Zone
         fields = "__all__"
 
-class CollineSerializer(serializers.ModelSerializer):
+class CommuneSerializer(serializers.ModelSerializer):
+    zones = serializers.SerializerMethodField()
+    
+    def get_zones(self, obj):
+        zones = Zone.objects.filter(commune = obj)
+        return ZoneSerializer(zones, many=True).data
+    
     class Meta:
-        model = Colline
+        model = Commune
+        fields = "__all__"
+
+class ProvinceSerializer(serializers.ModelSerializer):
+    communes = serializers.SerializerMethodField()
+    
+    def get_communes(self, obj):
+        communes = Commune.objects.filter(province = obj)
+        return CommuneSerializer(communes, many=True).data
+
+    class Meta:
+        model = Province
         fields = "__all__"
 
 class ReseauDAlimentationSerializer(serializers.ModelSerializer):

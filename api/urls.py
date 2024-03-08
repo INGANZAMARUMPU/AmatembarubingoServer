@@ -4,6 +4,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 from api.views import *
 
 router = routers.DefaultRouter()
+router.register("provinces", ProvinceViewset)
 router.register("collines", CollineViewset)
 router.register("reseaudalimentations", ReseauDAlimentationViewset)
 router.register("amabombo", IbomboViewset)
