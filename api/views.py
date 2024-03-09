@@ -23,12 +23,14 @@ class MinimalMetadata(SimpleMetadata):
     def determine_metadata(self, request, view):
         default = super().determine_metadata(request, view)
         post = dict(default["actions"]["POST"])
-        del post["longitude"]
-        del post["latitude"]
-        del post["altitude"]
-        del post["precision"]
-        del post["colline"]
-        default["actions"]["POST"] = post
+        to_exclude = { "longitude",  "latitude",  "altitude",  "precision",  "colline"}
+        new_post = {}
+        for item in post:
+            if item in to_exclude or post[item]["read_only"]: continue
+            new_item = dict(post[item])
+            # new_item["value"] = None
+            new_post[item] = new_item
+        default["actions"]["POST"] = new_post
         return default
 
 def getCentre(queryset:models.QuerySet) -> tuple:
@@ -152,8 +154,8 @@ class IbomboViewset(
     permission_classes = AllowAny,
     queryset = Ibombo.objects.all()
     serializer_class = IbomboSerializer
-    filter_backends = filters.DjangoFil
-    metadata_class = MinimalMetadataterBackend,
+    filter_backends = filters.DjangoFilterBackend,
+    metadata_class = MinimalMetadata
     filterset_fields = {
         'colline': ['exact'],
         'colline__zone': ['exact'],
@@ -187,8 +189,8 @@ class BranchementPriveViewset(
     permission_classes = AllowAny,
     queryset = BranchementPrive.objects.all()
     serializer_class = BranchementPriveSerializer
-    filter_backends = filters.DjangoFilterBackend
-    metadata_class = MinimalMetadata,
+    filter_backends = filters.DjangoFilterBackend,
+    metadata_class = MinimalMetadata
     filterset_fields = {
         'colline': ['exact'],
         'colline__zone': ['exact'],
@@ -222,8 +224,8 @@ class CaptageViewset(
     permission_classes = AllowAny,
     queryset = Captage.objects.all()
     serializer_class = CaptageSerializer
-    filter_backends = filters.DjangoFilt
-    metadata_class = MinimalMetadataerBackend,
+    filter_backends = filters.DjangoFilterBackend,
+    metadata_class = MinimalMetadata
     filterset_fields = {
         'colline': ['exact'],
         'colline__zone': ['exact'],
@@ -257,8 +259,8 @@ class PompeViewset(
     permission_classes = AllowAny,
     queryset = Pompe.objects.all()
     serializer_class = PompeSerializer
-    filter_backends = filters.DjangoFi
-    metadata_class = MinimalMetadatalterBackend,
+    filter_backends = filters.DjangoFilterBackend,
+    metadata_class = MinimalMetadata
     filterset_fields = {
         'colline': ['exact'],
         'colline__zone': ['exact'],
@@ -292,8 +294,8 @@ class PuitViewset(
     permission_classes = AllowAny,
     queryset = Puit.objects.all()
     serializer_class = PuitSerializer
-    filter_backends = filters.DjangoF
-    metadata_class = MinimalMetadatailterBackend,
+    filter_backends = filters.DjangoFilterBackend,
+    metadata_class = MinimalMetadata
     filterset_fields = {
         'colline': ['exact'],
         'colline__zone': ['exact'],
@@ -327,8 +329,8 @@ class ForageViewset(
     permission_classes = AllowAny,
     queryset = Forage.objects.all()
     serializer_class = ForageSerializer
-    filter_backends = filters.DjangoFil
-    metadata_class = MinimalMetadataterBackend,
+    filter_backends = filters.DjangoFilterBackend,
+    metadata_class = MinimalMetadata
     filterset_fields = {
         'colline': ['exact'],
         'colline__zone': ['exact'],
@@ -362,8 +364,8 @@ class ReservoirViewset(
     permission_classes = AllowAny,
     queryset = Reservoir.objects.all()
     serializer_class = ReservoirSerializer
-    filter_backends = filters.DjangoFilter
-    metadata_class = MinimalMetadataBackend,
+    filter_backends = filters.DjangoFilterBackend,
+    metadata_class = MinimalMetadata
     filterset_fields = {
         'colline': ['exact'],
         'colline__zone': ['exact'],
@@ -397,8 +399,8 @@ class SourceAmenageeViewset(
     permission_classes = AllowAny,
     queryset = SourceAmenagee.objects.all()
     serializer_class = SourceAmenageeSerializer
-    filter_backends = filters.DjangoFilterBacke
-    metadata_class = MinimalMetadatand,
+    filter_backends = filters.DjangoFilterBackend,
+    metadata_class = MinimalMetadata
     filterset_fields = {
         'colline': ['exact'],
         'colline__zone': ['exact'],
@@ -467,8 +469,8 @@ class VillageModerneViewset(
     permission_classes = AllowAny,
     queryset = VillageModerne.objects.all()
     serializer_class = VillageModerneSerializer
-    filter_backends = filters.DjangoFilterBacke
-    metadata_class = MinimalMetadatand,
+    filter_backends = filters.DjangoFilterBackend,
+    metadata_class = MinimalMetadata
     filterset_fields = {
         'colline': ['exact'],
         'colline__zone': ['exact'],
