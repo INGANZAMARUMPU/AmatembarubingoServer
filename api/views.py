@@ -129,7 +129,7 @@ class ReseauDAlimentationViewset(
     }
 
     def perform_create(self, serializer):
-        if(self.request.user):
+        if(not self.request.user.is_anonymous):
             serializer.save(enqueteur = self.request.user)
         else:
             serializer.save()
@@ -163,7 +163,7 @@ class IbomboViewset(
     }
 
     def perform_create(self, serializer):
-        if(self.request.user):
+        if(not self.request.user.is_anonymous):
             serializer.save(enqueteur = self.request.user)
         else:
             serializer.save()
@@ -198,7 +198,7 @@ class BranchementPriveViewset(
     }
 
     def perform_create(self, serializer):
-        if(self.request.user):
+        if(not self.request.user.is_anonymous):
             serializer.save(enqueteur = self.request.user)
         else:
             serializer.save()
@@ -233,7 +233,7 @@ class CaptageViewset(
     }
 
     def perform_create(self, serializer):
-        if(self.request.user):
+        if(not self.request.user.is_anonymous):
             serializer.save(enqueteur = self.request.user)
         else:
             serializer.save()
@@ -268,7 +268,7 @@ class PompeViewset(
     }
 
     def perform_create(self, serializer):
-        if(self.request.user):
+        if(not self.request.user.is_anonymous):
             serializer.save(enqueteur = self.request.user)
         else:
             serializer.save()
@@ -303,7 +303,7 @@ class PuitViewset(
     }
 
     def perform_create(self, serializer):
-        if(self.request.user):
+        if(not self.request.user.is_anonymous):
             serializer.save(enqueteur = self.request.user)
         else:
             serializer.save()
@@ -338,7 +338,7 @@ class ForageViewset(
     }
 
     def perform_create(self, serializer):
-        if(self.request.user):
+        if(not self.request.user.is_anonymous):
             serializer.save(enqueteur = self.request.user)
         else:
             serializer.save()
@@ -373,7 +373,7 @@ class ReservoirViewset(
     }
 
     def perform_create(self, serializer):
-        if(self.request.user):
+        if(not self.request.user.is_anonymous):
             serializer.save(enqueteur = self.request.user)
         else:
             serializer.save()
@@ -408,7 +408,7 @@ class SourceAmenageeViewset(
     }
 
     def perform_create(self, serializer):
-        if(self.request.user):
+        if(not self.request.user.is_anonymous):
             serializer.save(enqueteur = self.request.user)
         else:
             serializer.save()
@@ -443,7 +443,7 @@ class SourceNonAmenageeViewset(
     }
 
     def perform_create(self, serializer):
-        if(self.request.user):
+        if(not self.request.user.is_anonymous):
             serializer.save(enqueteur = self.request.user)
         else:
             serializer.save()
@@ -478,7 +478,7 @@ class VillageModerneViewset(
     }
 
     def perform_create(self, serializer):
-        if(self.request.user):
+        if(not self.request.user.is_anonymous):
             serializer.save(enqueteur = self.request.user)
         else:
             serializer.save()
@@ -513,7 +513,7 @@ class VillageCollinaireViewset(
     }
 
     def perform_create(self, serializer):
-        if(self.request.user):
+        if(not self.request.user.is_anonymous):
             serializer.save(enqueteur = self.request.user)
         else:
             serializer.save()
