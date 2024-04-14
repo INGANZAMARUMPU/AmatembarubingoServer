@@ -50,16 +50,15 @@ class Colline(models.Model):
         return f"{self.nom} - {self.zone}"
 
 class Enqueteur(models.Model):
+    class SEXE(models.TextChoices):
+        HOMME = "homme"
+        FEMME = "femme"
+
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    nom = models.CharField(max_length=32)
+    prenom = models.CharField(max_length=32)
+    sexe = models.CharField(max_length=8, choices=SEXE.choices)
     telephone = models.CharField(max_length=12)
-    colline = models.ForeignKey(Colline, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return str(self.user)
-
-    def __str__(self):
-        return f"Lat. {self.latitude}, Long {self.longitude}"
 
 class ReseauDAlimentation(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -81,7 +80,8 @@ class ReseauDAlimentation(models.Model):
     nb_reservoirs = models.IntegerField()
     nb_bornes_fontaines_publiques = models.IntegerField()
     nb_branchements_prives = models.IntegerField()
-    nb_menages = models.IntegerField()
+    nb_menages = models.PositiveIntegerField()
+    nb_menages_500 = models.PositiveIntegerField(default=0, help_text="Nombre de menage à plus de 500m")
     observations = models.CharField(max_length=128, blank=True, null=True)
 
     def __str__(self):
@@ -102,7 +102,8 @@ class Ibombo(models.Model):
     nom = models.CharField(max_length=32, help_text="serugo, ishure, ivuriro, ishengero...")
     umugende = models.CharField(max_length=32)
     fonctionnel = models.BooleanField(default=False)
-    nb_menages = models.IntegerField()
+    nb_menages = models.PositiveIntegerField()
+    nb_menages_500 = models.PositiveIntegerField(default=0, help_text="Nombre de menage à plus de 500m")
     observations = models.CharField(max_length=128, blank=True, null=True)
     
     class Meta:
@@ -123,7 +124,8 @@ class BranchementPrive(models.Model):
     umugende = models.CharField(max_length=32)
     date = models.DateField(default=timezone.localdate, editable=False)
     fonctionnel = models.BooleanField(default=False)
-    nb_menages = models.IntegerField()
+    nb_menages = models.PositiveIntegerField()
+    nb_menages_500 = models.PositiveIntegerField(default=0, help_text="Nombre de menage à plus de 500m")
     observations = models.CharField(max_length=128, blank=True, null=True)
 
     def __str__(self):
@@ -141,9 +143,9 @@ class Captage(models.Model):
     code_reseau = models.CharField(max_length=32)
     nom = models.CharField(max_length=32)
     date = models.DateField(default=timezone.localdate, editable=False)
-    fonctionnel = models.BooleanField(default=False)
     tarissement = models.BooleanField(default=False)
     protection = models.BooleanField(default=False)
+    fonctionnel = models.BooleanField(default=False)
     debit = models.FloatField(help_text="nombre de littres par seconde")
     observations = models.CharField(max_length=128, blank=True, null=True)
 
@@ -181,11 +183,12 @@ class Puit(models.Model):
     nom = models.CharField(max_length=32)
     date_forage = models.DateField()
     date = models.DateField(default=timezone.localdate, editable=False)
-    fonctionnel = models.BooleanField(default=False)
     coloration = models.BooleanField(default=False)
-    nb_menages = models.IntegerField()
-    tarissement = models.BooleanField(default=False)
     protection = models.BooleanField(default=False)
+    tarissement = models.BooleanField(default=False)
+    fonctionnel = models.BooleanField(default=False)
+    nb_menages = models.PositiveIntegerField()
+    nb_menages_500 = models.PositiveIntegerField(default=0, help_text="Nombre de menage à plus de 500m")
     observations = models.CharField(max_length=128, blank=True, null=True)
 
     def __str__(self):
@@ -205,7 +208,8 @@ class Forage(models.Model):
     date = models.DateField(default=timezone.localdate, editable=False)
     fonctionnel = models.BooleanField(default=False)
     coloration = models.BooleanField(default=False)
-    nb_menages = models.IntegerField()
+    nb_menages = models.PositiveIntegerField()
+    nb_menages_500 = models.PositiveIntegerField(default=0, help_text="Nombre de menage à plus de 500m")
     tarissement = models.BooleanField(default=False)
     observations = models.CharField(max_length=128, blank=True, null=True)
 
@@ -241,11 +245,12 @@ class SourceAmenagee(models.Model):
     precision = models.FloatField(null=True, blank=True)
     nom = models.CharField(max_length=32)
     date = models.DateField(default=timezone.localdate, editable=False)
-    fonctionnel = models.BooleanField(default=False)
     coloration = models.BooleanField(default=False)
-    tarissement = models.BooleanField(default=False)
     protection = models.BooleanField(default=False)
-    nb_menages = models.IntegerField()
+    tarissement = models.BooleanField(default=False)
+    fonctionnel = models.BooleanField(default=False)
+    nb_menages = models.PositiveIntegerField()
+    nb_menages_500 = models.PositiveIntegerField(default=0, help_text="Nombre de menage à plus de 500m")
     observations = models.CharField(max_length=128, blank=True, null=True)
 
     def __str__(self):
