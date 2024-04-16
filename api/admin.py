@@ -40,7 +40,7 @@ class ReseauDAlimentationAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register(Ibombo)
 class IbomboAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = IbomboResource
-    list_display = "colline", "map", "nom", "umugende", "fonctionnel", "nb_menages", "nb_menages_500", "enqueteur"
+    list_display = "colline", "map", "identification", "umugende", "fonctionnel", "nb_menages", "nb_menages_500", "enqueteur"
 
     def map(self, obj):
         return mark_safe(f"<a target=blank href='https://maps.google.com/?q={obj.latitude},{obj.longitude}&ll={obj.latitude},{obj.longitude}&z=18'>voir sur la carte</a>")

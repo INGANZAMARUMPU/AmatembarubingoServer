@@ -31,6 +31,7 @@ class MinimalMetadata(SimpleMetadata):
             # new_item["value"] = None
             new_post[item] = new_item
         default["actions"]["POST"] = new_post
+        print(view)
         return default
 
 def getCentre(queryset:models.QuerySet) -> tuple:
@@ -128,6 +129,9 @@ class ReseauDAlimentationViewset(
         'colline__zone__commune': ['exact']
     }
 
+    def get_view_name(self):
+        return 'OUVRAGES AEP'
+
     def perform_create(self, serializer):
         if(not self.request.user.is_anonymous):
             serializer.save(enqueteur = self.request.user)
@@ -162,6 +166,9 @@ class IbomboViewset(
         'colline__zone__commune': ['exact']
     }
 
+    def get_view_name(self):
+        return 'Borne fontaine "BF" (IBOMBO RUSANGI)'
+    
     def perform_create(self, serializer):
         if(not self.request.user.is_anonymous):
             serializer.save(enqueteur = self.request.user)
@@ -196,6 +203,9 @@ class BranchementPriveViewset(
         'colline__zone': ['exact'],
         'colline__zone__commune': ['exact']
     }
+
+    def get_view_name(self):
+        return 'BRANCHEMENT PRIVE (UMUHANA CANKE INYUBAKWA RUZANGI IFISE MAZI IWABO)'
 
     def perform_create(self, serializer):
         if(not self.request.user.is_anonymous):
@@ -232,6 +242,9 @@ class CaptageViewset(
         'colline__zone__commune': ['exact']
     }
 
+    def get_view_name(self):
+        return 'CAPTAGE'
+
     def perform_create(self, serializer):
         if(not self.request.user.is_anonymous):
             serializer.save(enqueteur = self.request.user)
@@ -266,6 +279,9 @@ class PompeViewset(
         'colline__zone': ['exact'],
         'colline__zone__commune': ['exact']
     }
+
+    def get_view_name(self):
+        return 'SYSTÈME DE POMPAGE'
 
     def perform_create(self, serializer):
         if(not self.request.user.is_anonymous):
@@ -302,6 +318,9 @@ class PuitViewset(
         'colline__zone__commune': ['exact']
     }
 
+    def get_view_name(self):
+        return "PUITS (IRIBA RY'AMAZI RYUBAKIYE)"
+
     def perform_create(self, serializer):
         if(not self.request.user.is_anonymous):
             serializer.save(enqueteur = self.request.user)
@@ -336,6 +355,9 @@ class ForageViewset(
         'colline__zone': ['exact'],
         'colline__zone__commune': ['exact']
     }
+
+    def get_view_name(self):
+        return 'FORAGE'
 
     def perform_create(self, serializer):
         if(not self.request.user.is_anonymous):
@@ -372,6 +394,9 @@ class ReservoirViewset(
         'colline__zone__commune': ['exact']
     }
 
+    def get_view_name(self):
+        return "RESERVOIR (Ikigega c'amazi)"
+
     def perform_create(self, serializer):
         if(not self.request.user.is_anonymous):
             serializer.save(enqueteur = self.request.user)
@@ -406,6 +431,9 @@ class SourceAmenageeViewset(
         'colline__zone': ['exact'],
         'colline__zone__commune': ['exact']
     }
+
+    def get_view_name(self):
+        return 'Source Aménagée (Isoko ritunganijwe)'
 
     def perform_create(self, serializer):
         if(not self.request.user.is_anonymous):
@@ -442,6 +470,9 @@ class SourceNonAmenageeViewset(
         'colline__zone__commune': ['exact']
     }
 
+    def get_view_name(self):
+        return 'Source Non Aménagée (Isoko ridatunganijwe)'
+
     def perform_create(self, serializer):
         if(not self.request.user.is_anonymous):
             serializer.save(enqueteur = self.request.user)
@@ -477,6 +508,9 @@ class VillageModerneViewset(
         'colline__zone__commune': ['exact']
     }
 
+    def get_view_name(self):
+        return 'Village Moderne (Ikigwati ca kijambere)'
+
     def perform_create(self, serializer):
         if(not self.request.user.is_anonymous):
             serializer.save(enqueteur = self.request.user)
@@ -511,6 +545,9 @@ class VillageCollinaireViewset(
         'colline__zone': ['exact'],
         'colline__zone__commune': ['exact']
     }
+
+    def get_view_name(self):
+        return 'Village collinaire (Ikigwati co ku mutumba)'
 
     def perform_create(self, serializer):
         if(not self.request.user.is_anonymous):
