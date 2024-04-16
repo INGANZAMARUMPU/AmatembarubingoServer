@@ -61,6 +61,16 @@ class Enqueteur(models.Model):
     telephone = models.CharField(max_length=12)
 
 class ReseauDAlimentation(models.Model):
+    class TYPE(models.TextChoices):
+        DEPART = "chambre départ"
+        COLLECTRICE = "chambre collectrice"
+        EQUILIBRE = "chambre d'équilibre"
+        VENTOUSE = "chambre de ventouse"
+        VANNE_DE_SELECTIONNEMENT = "chambre de vanne de selectionnement"
+        COLORATION = "chambre de coloration"
+        AERATION = "chambre d'aeration"
+        PURGE = "chambre de purge"
+
     id = models.BigAutoField(primary_key=True)
     enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
@@ -71,18 +81,8 @@ class ReseauDAlimentation(models.Model):
     code = models.CharField(max_length=16)
     nom = models.CharField(max_length=32)
     date = models.DateField(default=timezone.localdate, editable=False)
-    gravitaire = models.BooleanField(default=False)
-    pompage = models.BooleanField(default=False)
-    lineaire_km = models.FloatField(max_length=8)
-    gestionnaire = models.CharField(max_length=32)
-    nb_captages = models.IntegerField()
-    nb_pompes = models.IntegerField()
-    nb_reservoirs = models.IntegerField()
-    nb_bornes_fontaines_publiques = models.IntegerField()
-    nb_branchements_prives = models.IntegerField()
-    nb_menages = models.PositiveIntegerField()
-    nb_menages_500 = models.PositiveIntegerField(default=0, help_text="Nombre de menage à plus de 500m")
-    observations = models.CharField(max_length=128, blank=True, null=True)
+    type = models.CharField(max_length=64, choices=TYPE.choices)
+    observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
     def __str__(self):
         return self.nom
@@ -91,6 +91,17 @@ class ReseauDAlimentation(models.Model):
         verbose_name_plural = "reseaux d'alimentation"
 
 class Ibombo(models.Model):
+    class PLACE(models.TextChoices):
+        MENAGE = "menage"
+        EGLISE_MOSQUEE = "Eglise/Mosquée"
+        ETABLISSEMENT_SCOLAIRE = "Etablissement Scolaire"
+        INSTITUTION_PUBLIQUE = "Institution Publique"
+        INSTITUTION_PRIVEE = "Institution Privee"
+        CDS = "CDS"
+        HOPITAL = "Hôpital"
+        MARCHE = "Marché"
+        AUTRES = "Autres"
+
     id = models.BigAutoField(primary_key=True)
     enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
@@ -99,12 +110,13 @@ class Ibombo(models.Model):
     altitude = models.FloatField(null=True, blank=True)
     precision = models.FloatField(null=True, blank=True)
     date = models.DateField(default=timezone.localdate, editable=False)
-    nom = models.CharField(max_length=32, help_text="serugo, ishure, ivuriro, ishengero...")
+    place = models.CharField(max_length=32, choices=PLACE.choices)
+    identification = models.CharField(max_length=32, verbose_name="Izina ry'iryo bombo rusangi")
     umugende = models.CharField(max_length=32)
-    fonctionnel = models.BooleanField(default=False)
-    nb_menages = models.PositiveIntegerField()
-    nb_menages_500 = models.PositiveIntegerField(default=0, help_text="Nombre de menage à plus de 500m")
-    observations = models.CharField(max_length=128, blank=True, null=True)
+    fonctionnel = models.BooleanField(default=False, verbose_name="Fonctionnel / Rirakora")
+    nb_menages = models.PositiveIntegerField(verbose_name="nombre de menages(igitigiri c'imihana ihavoma)")
+    nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="Nombre de menage à plus de 500m")
+    observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
     
     class Meta:
         verbose_name_plural = "amabombo"
@@ -120,13 +132,13 @@ class BranchementPrive(models.Model):
     longitude = models.FloatField()
     altitude = models.FloatField(null=True, blank=True)
     precision = models.FloatField(null=True, blank=True)
-    nom = models.CharField(max_length=32, help_text="izina serugo canke ry'inyubakwa rusangi")
+    nom = models.CharField(max_length=32, verbose_name="izina serugo canke ry'inyubakwa rusangi")
     umugende = models.CharField(max_length=32)
     date = models.DateField(default=timezone.localdate, editable=False)
-    fonctionnel = models.BooleanField(default=False)
-    nb_menages = models.PositiveIntegerField()
-    nb_menages_500 = models.PositiveIntegerField(default=0, help_text="Nombre de menage à plus de 500m")
-    observations = models.CharField(max_length=128, blank=True, null=True)
+    fonctionnel = models.BooleanField(default=False, verbose_name="Fonctionnel / Rirakora")
+    nb_menages = models.PositiveIntegerField(verbose_name="nombre de menages(igitigiri c'imihana ihavoma)")
+    nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="Nombre de menage à plus de 500m")
+    observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
     def __str__(self):
         return self.nom
@@ -145,9 +157,9 @@ class Captage(models.Model):
     date = models.DateField(default=timezone.localdate, editable=False)
     tarissement = models.BooleanField(default=False)
     protection = models.BooleanField(default=False)
-    fonctionnel = models.BooleanField(default=False)
-    debit = models.FloatField(help_text="nombre de littres par seconde")
-    observations = models.CharField(max_length=128, blank=True, null=True)
+    fonctionnel = models.BooleanField(default=False, verbose_name="Fonctionnel / Rirakora")
+    debit = models.FloatField(verbose_name="nombre de littres par seconde")
+    observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
     def __str__(self):
         return self.nom
@@ -164,9 +176,9 @@ class Pompe(models.Model):
     code_reseau = models.CharField(max_length=32)
     nom = models.CharField(max_length=32)
     date = models.DateField(default=timezone.localdate, editable=False)
-    fonctionnel = models.BooleanField(default=False)
-    debit = models.FloatField(help_text="nombre de littres par seconde")
-    observations = models.CharField(max_length=128, blank=True, null=True)
+    fonctionnel = models.BooleanField(default=False, verbose_name="Fonctionnel / Rirakora")
+    debit = models.FloatField(verbose_name="nombre de littres par seconde")
+    observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
     def __str__(self):
         return self.nom
@@ -186,10 +198,10 @@ class Puit(models.Model):
     coloration = models.BooleanField(default=False)
     protection = models.BooleanField(default=False)
     tarissement = models.BooleanField(default=False)
-    fonctionnel = models.BooleanField(default=False)
-    nb_menages = models.PositiveIntegerField()
-    nb_menages_500 = models.PositiveIntegerField(default=0, help_text="Nombre de menage à plus de 500m")
-    observations = models.CharField(max_length=128, blank=True, null=True)
+    fonctionnel = models.BooleanField(default=False, verbose_name="Fonctionnel / Harakoreshwa")
+    nb_menages = models.PositiveIntegerField(verbose_name="nombre de menages(igitigiri c'imihana ihavoma)")
+    nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="Nombre de menage à plus de 500m")
+    observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
     def __str__(self):
         return self.nom
@@ -206,12 +218,12 @@ class Forage(models.Model):
     nom = models.CharField(max_length=32)
     date_forage = models.DateField()
     date = models.DateField(default=timezone.localdate, editable=False)
-    fonctionnel = models.BooleanField(default=False)
+    fonctionnel = models.BooleanField(default=False, verbose_name="Fonctionnel / Harakoreshwa")
     coloration = models.BooleanField(default=False)
-    nb_menages = models.PositiveIntegerField()
-    nb_menages_500 = models.PositiveIntegerField(default=0, help_text="Nombre de menage à plus de 500m")
+    nb_menages = models.PositiveIntegerField(verbose_name="nombre de menages(igitigiri c'imihana ihavoma)")
+    nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="Nombre de menage à plus de 500m")
     tarissement = models.BooleanField(default=False)
-    observations = models.CharField(max_length=128, blank=True, null=True)
+    observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
     def __str__(self):
         return self.nom
@@ -228,9 +240,9 @@ class Reservoir(models.Model):
     code_reseau = models.CharField(max_length=32)
     nom = models.CharField(max_length=32)
     date = models.DateField(default=timezone.localdate, editable=False)
-    fonctionnel = models.BooleanField(default=False)
-    volume = models.FloatField(help_text="le volume en mettres cube")
-    observations = models.CharField(max_length=128, blank=True, null=True)
+    fonctionnel = models.BooleanField(default=False, verbose_name="Fonctionnel / Kirakora")
+    volume = models.FloatField(verbose_name="le volume en mettres cube")
+    observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
     def __str__(self):
         return self.nom
@@ -248,10 +260,10 @@ class SourceAmenagee(models.Model):
     coloration = models.BooleanField(default=False)
     protection = models.BooleanField(default=False)
     tarissement = models.BooleanField(default=False)
-    fonctionnel = models.BooleanField(default=False)
-    nb_menages = models.PositiveIntegerField()
-    nb_menages_500 = models.PositiveIntegerField(default=0, help_text="Nombre de menage à plus de 500m")
-    observations = models.CharField(max_length=128, blank=True, null=True)
+    fonctionnel = models.BooleanField(default=False, verbose_name="Fonctionnel / Rirakora")
+    nb_menages = models.PositiveIntegerField(verbose_name="nombre de menages(igitigiri c'imihana ihavoma)")
+    nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="Nombre de menage à plus de 500m")
+    observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
     def __str__(self):
         return self.nom
@@ -273,7 +285,7 @@ class SourceNonAmenagee(models.Model):
     coloration = models.BooleanField(default=False)
     tarissement = models.BooleanField(default=False)
     debit = models.FloatField()
-    observations = models.CharField(max_length=128, blank=True, null=True)
+    observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
     def __str__(self):
         return self.nom
@@ -295,7 +307,7 @@ class VillageModerne(models.Model):
     alimentation_potable = models.BooleanField(default=False)
     source_a_capter = models.CharField(max_length=32)
     debit = models.FloatField()
-    observations = models.CharField(max_length=128, blank=True, null=True)
+    observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
     def __str__(self):
         return self.nom
@@ -317,7 +329,7 @@ class VillageCollinaire(models.Model):
     alimentation_potable = models.BooleanField(default=False)
     source_a_capter = models.CharField(max_length=32)
     debit = models.FloatField()
-    observations = models.CharField(max_length=128, blank=True, null=True)
+    observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
     def __str__(self):
         return self.nom

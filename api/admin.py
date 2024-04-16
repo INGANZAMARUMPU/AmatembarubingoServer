@@ -32,7 +32,7 @@ class EnqueteurAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register(ReseauDAlimentation)
 class ReseauDAlimentationAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = ReseauDAlimentationResource
-    list_display = "colline", "map", "code", "nom", "gravitaire", "pompage", "lineaire_km", "gestionnaire", "nb_captages", "nb_pompes", "nb_reservoirs", "nb_bornes_fontaines_publiques", "nb_branchements_prives", "nb_menages", "nb_menages_500", "enqueteur"
+    list_display =  "colline", "enqueteur", "code", "nom", "date", "type", "observations"
 
     def map(self, obj):
         return mark_safe(f"<a target=blank href='https://maps.google.com/?q={obj.latitude},{obj.longitude}&ll={obj.latitude},{obj.longitude}&z=18'>voir sur la carte</a>")
