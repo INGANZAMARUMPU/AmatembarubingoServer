@@ -32,7 +32,7 @@ class EnqueteurAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register(ReseauDAlimentation)
 class ReseauDAlimentationAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = ReseauDAlimentationResource
-    list_display =  "colline", "enqueteur", "code", "nom", "date", "type", "observations"
+    list_display =  "colline", "enqueteur", "nom", "date", "type", "observations"
 
     def map(self, obj):
         return mark_safe(f"<a target=blank href='https://maps.google.com/?q={obj.latitude},{obj.longitude}&ll={obj.latitude},{obj.longitude}&z=18'>voir sur la carte</a>")
@@ -56,7 +56,7 @@ class BranchementPriveAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register(Captage)
 class CaptageAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = CaptageResource
-    list_display = "colline", "map", "altitude", "code", "code_reseau", "nom", "precision", "fonctionnel", "tarissement", "protection", "debit", "enqueteur"
+    list_display = "colline", "map", "altitude", "nom", "precision", "fonctionnel", "tarissement", "protection", "enqueteur"
 
     def map(self, obj):
         return mark_safe(f"<a target=blank href='https://maps.google.com/?q={obj.latitude},{obj.longitude}&ll={obj.latitude},{obj.longitude}&z=18'>voir sur la carte</a>")
@@ -64,7 +64,7 @@ class CaptageAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register(Pompe)
 class PompeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = PompeResource
-    list_display = "colline", "map", "altitude", "code", "code_reseau", "nom", "precision", "fonctionnel", "debit", "enqueteur"
+    list_display = "colline", "map", "altitude", "nom", "precision", "fonctionnel", "enqueteur"
 
     def map(self, obj):
         return mark_safe(f"<a target=blank href='https://maps.google.com/?q={obj.latitude},{obj.longitude}&ll={obj.latitude},{obj.longitude}&z=18'>voir sur la carte</a>")
@@ -72,7 +72,7 @@ class PompeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register(Puit)
 class PuitAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = PuitResource
-    list_display = "colline", "map", "nature", "nom", "date_forage", "fonctionnel", "coloration", "nb_menages", "nb_menages_500", "tarissement", "protection", "enqueteur"
+    list_display = "colline", "map", "nom", "fonctionnel", "coloration", "nb_menages", "nb_menages_500", "tarissement", "protection", "enqueteur"
 
     def map(self, obj):
         return mark_safe(f"<a target=blank href='https://maps.google.com/?q={obj.latitude},{obj.longitude}&ll={obj.latitude},{obj.longitude}&z=18'>voir sur la carte</a>")
@@ -80,7 +80,7 @@ class PuitAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register(Forage)
 class ForageAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = ForageResource
-    list_display = "colline", "map", "nature", "nom", "date_forage", "fonctionnel", "coloration", "nb_menages", "nb_menages_500", "tarissement", "enqueteur"
+    list_display = "colline", "map", "nom", "fonctionnel", "coloration", "nb_menages", "nb_menages_500", "tarissement", "enqueteur"
 
     def map(self, obj):
         return mark_safe(f"<a target=blank href='https://maps.google.com/?q={obj.latitude},{obj.longitude}&ll={obj.latitude},{obj.longitude}&z=18'>voir sur la carte</a>")
@@ -88,7 +88,7 @@ class ForageAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register(Reservoir)
 class ReservoirAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = ReservoirResource
-    list_display = "colline", "map", "code_reservoir", "code_reseau", "nom", "fonctionnel", "volume", "enqueteur"
+    list_display = "colline", "map", "nom", "fonctionnel", "volume", "enqueteur"
 
     def map(self, obj):
         return mark_safe(f"<a target=blank href='https://maps.google.com/?q={obj.latitude},{obj.longitude}&ll={obj.latitude},{obj.longitude}&z=18'>voir sur la carte</a>")
@@ -104,7 +104,7 @@ class SourceAmenageeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register(SourceNonAmenagee)
 class SourceNonAmenageeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = SourceNonAmenageeResource
-    list_display = "colline", "map", "code", "nom", "coloration", "tarissement", "debit", "enqueteur"
+    list_display = "colline", "map", "nom", "coloration", "tarissement", "enqueteur"
 
     def map(self, obj):
         return mark_safe(f"<a target=blank href='https://maps.google.com/?q={obj.latitude},{obj.longitude}&ll={obj.latitude},{obj.longitude}&z=18'>voir sur la carte</a>")
@@ -112,7 +112,7 @@ class SourceNonAmenageeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register(VillageModerne)
 class VillageModerneAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = VillageModerneResource
-    list_display = "colline", "map", "code", "nom", "alimentation_potable", "source_a_capter", "debit", "enqueteur"
+    list_display = "colline", "map", "nom", "fonctionnel", "enqueteur"
 
     def map(self, obj):
         return mark_safe(f"<a target=blank href='https://maps.google.com/?q={obj.latitude},{obj.longitude}&ll={obj.latitude},{obj.longitude}&z=18'>voir sur la carte</a>")
@@ -120,7 +120,7 @@ class VillageModerneAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register(VillageCollinaire)
 class VillageCollinaireAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = VillageCollinaireResource
-    list_display = "colline", "map", "code", "nom", "alimentation_potable", "source_a_capter", "debit", "enqueteur"
+    list_display = "colline", "map", "nom", "fonctionnel", "enqueteur"
 
     def map(self, obj):
         return mark_safe(f"<a target=blank href='https://maps.google.com/?q={obj.latitude},{obj.longitude}&ll={obj.latitude},{obj.longitude}&z=18'>voir sur la carte</a>")
