@@ -112,7 +112,13 @@ class Ibombo(models.Model):
     place = models.CharField(max_length=32, choices=PLACE.choices, verbose_name="Borne fontaine proche de(Ibombo rusangi ryegereye he)")
     identification = models.CharField(max_length=32, verbose_name="Identification de la BORNE FONTAINE(Izina ry'iryo bombo rusangi)")
     umugende = models.CharField(max_length=32, verbose_name="Nom réseau AEP")
-    fonctionnel = models.BooleanField(default=False, verbose_name="Fonctionnel / Rirakora")
+    fonctionnel = models.BooleanField(
+        default=False, verbose_name="Fonctionnel / Rirakora",
+        help_text='''{
+            "false":["nb_menages","nb_menages_500"],
+            "true":["observations"]
+        }'''
+    )
     nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
@@ -135,7 +141,13 @@ class BranchementPrive(models.Model):
     nom = models.CharField(max_length=32, verbose_name="Nom/ Le nom du proprietaire/ Abonné")
     umugende = models.CharField(max_length=32, verbose_name="Nom du réseau AEP (Izina ry'umugende ayo mazi yamukako)")
     date = models.DateField(default=timezone.localdate, editable=False)
-    fonctionnel = models.BooleanField(default=False, verbose_name="Fonctionnel / Rirakora")
+    fonctionnel = models.BooleanField(
+        default=False, verbose_name="Fonctionnel / Rirakora",
+        help_text='''{
+            "false":["avec_eau","nb_menages","nb_menages_500","suffisante"],
+            "true":["observations"]
+        }'''
+    )
     avec_eau = models.BooleanField(default=False, verbose_name="Y'a-t-il de l'eau(Barafise amazi)?")
     nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
@@ -160,7 +172,13 @@ class Captage(models.Model):
     nom = models.CharField(max_length=32, verbose_name="Nom du captage")
     date = models.DateField(default=timezone.localdate, editable=False)
     systeme = models.CharField(max_length=32, choices=SYSTEME.choices, verbose_name="Système de captage")
-    fonctionnel = models.BooleanField(default=False, verbose_name="Fonctionnel / Rirakora")
+    fonctionnel = models.BooleanField(
+        default=False, verbose_name="Fonctionnel / Rirakora",
+        help_text='''{
+            "false":["tarissement","protection","debit"],
+            "true":["observations"]
+        }'''
+    )
     tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
     debit = models.FloatField(verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
@@ -179,7 +197,13 @@ class Pompe(models.Model):
     precision = models.FloatField(null=True, blank=True)
     nom = models.CharField(max_length=32, verbose_name="Nom du réseau (Izina ry'umugende)")
     date = models.DateField(default=timezone.localdate, editable=False)
-    fonctionnel = models.BooleanField(default=False, verbose_name="Fonctionnel / Rirakora")
+    fonctionnel = models.BooleanField(
+        default=False, verbose_name="Fonctionnel / Rirakora",
+        help_text='''{
+            "false":["debit"],
+            "true":["observations"]
+        }'''
+    )
     debit = models.FloatField(verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
     observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
@@ -196,7 +220,13 @@ class Puit(models.Model):
     precision = models.FloatField(null=True, blank=True)
     nom = models.CharField(max_length=32, verbose_name="Nom de la sous colline (Izina ry'agacimbiri kimbweko iryo riba)")
     date = models.DateField(default=timezone.localdate, editable=False)
-    fonctionnel = models.BooleanField(default=False, verbose_name="Fonctionnel / Harakoreshwa")
+    fonctionnel = models.BooleanField(
+        default=False, verbose_name="Fonctionnel / Harakoreshwa",
+        help_text='''{
+            "false":["coloration","nb_menages","nb_menages_500","tarissement","protection"],
+            "true":["observations"]
+        }'''
+    )
     coloration = models.BooleanField(default=False, verbose_name="Cette eau est-elle colorée (amazi arafise ibara)?")
     nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
@@ -223,7 +253,13 @@ class Forage(models.Model):
     type = models.CharField(max_length=32, choices=TYPE.choices)
     nom = models.CharField(max_length=32, verbose_name="Nom de la sous colline (Izina ry'agacimbiri kimbweko iryo riba)")
     date = models.DateField(default=timezone.localdate, editable=False)
-    fonctionnel = models.BooleanField(default=False, verbose_name="Fonctionnel / Harakoreshwa")
+    fonctionnel = models.BooleanField(
+        default=False, verbose_name="Fonctionnel / Harakoreshwa",
+        help_text='''{
+            "false":["coloration","nb_menages","nb_menages_500","tarissement","protection"],
+            "true":["observations"]
+        }'''
+    )
     coloration = models.BooleanField(default=False)
     nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
@@ -243,7 +279,13 @@ class Reservoir(models.Model):
     altitude = models.FloatField(null=True, blank=True)
     precision = models.FloatField(null=True, blank=True)
     nom = models.CharField(max_length=32, verbose_name="nom du réseau")
-    fonctionnel = models.BooleanField(default=False, verbose_name="Fonctionnel / Kirakora")
+    fonctionnel = models.BooleanField(
+        default=False, verbose_name="Fonctionnel / Irakoresha",
+        help_text='''{
+            "false":["volume"],
+            "true":["observations"]
+        }'''
+    )
     volume = models.FloatField(verbose_name="le volume du réservoir en mettres cube (ubwaguke bw'ikigega)")
     observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
@@ -261,7 +303,13 @@ class SourceAmenagee(models.Model):
     nom = models.CharField(max_length=32, verbose_name="Nom de la SA(Izina ry'iryo soko)")
     sous_colline = models.CharField(max_length=32, verbose_name="Emplacement de la SA(sous-colline)/ Agacimbiri karimwo iryo soko")
     date = models.DateField(default=timezone.localdate, editable=False)
-    fonctionnel = models.BooleanField(default=False, verbose_name="Fonctionnel / Rirakora")
+    fonctionnel = models.BooleanField(
+        default=False, verbose_name="Fonctionnel / Rirakora",
+        help_text='''{
+            "false":["coloration","nb_menages","nb_menages_500","tarissement","protection"],
+            "true":["observations"]
+        }'''
+    )
     coloration = models.BooleanField(default=False, verbose_name="Cette eau est-elle colorée (amazi arafise ibara)?")
     tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
@@ -284,7 +332,13 @@ class SourceNonAmenagee(models.Model):
     altitude = models.FloatField(null=True, blank=True)
     precision = models.FloatField(null=True, blank=True)
     nom = models.CharField(max_length=32, verbose_name="Nom de la SNA(Izina ry'iryo soko)")
-    fonctionnel = models.BooleanField(default=False, verbose_name="Fonctionnel / Rirakora")
+    fonctionnel = fonctionnel = models.BooleanField(
+        default=False, verbose_name="Fonctionnel / Rirakora",
+        help_text='''{
+            "false":["coloration","tarissement","sous_colline"],
+            "true":["observations"]
+        }'''
+    )
     coloration = models.BooleanField(default=False, verbose_name="Cette eau est-elle colorée (amazi arafise ibara)?")
     tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     sous_colline = models.CharField(max_length=32, verbose_name="Emplacement de la SA(sous-colline)/ Agacimbiri karimwo iryo soko")
@@ -306,10 +360,18 @@ class VillageModerne(models.Model):
     precision = models.FloatField(null=True, blank=True)
     nom = models.CharField(max_length=32, verbose_name="Nom du village (Izina ry'ikigwati)")
     date = models.DateField(default=timezone.localdate, editable=False)
-    fonctionnel = models.BooleanField(default=False, verbose_name="Le village est-il alimenté en eau potable/Ico kigwati kirafise amazi?")
+    fonctionnel = fonctionnel = models.BooleanField(
+        default=False, verbose_name="Le village est-il alimenté en eau potable/Ico kigwati kirafise amazi?",
+        help_text='''{
+            "false":["province","commune","source"],
+            "true":["province_a_capter","commune_a_capter","source_a_capter","observations"]
+        }'''
+    )
     province = models.CharField(max_length=32, verbose_name="Emplacement de la source d'eau(Province)/Intara irimwo isoko ritanga amazi kuri ico kigwati")
     commune = models.CharField(max_length=32, verbose_name="Emplacement de la source d'eau(Commune)/Ikomine irimwo isoko ritanga amazi kuri ico kigwati")
     source = models.CharField(max_length=32, verbose_name="Nom de la source d'eau")
+    province_a_capter = models.CharField(max_length=32, verbose_name="Emplacement de la source d'eau(Province)/Intara ihegereye wokurako amazi")
+    commune_a_capter = models.CharField(max_length=32, verbose_name="Emplacement de la source d'eau(Commune)/Ikomine ihegereye wokurako amazi")
     source_a_capter = models.CharField(max_length=32, verbose_name="Nom de la source d'eau à capter(isoko rihegereye wokurako amazi)")
     observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
@@ -327,13 +389,21 @@ class VillageCollinaire(models.Model):
     longitude = models.FloatField()
     altitude = models.FloatField(null=True, blank=True)
     precision = models.FloatField(null=True, blank=True)
-    fonctionnel = models.BooleanField(default=False, verbose_name="Le village est-il alimenté en eau potable/Ico kigwati kirafise amazi?")
+    date = models.DateField(default=timezone.localdate, editable=False)
+    nom = models.CharField(max_length=32, verbose_name="Nom du village (Izina ry'ikigwati)")
+    fonctionnel = fonctionnel = models.BooleanField(
+        default=False, verbose_name="Le village est-il alimenté en eau potable/Ico kigwati kirafise amazi?",
+        help_text='''{
+            "false":["province","commune","source"],
+            "true":["province_a_capter","commune_a_capter","source_a_capter","observations"]
+        }'''
+    )
     province = models.CharField(max_length=32, verbose_name="Emplacement de la source d'eau(Province)/Intara irimwo isoko ritanga amazi kuri ico kigwati")
     commune = models.CharField(max_length=32, verbose_name="Emplacement de la source d'eau(Commune)/Ikomine irimwo isoko ritanga amazi kuri ico kigwati")
     source = models.CharField(max_length=32, verbose_name="Nom de la source d'eau")
-    nom = models.CharField(max_length=32, verbose_name="Nom du village (Izina ry'ikigwati)")
+    province_a_capter = models.CharField(max_length=32, verbose_name="Emplacement de la source d'eau(Province)/Intara ihegereye wokurako amazi")
+    commune_a_capter = models.CharField(max_length=32, verbose_name="Emplacement de la source d'eau(Commune)/Ikomine ihegereye wokurako amazi")
     source_a_capter = models.CharField(max_length=32, verbose_name="Nom de la source d'eau à capter(isoko rihegereye wokurako amazi)")
-    date = models.DateField(default=timezone.localdate, editable=False)
     observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
     def __str__(self):
