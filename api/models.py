@@ -115,7 +115,7 @@ class Ibombo(models.Model):
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
         help_text='''{
-            "false":["nb_menages","nb_menages_500"],
+            "false":["nb_menages","nb_menages_500","observations"],
             "true":["observations"]
         }'''
     )
@@ -144,7 +144,7 @@ class BranchementPrive(models.Model):
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
         help_text='''{
-            "false":["avec_eau","nb_menages","nb_menages_500","suffisante"],
+            "false":["avec_eau","nb_menages","nb_menages_500","suffisante","observations"],
             "true":["observations"]
         }'''
     )
@@ -175,7 +175,7 @@ class Captage(models.Model):
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
         help_text='''{
-            "false":["tarissement","protection","debit"],
+            "false":["tarissement","protection","debit","observations"],
             "true":["observations"]
         }'''
     )
@@ -200,7 +200,7 @@ class Pompe(models.Model):
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
         help_text='''{
-            "false":["debit"],
+            "false":["debit","observations"],
             "true":["observations"]
         }'''
     )
@@ -223,7 +223,7 @@ class Puit(models.Model):
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Harakoreshwa",
         help_text='''{
-            "false":["coloration","nb_menages","nb_menages_500","tarissement","protection"],
+            "false":["coloration","nb_menages","nb_menages_500","tarissement","protection","observations"],
             "true":["observations"]
         }'''
     )
@@ -256,7 +256,7 @@ class Forage(models.Model):
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Harakoreshwa",
         help_text='''{
-            "false":["coloration","nb_menages","nb_menages_500","tarissement","protection"],
+            "false":["coloration","nb_menages","nb_menages_500","tarissement","protection","observations"],
             "true":["observations"]
         }'''
     )
@@ -282,7 +282,7 @@ class Reservoir(models.Model):
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Irakoresha",
         help_text='''{
-            "false":["volume"],
+            "false":["volume","observations"],
             "true":["observations"]
         }'''
     )
@@ -306,7 +306,7 @@ class SourceAmenagee(models.Model):
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
         help_text='''{
-            "false":["coloration","nb_menages","nb_menages_500","tarissement","protection"],
+            "false":["coloration","nb_menages","nb_menages_500","tarissement","protection","observations"],
             "true":["observations"]
         }'''
     )
@@ -335,7 +335,7 @@ class SourceNonAmenagee(models.Model):
     fonctionnel = fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
         help_text='''{
-            "false":["coloration","tarissement","sous_colline"],
+            "false":["coloration","tarissement","sous_colline","observations"],
             "true":["observations"]
         }'''
     )
@@ -363,7 +363,7 @@ class VillageModerne(models.Model):
     fonctionnel = fonctionnel = models.BooleanField(
         default=False, verbose_name="Le village est-il alimenté en eau potable/Ico kigwati kirafise amazi?",
         help_text='''{
-            "false":["province","commune","source"],
+            "false":["province","commune","source","observations"],
             "true":["province_a_capter","commune_a_capter","source_a_capter","observations"]
         }'''
     )
@@ -394,7 +394,7 @@ class VillageCollinaire(models.Model):
     fonctionnel = fonctionnel = models.BooleanField(
         default=False, verbose_name="Le village est-il alimenté en eau potable/Ico kigwati kirafise amazi?",
         help_text='''{
-            "false":["province","commune","source"],
+            "false":["province","commune","source","observations"],
             "true":["province_a_capter","commune_a_capter","source_a_capter","observations"]
         }'''
     )
