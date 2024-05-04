@@ -115,12 +115,12 @@ class Ibombo(models.Model):
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
         help_text='''{
-            "false":["nb_menages","nb_menages_500","observations"],
-            "true":["observations"]
+            "false":["nb_menages","nb_menages_500"],
+            "true":[]
         }'''
     )
-    nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
-    nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
+    nb_menages = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
+    nb_menages_500 = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
     
     class Meta:
@@ -144,13 +144,13 @@ class BranchementPrive(models.Model):
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
         help_text='''{
-            "false":["avec_eau","nb_menages","nb_menages_500","suffisante","observations"],
-            "true":["observations"]
+            "false":["avec_eau","nb_menages","nb_menages_500","suffisante"],
+            "true":[]
         }'''
     )
     avec_eau = models.BooleanField(default=False, verbose_name="Y'a-t-il de l'eau(Barafise amazi)?")
-    nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
-    nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
+    nb_menages = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
+    nb_menages_500 = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     suffisante = models.BooleanField(default=False, verbose_name="L'eau est-elle suffisante(amazi arakwiye)?")
     observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
@@ -175,8 +175,8 @@ class Captage(models.Model):
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
         help_text='''{
-            "false":["tarissement","protection","debit","observations"],
-            "true":["observations"]
+            "false":["tarissement","protection","debit"],
+            "true":[]
         }'''
     )
     tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
@@ -200,8 +200,8 @@ class Pompe(models.Model):
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
         help_text='''{
-            "false":["debit","observations"],
-            "true":["observations"]
+            "false":["debit"],
+            "true":[]
         }'''
     )
     debit = models.FloatField(verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
@@ -223,13 +223,13 @@ class Puit(models.Model):
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Harakoreshwa",
         help_text='''{
-            "false":["coloration","nb_menages","nb_menages_500","tarissement","protection","observations"],
-            "true":["observations"]
+            "false":["coloration","nb_menages","nb_menages_500","tarissement","protection"],
+            "true":[]
         }'''
     )
     coloration = models.BooleanField(default=False, verbose_name="Cette eau est-elle colorée (amazi arafise ibara)?")
-    nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
-    nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
+    nb_menages = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
+    nb_menages_500 = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
     observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
@@ -256,13 +256,13 @@ class Forage(models.Model):
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Harakoreshwa",
         help_text='''{
-            "false":["coloration","nb_menages","nb_menages_500","tarissement","protection","observations"],
-            "true":["observations"]
+            "false":["coloration","nb_menages","nb_menages_500","tarissement","protection"],
+            "true":[]
         }'''
     )
     coloration = models.BooleanField(default=False)
-    nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
-    nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
+    nb_menages = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
+    nb_menages_500 = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
     observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
@@ -282,8 +282,8 @@ class Reservoir(models.Model):
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Irakoresha",
         help_text='''{
-            "false":["volume","observations"],
-            "true":["observations"]
+            "false":["volume"],
+            "true":[]
         }'''
     )
     volume = models.FloatField(verbose_name="le volume du réservoir en mettres cube (ubwaguke bw'ikigega)")
@@ -306,15 +306,15 @@ class SourceAmenagee(models.Model):
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
         help_text='''{
-            "false":["coloration","nb_menages","nb_menages_500","tarissement","protection","observations"],
-            "true":["observations"]
+            "false":["coloration","nb_menages","nb_menages_500","tarissement","protection"],
+            "true":[]
         }'''
     )
     coloration = models.BooleanField(default=False, verbose_name="Cette eau est-elle colorée (amazi arafise ibara)?")
     tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
-    nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
-    nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
+    nb_menages = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
+    nb_menages_500 = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
     def __str__(self):
@@ -335,8 +335,8 @@ class SourceNonAmenagee(models.Model):
     fonctionnel = fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
         help_text='''{
-            "false":["coloration","tarissement","sous_colline","observations"],
-            "true":["observations"]
+            "false":["coloration","tarissement","sous_colline"],
+            "true":[]
         }'''
     )
     coloration = models.BooleanField(default=False, verbose_name="Cette eau est-elle colorée (amazi arafise ibara)?")
@@ -363,8 +363,8 @@ class VillageModerne(models.Model):
     fonctionnel = fonctionnel = models.BooleanField(
         default=False, verbose_name="Le village est-il alimenté en eau potable/Ico kigwati kirafise amazi?",
         help_text='''{
-            "false":["province","commune","source","observations"],
-            "true":["province_a_capter","commune_a_capter","source_a_capter","observations"]
+            "false":["province","commune","source"],
+            "true":["province_a_capter","commune_a_capter","source_a_capter",]
         }'''
     )
     province = models.CharField(max_length=32, verbose_name="Emplacement de la source d'eau(Province)/Intara irimwo isoko ritanga amazi kuri ico kigwati")
@@ -394,8 +394,8 @@ class VillageCollinaire(models.Model):
     fonctionnel = fonctionnel = models.BooleanField(
         default=False, verbose_name="Le village est-il alimenté en eau potable/Ico kigwati kirafise amazi?",
         help_text='''{
-            "false":["province","commune","source","observations"],
-            "true":["province_a_capter","commune_a_capter","source_a_capter","observations"]
+            "false":["province","commune","source"],
+            "true":["province_a_capter","commune_a_capter","source_a_capter",]
         }'''
     )
     province = models.CharField(max_length=32, verbose_name="Emplacement de la source d'eau(Province)/Intara irimwo isoko ritanga amazi kuri ico kigwati")
