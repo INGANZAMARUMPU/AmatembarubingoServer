@@ -118,8 +118,8 @@ class Ibombo(models.Model):
             "true":[]
         }'''
     )
-    nb_menages = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
-    nb_menages_500 = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
+    nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
+    nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
     
     class Meta:
@@ -151,8 +151,8 @@ class BranchementPrive(models.Model):
         }'''
     )
     avec_eau = models.BooleanField(default=False, verbose_name="Y'a-t-il de l'eau(Barafise amazi)?")
-    nb_menages = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
-    nb_menages_500 = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
+    nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
+    nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     suffisante = models.BooleanField(default=False, verbose_name="L'eau est-elle suffisante(amazi arakwiye)?")
     observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
@@ -240,8 +240,8 @@ class Puit(models.Model):
         }'''
     )
     coloration = models.BooleanField(default=False, verbose_name="Cette eau est-elle colorée (amazi arafise ibara)?")
-    nb_menages = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
-    nb_menages_500 = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
+    nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
+    nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
     observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
@@ -276,8 +276,8 @@ class Forage(models.Model):
         }'''
     )
     coloration = models.BooleanField(default=False)
-    nb_menages = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
-    nb_menages_500 = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
+    nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
+    nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
     observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
@@ -334,8 +334,8 @@ class SourceAmenagee(models.Model):
     coloration = models.BooleanField(default=False, verbose_name="Cette eau est-elle colorée (amazi arafise ibara)?")
     tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
-    nb_menages = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
-    nb_menages_500 = models.PositiveIntegerField(verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
+    nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
+    nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
     def __str__(self):
