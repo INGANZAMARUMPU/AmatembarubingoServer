@@ -23,7 +23,16 @@ class MinimalMetadata(SimpleMetadata):
     def determine_metadata(self, request, view):
         default = super().determine_metadata(request, view)
         post = dict(default["actions"]["POST"])
-        to_exclude = {"longitude", "latitude", "altitude", "precision", "colline", "nom", "prenom", "sexe", "telephone"}
+        to_exclude = {
+            "I_1_nom_et_prenom",
+            "I_2_sexe",
+            "I_3_telephone",
+            "II_1_province",
+            "II_2_commune",
+            "II_3_zone",
+            "II_4_colline",
+            "II_5_coordonnees"
+        }
         new_post = {}
         for item in post:
             if item in to_exclude or post[item]["read_only"]: continue
@@ -123,11 +132,6 @@ class ReseauDAlimentationViewset(
     serializer_class = ReseauDAlimentationSerializer
     filter_backends = filters.DjangoFilterBackend,
     metadata_class = MinimalMetadata
-    filterset_fields = {
-        'colline': ['exact'],
-        'colline__zone': ['exact'],
-        'colline__zone__commune': ['exact']
-    }
 
     def get_view_name(self):
         return 'OUVRAGES AEP'
@@ -160,11 +164,6 @@ class IbomboViewset(
     serializer_class = IbomboSerializer
     filter_backends = filters.DjangoFilterBackend,
     metadata_class = MinimalMetadata
-    filterset_fields = {
-        'colline': ['exact'],
-        'colline__zone': ['exact'],
-        'colline__zone__commune': ['exact']
-    }
 
     def get_view_name(self):
         return 'Borne fontaine "BF" (IBOMBO RUSANGI)'
@@ -198,11 +197,6 @@ class BranchementPriveViewset(
     serializer_class = BranchementPriveSerializer
     filter_backends = filters.DjangoFilterBackend,
     metadata_class = MinimalMetadata
-    filterset_fields = {
-        'colline': ['exact'],
-        'colline__zone': ['exact'],
-        'colline__zone__commune': ['exact']
-    }
 
     def get_view_name(self):
         return 'BRANCHEMENT PRIVE (UMUHANA CANKE INYUBAKWA RUZANGI IFISE MAZI IWABO)'
@@ -236,11 +230,6 @@ class CaptageViewset(
     serializer_class = CaptageSerializer
     filter_backends = filters.DjangoFilterBackend,
     metadata_class = MinimalMetadata
-    filterset_fields = {
-        'colline': ['exact'],
-        'colline__zone': ['exact'],
-        'colline__zone__commune': ['exact']
-    }
 
     def get_view_name(self):
         return 'CAPTAGE'
@@ -274,11 +263,6 @@ class PompeViewset(
     serializer_class = PompeSerializer
     filter_backends = filters.DjangoFilterBackend,
     metadata_class = MinimalMetadata
-    filterset_fields = {
-        'colline': ['exact'],
-        'colline__zone': ['exact'],
-        'colline__zone__commune': ['exact']
-    }
 
     def get_view_name(self):
         return 'SYSTÈME DE POMPAGE'
@@ -312,11 +296,6 @@ class PuitViewset(
     serializer_class = PuitSerializer
     filter_backends = filters.DjangoFilterBackend,
     metadata_class = MinimalMetadata
-    filterset_fields = {
-        'colline': ['exact'],
-        'colline__zone': ['exact'],
-        'colline__zone__commune': ['exact']
-    }
 
     def get_view_name(self):
         return "PUITS (IRIBA RY'AMAZI RYUBAKIYE)"
@@ -350,11 +329,6 @@ class ForageViewset(
     serializer_class = ForageSerializer
     filter_backends = filters.DjangoFilterBackend,
     metadata_class = MinimalMetadata
-    filterset_fields = {
-        'colline': ['exact'],
-        'colline__zone': ['exact'],
-        'colline__zone__commune': ['exact']
-    }
 
     def get_view_name(self):
         return 'FORAGE'
@@ -388,11 +362,6 @@ class ReservoirViewset(
     serializer_class = ReservoirSerializer
     filter_backends = filters.DjangoFilterBackend,
     metadata_class = MinimalMetadata
-    filterset_fields = {
-        'colline': ['exact'],
-        'colline__zone': ['exact'],
-        'colline__zone__commune': ['exact']
-    }
 
     def get_view_name(self):
         return "RESERVOIR (Ikigega c'amazi)"
@@ -426,11 +395,6 @@ class SourceAmenageeViewset(
     serializer_class = SourceAmenageeSerializer
     filter_backends = filters.DjangoFilterBackend,
     metadata_class = MinimalMetadata
-    filterset_fields = {
-        'colline': ['exact'],
-        'colline__zone': ['exact'],
-        'colline__zone__commune': ['exact']
-    }
 
     def get_view_name(self):
         return 'Source Aménagée (Isoko ritunganijwe)'
@@ -464,11 +428,6 @@ class SourceNonAmenageeViewset(
     serializer_class = SourceNonAmenageeSerializer
     filter_backends = filters.DjangoFilterBackend,
     metadata_class = MinimalMetadata
-    filterset_fields = {
-        'colline': ['exact'],
-        'colline__zone': ['exact'],
-        'colline__zone__commune': ['exact']
-    }
 
     def get_view_name(self):
         return 'Source Non Aménagée (Isoko ridatunganijwe)'
@@ -502,11 +461,6 @@ class VillageModerneViewset(
     serializer_class = VillageModerneSerializer
     filter_backends = filters.DjangoFilterBackend,
     metadata_class = MinimalMetadata
-    filterset_fields = {
-        'colline': ['exact'],
-        'colline__zone': ['exact'],
-        'colline__zone__commune': ['exact']
-    }
 
     def get_view_name(self):
         return 'Village Moderne (Ikigwati ca kijambere)'
@@ -540,11 +494,6 @@ class VillageCollinaireViewset(
     serializer_class = VillageCollinaireSerializer
     filter_backends = filters.DjangoFilterBackend,
     metadata_class = MinimalMetadata
-    filterset_fields = {
-        'colline': ['exact'],
-        'colline__zone': ['exact'],
-        'colline__zone__commune': ['exact']
-    }
 
     def get_view_name(self):
         return 'Village collinaire (Ikigwati co ku mutumba)'

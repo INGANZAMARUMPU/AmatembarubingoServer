@@ -16,6 +16,21 @@ class SEXE(models.TextChoices):
     HOMME = "homme"
     FEMME = "femme"
 
+class MILIEU(models.TextChoices):
+    RURAL = "urbain"
+    URBAIN = "rural"
+
+class PLACE(models.TextChoices):
+    MENAGE = "menage"
+    EGLISE_MOSQUEE = "Eglise/Mosquée"
+    ETABLISSEMENT_SCOLAIRE = "Etablissement Scolaire"
+    INSTITUTION_PUBLIQUE = "Institution Publique"
+    INSTITUTION_PRIVEE = "Institution Privee"
+    CDS = "CDS"
+    HOPITAL = "Hôpital"
+    MARCHE = "Marché"
+    AUTRES = "Autres"
+
 print("Chargement des groupes")
 for value, key in GROUPS.choices:
     try:
@@ -65,17 +80,18 @@ class ReseauDAlimentation(models.Model):
         PURGE = "chambre de purge"
 
     id = models.BigAutoField(primary_key=True)
-    I_1_nom_et_prenom = models.CharField(max_length=64)
-    I_1_sexe = models.CharField(max_length=8, choices=SEXE.choices)
-    I_1_telephone = models.CharField(max_length=12)
-    II_1_province = models.CharField(max_length=32)
-    II_1_commune = models.CharField(max_length=32)
-    II_1_zone = models.CharField(max_length=32)
-    II_1_colline = models.CharField(max_length=32)
-    II_5_latitude = models.CharField(max_length=64)
+    date = models.DateField(default=timezone.localdate, editable=False)
+    I_1_nom_et_prenom = models.CharField(max_length=64, verbose_name="Nom et prénom")
+    I_2_sexe = models.CharField(max_length=8, choices=SEXE.choices, verbose_name="sexe")
+    I_3_telephone = models.CharField(max_length=12, verbose_name="telephone")
+    II_1_province = models.CharField(max_length=32, verbose_name="province")
+    II_2_commune = models.CharField(max_length=32, verbose_name="commune")
+    II_3_zone = models.CharField(max_length=32, verbose_name="zone")
+    II_4_colline = models.CharField(max_length=32, verbose_name="colline")
+    II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
+    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
     XV_1_nomination = models.CharField(max_length=32, verbose_name="Nom du réseau AEP (Izina ry'umugende)")
     XV_2_type = models.CharField(max_length=64, choices=TYPE.choices, verbose_name="Autres types d'ouvrage")
-    XV_3_date = models.DateField(default=timezone.localdate, editable=False)
     XV_4_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
     def __str__(self):
@@ -84,28 +100,18 @@ class ReseauDAlimentation(models.Model):
     class Meta:
         verbose_name_plural = "reseaux d'alimentation"
 
-class PLACE(models.TextChoices):
-    MENAGE = "menage"
-    EGLISE_MOSQUEE = "Eglise/Mosquée"
-    ETABLISSEMENT_SCOLAIRE = "Etablissement Scolaire"
-    INSTITUTION_PUBLIQUE = "Institution Publique"
-    INSTITUTION_PRIVEE = "Institution Privee"
-    CDS = "CDS"
-    HOPITAL = "Hôpital"
-    MARCHE = "Marché"
-    AUTRES = "Autres"
-
 class Ibombo(models.Model):
     id = models.BigAutoField(primary_key=True)
     date = models.DateField(default=timezone.localdate, editable=False)
     I_1_nom_et_prenom = models.CharField(max_length=64)
     I_2_sexe = models.CharField(max_length=8, choices=SEXE.choices)
     I_3_telephone = models.CharField(max_length=12)
-    II_1_province = models.CharField(max_length=32)
-    II_2_commune = models.CharField(max_length=32)
-    II_3_zone = models.CharField(max_length=32)
-    II_4_colline = models.CharField(max_length=32)
-    II_5_latitude = models.CharField(max_length=64)
+    II_1_province = models.CharField(max_length=32, verbose_name="province")
+    II_2_commune = models.CharField(max_length=32, verbose_name="commune")
+    II_3_zone = models.CharField(max_length=32, verbose_name="zone")
+    II_4_colline = models.CharField(max_length=32, verbose_name="colline")
+    II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
+    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
     IV_1_place = models.CharField(max_length=32, choices=PLACE.choices, verbose_name="Borne fontaine proche de(Ibombo rusangi ryegereye he)")
     IV_2_identification = models.CharField(max_length=32, verbose_name="Identification de la BORNE FONTAINE(Izina ry'iryo bombo rusangi)")
     IV_3_umugende = models.CharField(max_length=32, verbose_name="Nom réseau AEP")
@@ -130,13 +136,14 @@ class BranchementPrive(models.Model):
     id = models.BigAutoField(primary_key=True)
     date = models.DateField(default=timezone.localdate, editable=False)
     I_1_nom_et_prenom = models.CharField(max_length=64)
-    I_1_sexe = models.CharField(max_length=8, choices=SEXE.choices)
-    I_1_telephone = models.CharField(max_length=12)
-    II_1_province = models.CharField(max_length=32)
-    II_1_commune = models.CharField(max_length=32)
-    II_1_zone = models.CharField(max_length=32)
-    II_1_colline = models.CharField(max_length=32)
-    II_5_latitude = models.CharField(max_length=64)
+    I_2_sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    I_3_telephone = models.CharField(max_length=12)
+    II_1_province = models.CharField(max_length=32, verbose_name="province")
+    II_2_commune = models.CharField(max_length=32, verbose_name="commune")
+    II_3_zone = models.CharField(max_length=32, verbose_name="zone")
+    II_4_colline = models.CharField(max_length=32, verbose_name="colline")
+    II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
+    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
     V_1_place = models.CharField(max_length=32, choices=PLACE.choices, verbose_name="Type de BRANCHEMENT PRIVE (IMIHANA CANKE INYUBAKWA RUSANGI IFISE AMAZI I WABO)")
     V_2_nomination = models.CharField(max_length=32, verbose_name="Nom/ Le nom du proprietaire/ Abonné")
     V_3_umugende = models.CharField(max_length=32, verbose_name="Nom du réseau AEP (Izina ry'umugende ayo mazi yamukako)")
@@ -164,13 +171,14 @@ class Captage(models.Model):
     id = models.BigAutoField(primary_key=True)
     date = models.DateField(default=timezone.localdate, editable=False)
     I_1_nom_et_prenom = models.CharField(max_length=64)
-    I_1_sexe = models.CharField(max_length=8, choices=SEXE.choices)
-    I_1_telephone = models.CharField(max_length=12)
-    II_1_province = models.CharField(max_length=32)
-    II_1_commune = models.CharField(max_length=32)
-    II_1_zone = models.CharField(max_length=32)
-    II_1_colline = models.CharField(max_length=32)
-    II_5_latitude = models.CharField(max_length=64)
+    I_2_sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    I_3_telephone = models.CharField(max_length=12)
+    II_1_province = models.CharField(max_length=32, verbose_name="province")
+    II_2_commune = models.CharField(max_length=32, verbose_name="commune")
+    II_3_zone = models.CharField(max_length=32, verbose_name="zone")
+    II_4_colline = models.CharField(max_length=32, verbose_name="colline")
+    II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
+    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
     VI_1_umugende = models.CharField(max_length=32, verbose_name="Nom réseau AEP (Izina ry'umugende ayo mazi yamukako)")
     VI_2_nomination = models.CharField(max_length=32, verbose_name="Nom du captage")
     VI_3_systeme = models.CharField(max_length=32, choices=SYSTEME.choices, verbose_name="Système de captage")
@@ -193,13 +201,14 @@ class Pompe(models.Model):
     id = models.BigAutoField(primary_key=True)
     date = models.DateField(default=timezone.localdate, editable=False)
     I_1_nom_et_prenom = models.CharField(max_length=64)
-    I_1_sexe = models.CharField(max_length=8, choices=SEXE.choices)
-    I_1_telephone = models.CharField(max_length=12)
-    II_1_province = models.CharField(max_length=32)
-    II_1_commune = models.CharField(max_length=32)
-    II_1_zone = models.CharField(max_length=32)
-    II_1_colline = models.CharField(max_length=32)
-    II_5_latitude = models.CharField(max_length=64)
+    I_2_sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    I_3_telephone = models.CharField(max_length=12)
+    II_1_province = models.CharField(max_length=32, verbose_name="province")
+    II_2_commune = models.CharField(max_length=32, verbose_name="commune")
+    II_3_zone = models.CharField(max_length=32, verbose_name="zone")
+    II_4_colline = models.CharField(max_length=32, verbose_name="colline")
+    II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
+    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
     VII_1_nomination = models.CharField(max_length=32, verbose_name="Nom du réseau (Izina ry'umugende)")
     VII_2_fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
@@ -218,13 +227,14 @@ class Puit(models.Model):
     id = models.BigAutoField(primary_key=True)
     date = models.DateField(default=timezone.localdate, editable=False)
     I_1_nom_et_prenom = models.CharField(max_length=64)
-    I_1_sexe = models.CharField(max_length=8, choices=SEXE.choices)
-    I_1_telephone = models.CharField(max_length=12)
-    II_1_province = models.CharField(max_length=32)
-    II_1_commune = models.CharField(max_length=32)
-    II_1_zone = models.CharField(max_length=32)
-    II_1_colline = models.CharField(max_length=32)
-    II_5_latitude = models.CharField(max_length=64)
+    I_2_sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    I_3_telephone = models.CharField(max_length=12)
+    II_1_province = models.CharField(max_length=32, verbose_name="province")
+    II_2_commune = models.CharField(max_length=32, verbose_name="commune")
+    II_3_zone = models.CharField(max_length=32, verbose_name="zone")
+    II_4_colline = models.CharField(max_length=32, verbose_name="colline")
+    II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
+    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
     VII_1_nomination = models.CharField(max_length=32, verbose_name="Nom de la sous colline (Izina ry'agacimbiri kimbweko iryo riba)")
     VII_2_fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Harakoreshwa",
@@ -252,13 +262,14 @@ class Forage(models.Model):
     id = models.BigAutoField(primary_key=True)
     date = models.DateField(default=timezone.localdate, editable=False)
     I_1_nom_et_prenom = models.CharField(max_length=64)
-    I_1_sexe = models.CharField(max_length=8, choices=SEXE.choices)
-    I_1_telephone = models.CharField(max_length=12)
-    II_1_province = models.CharField(max_length=32)
-    II_1_commune = models.CharField(max_length=32)
-    II_1_zone = models.CharField(max_length=32)
-    II_1_colline = models.CharField(max_length=32)
-    II_5_latitude = models.CharField(max_length=64)
+    I_2_sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    I_3_telephone = models.CharField(max_length=12)
+    II_1_province = models.CharField(max_length=32, verbose_name="province")
+    II_2_commune = models.CharField(max_length=32, verbose_name="commune")
+    II_3_zone = models.CharField(max_length=32, verbose_name="zone")
+    II_4_colline = models.CharField(max_length=32, verbose_name="colline")
+    II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
+    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
     XIV_1_type = models.CharField(max_length=32, choices=TYPE.choices)
     XIV_2_nomination = models.CharField(max_length=32, verbose_name="Nom de la sous colline (Izina ry'agacimbiri kimbweko iryo riba)")
     XIV_3_fonctionnel = models.BooleanField(
@@ -282,13 +293,14 @@ class Reservoir(models.Model):
     id = models.BigAutoField(primary_key=True)
     date = models.DateField(default=timezone.localdate, editable=False)
     I_1_nom_et_prenom = models.CharField(max_length=64)
-    I_1_sexe = models.CharField(max_length=8, choices=SEXE.choices)
-    I_1_telephone = models.CharField(max_length=12)
-    II_1_province = models.CharField(max_length=32)
-    II_1_commune = models.CharField(max_length=32)
-    II_1_zone = models.CharField(max_length=32)
-    II_1_colline = models.CharField(max_length=32)
-    II_5_latitude = models.CharField(max_length=64)
+    I_2_sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    I_3_telephone = models.CharField(max_length=12)
+    II_1_province = models.CharField(max_length=32, verbose_name="province")
+    II_2_commune = models.CharField(max_length=32, verbose_name="commune")
+    II_3_zone = models.CharField(max_length=32, verbose_name="zone")
+    II_4_colline = models.CharField(max_length=32, verbose_name="colline")
+    II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
+    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
     IX_1_nomination = models.CharField(max_length=32, verbose_name="nom du réseau")
     IX_2_fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Irakora",
@@ -307,13 +319,14 @@ class SourceAmenagee(models.Model):
     id = models.BigAutoField(primary_key=True)
     date = models.DateField(default=timezone.localdate, editable=False)
     I_1_nom_et_prenom = models.CharField(max_length=64)
-    I_1_sexe = models.CharField(max_length=8, choices=SEXE.choices)
-    I_1_telephone = models.CharField(max_length=12)
-    II_1_province = models.CharField(max_length=32)
-    II_1_commune = models.CharField(max_length=32)
-    II_1_zone = models.CharField(max_length=32)
-    II_1_colline = models.CharField(max_length=32)
-    II_5_latitude = models.CharField(max_length=64)
+    I_2_sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    I_3_telephone = models.CharField(max_length=12)
+    II_1_province = models.CharField(max_length=32, verbose_name="province")
+    II_2_commune = models.CharField(max_length=32, verbose_name="commune")
+    II_3_zone = models.CharField(max_length=32, verbose_name="zone")
+    II_4_colline = models.CharField(max_length=32, verbose_name="colline")
+    II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
+    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
     X_1_nomination = models.CharField(max_length=32, verbose_name="Nom de la SA(Izina ry'iryo soko)")
     X_2_sous_colline = models.CharField(max_length=32, verbose_name="Emplacement de la SA(sous-colline)/ Agacimbiri karimwo iryo soko")
     X_3_fonctionnel = models.BooleanField(
@@ -341,25 +354,27 @@ class SourceNonAmenagee(models.Model):
     id = models.BigAutoField(primary_key=True)
     date = models.DateField(default=timezone.localdate, editable=False)
     I_1_nom_et_prenom = models.CharField(max_length=64)
-    I_1_sexe = models.CharField(max_length=8, choices=SEXE.choices)
-    I_1_telephone = models.CharField(max_length=12)
-    II_1_province = models.CharField(max_length=32)
-    II_1_commune = models.CharField(max_length=32)
-    II_1_zone = models.CharField(max_length=32)
-    II_1_colline = models.CharField(max_length=32)
-    II_5_latitude = models.CharField(max_length=64)
+    I_2_sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    I_3_telephone = models.CharField(max_length=12)
+    II_1_province = models.CharField(max_length=32, verbose_name="province")
+    II_2_commune = models.CharField(max_length=32, verbose_name="commune")
+    II_3_zone = models.CharField(max_length=32, verbose_name="zone")
+    II_4_colline = models.CharField(max_length=32, verbose_name="colline")
+    II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
+    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
     X_1_nomination = models.CharField(max_length=32, verbose_name="Nom de la SNA(Izina ry'iryo soko)")
     X_2_fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
         help_text='''{
-            "false":["X_3_coloration","X_4_tarissement","X_5_sous_colline"],
+            "false":["X_3_coloration","X_4_tarissement","X_5_debit","X_6_sous_colline"],
             "true":[]
         }'''
     )
     X_3_coloration = models.BooleanField(default=False, verbose_name="Cette eau est-elle colorée (amazi arafise ibara)?")
     X_4_tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
-    X_5_sous_colline = models.CharField(max_length=32, verbose_name="Emplacement de la SA(sous-colline)/ Agacimbiri karimwo iryo soko")
-    X_6_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    X_5_debit = models.FloatField(verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
+    X_6_sous_colline = models.CharField(max_length=32, verbose_name="Emplacement de la SA(sous-colline)/ Agacimbiri karimwo iryo soko")
+    X_7_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
     def __str__(self):
         return self.nom
@@ -371,13 +386,14 @@ class VillageModerne(models.Model):
     id = models.BigAutoField(primary_key=True)
     date = models.DateField(default=timezone.localdate, editable=False)
     I_1_nom_et_prenom = models.CharField(max_length=64)
-    I_1_sexe = models.CharField(max_length=8, choices=SEXE.choices)
-    I_1_telephone = models.CharField(max_length=12)
-    II_1_province = models.CharField(max_length=32)
-    II_1_commune = models.CharField(max_length=32)
-    II_1_zone = models.CharField(max_length=32)
-    II_1_colline = models.CharField(max_length=32)
-    II_5_latitude = models.CharField(max_length=64)
+    I_2_sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    I_3_telephone = models.CharField(max_length=12)
+    II_1_province = models.CharField(max_length=32, verbose_name="province")
+    II_2_commune = models.CharField(max_length=32, verbose_name="commune")
+    II_3_zone = models.CharField(max_length=32, verbose_name="zone")
+    II_4_colline = models.CharField(max_length=32, verbose_name="colline")
+    II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
+    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
     XII_1_nomination = models.CharField(max_length=32, verbose_name="Nom du village (Izina ry'ikigwati)")
     XII_2_fonctionnel = models.BooleanField(
         default=False, verbose_name="Le village est-il alimenté en eau potable/Ico kigwati kirafise amazi?",
@@ -404,13 +420,14 @@ class VillageCollinaire(models.Model):
     id = models.BigAutoField(primary_key=True)
     date = models.DateField(default=timezone.localdate, editable=False)
     I_1_nom_et_prenom = models.CharField(max_length=64)
-    I_1_sexe = models.CharField(max_length=8, choices=SEXE.choices)
-    I_1_telephone = models.CharField(max_length=12)
-    II_1_province = models.CharField(max_length=32)
-    II_1_commune = models.CharField(max_length=32)
-    II_1_zone = models.CharField(max_length=32)
-    II_1_colline = models.CharField(max_length=32)
-    II_5_latitude = models.CharField(max_length=64)
+    I_2_sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    I_3_telephone = models.CharField(max_length=12)
+    II_1_province = models.CharField(max_length=32, verbose_name="province")
+    II_2_commune = models.CharField(max_length=32, verbose_name="commune")
+    II_3_zone = models.CharField(max_length=32, verbose_name="zone")
+    II_4_colline = models.CharField(max_length=32, verbose_name="colline")
+    II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
+    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
     XIII_1_nomination = models.CharField(max_length=32, verbose_name="Nom du village (Izina ry'ikigwati)")
     XIII_2_fonctionnel = models.BooleanField(
         default=False, verbose_name="Le village est-il alimenté en eau potable/Ico kigwati kirafise amazi?",
