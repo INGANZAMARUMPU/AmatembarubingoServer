@@ -392,7 +392,7 @@ class VillageModerne(models.Model):
         default=False, verbose_name="Le village est-il alimenté en eau potable/Ico kigwati kirafise amazi?",
         help_text='''{
             "false":["province","commune","source"],
-            "true":["province_a_capter","commune_a_capter","source_a_capter",]
+            "true":["province_a_capter","commune_a_capter","source_a_capter"]
         }'''
     )
     province = models.CharField(max_length=32, verbose_name="Emplacement de la source d'eau(Province)/Intara irimwo isoko ritanga amazi kuri ico kigwati")
@@ -426,7 +426,7 @@ class VillageCollinaire(models.Model):
         default=False, verbose_name="Le village est-il alimenté en eau potable/Ico kigwati kirafise amazi?",
         help_text='''{
             "false":["province","commune","source"],
-            "true":["province_a_capter","commune_a_capter","source_a_capter",]
+            "true":["province_a_capter","commune_a_capter","source_a_capter"]
         }'''
     )
     province = models.CharField(max_length=32, verbose_name="Emplacement de la source d'eau(Province)/Intara irimwo isoko ritanga amazi kuri ico kigwati")
