@@ -12,6 +12,10 @@ class GROUPS(models.TextChoices):
     ADMIN = "admin"
     ENQUETEUR = "enqueteur"
 
+class SEXE(models.TextChoices):
+    HOMME = "homme"
+    FEMME = "femme"
+
 print("Chargement des groupes")
 for value, key in GROUPS.choices:
     try:
@@ -159,6 +163,7 @@ class Captage(models.Model):
     class SYSTEME(models.TextChoices):
         GRAVITAIRE = "Système gravitaire"
         POMPAGE = "Pompage"
+
     id = models.BigAutoField(primary_key=True)
     nom = models.CharField(max_length=32)
     prenom = models.CharField(max_length=32)

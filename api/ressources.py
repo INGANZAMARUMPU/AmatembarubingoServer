@@ -22,11 +22,6 @@ class CollineResource(resources.ModelResource):
         model = Colline
 
 
-class EnqueteurResource(resources.ModelResource):
-    class Meta:
-        model = Enqueteur
-
-
 class ReseauDAlimentationResource(resources.ModelResource):
     class Meta:
         model = ReseauDAlimentation
