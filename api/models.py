@@ -41,32 +41,20 @@ class Province(models.Model):
     id = models.SmallAutoField(primary_key=True)
     nom = models.CharField(max_length=16)
 
-    def __str__(self):
-        return f"{self.nom}"
-
 class Commune(models.Model):
     id = models.SmallAutoField(primary_key=True)
     nom = models.CharField(max_length=16)
     province = models.ForeignKey(Province, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.nom} - {self.province}"
 
 class Zone(models.Model):
     id = models.AutoField(primary_key=True)
     nom = models.CharField(max_length=16)
     commune = models.ForeignKey(Commune, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f"{self.nom} - {self.commune}"
-
 class Colline(models.Model):
     id = models.AutoField(primary_key=True)
     nom = models.CharField(max_length=16)
     zone = models.ForeignKey(Zone, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.nom} - {self.zone}"
 
 class ReseauDAlimentation(models.Model):
     class TYPE(models.TextChoices):
@@ -93,9 +81,6 @@ class ReseauDAlimentation(models.Model):
     XV_1_nomination = models.CharField(max_length=32, verbose_name="Nom du réseau AEP (Izina ry'umugende)")
     XV_2_type = models.CharField(max_length=64, choices=TYPE.choices, verbose_name="Autres types d'ouvrage")
     XV_4_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
-
-    def __str__(self):
-        return self.nom
     
     class Meta:
         verbose_name_plural = "reseaux d'alimentation"
@@ -129,9 +114,6 @@ class Ibombo(models.Model):
     class Meta:
         verbose_name_plural = "amabombo"
 
-    def __str__(self):
-        return self.place
-
 class BranchementPrive(models.Model):
     id = models.BigAutoField(primary_key=True)
     date = models.DateField(default=timezone.localdate, editable=False)
@@ -159,9 +141,6 @@ class BranchementPrive(models.Model):
     V_7_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     V_8_suffisante = models.BooleanField(default=False, verbose_name="L'eau est-elle suffisante(amazi arakwiye)?")
     V_9_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
-
-    def __str__(self):
-        return self.nom
 
 class Captage(models.Model):
     class SYSTEME(models.TextChoices):
@@ -194,9 +173,6 @@ class Captage(models.Model):
     VI_7_debit = models.FloatField(verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
     VI_8_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
-    def __str__(self):
-        return self.nom
-
 class Pompe(models.Model):
     id = models.BigAutoField(primary_key=True)
     date = models.DateField(default=timezone.localdate, editable=False)
@@ -219,9 +195,6 @@ class Pompe(models.Model):
     )
     VII_3_debit = models.FloatField(verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
     VII_4_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
-
-    def __str__(self):
-        return self.nom
 
 class Puit(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -249,9 +222,6 @@ class Puit(models.Model):
     VII_6_tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     VII_7_protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
     VII_8_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
-
-    def __str__(self):
-        return self.nom
 
 class Forage(models.Model):
     class TYPE(models.TextChoices):
@@ -286,9 +256,6 @@ class Forage(models.Model):
     XIV_8_protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
     XIV_9_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
-    def __str__(self):
-        return self.nom
-
 class Reservoir(models.Model):
     id = models.BigAutoField(primary_key=True)
     date = models.DateField(default=timezone.localdate, editable=False)
@@ -311,9 +278,6 @@ class Reservoir(models.Model):
     )
     IX_3_volume = models.FloatField(verbose_name="le volume du réservoir en mettres cube (ubwaguke bw'ikigega)")
     IX_4_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
-
-    def __str__(self):
-        return self.nom
 
 class SourceAmenagee(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -343,9 +307,6 @@ class SourceAmenagee(models.Model):
     X_8_nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     X_9_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     X_10_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
-
-    def __str__(self):
-        return self.nom
     
     class Meta:
         verbose_name_plural = "Sources aménagées"
@@ -375,9 +336,6 @@ class SourceNonAmenagee(models.Model):
     X_5_debit = models.FloatField(verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
     X_6_sous_colline = models.CharField(max_length=32, verbose_name="Emplacement de la SA(sous-colline)/ Agacimbiri karimwo iryo soko")
     X_7_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
-
-    def __str__(self):
-        return self.nom
     
     class Meta:
         verbose_name_plural = "Sources non-aménagées"
@@ -409,9 +367,6 @@ class VillageModerne(models.Model):
     XII_7_commune_a_capter = models.CharField(max_length=32, verbose_name="Emplacement de la source d'eau(Commune)/Ikomine ihegereye wokurako amazi")
     XII_9_source_a_capter = models.CharField(max_length=32, verbose_name="Nom de la source d'eau à capter(isoko rihegereye wokurako amazi)")
     XII_10_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
-
-    def __str__(self):
-        return self.nom
     
     class Meta:
         verbose_name_plural = "villages modernes"
@@ -443,9 +398,6 @@ class VillageCollinaire(models.Model):
     XIII_7_commune_a_capter = models.CharField(max_length=32, verbose_name="Emplacement de la source d'eau(Commune)/Ikomine ihegereye wokurako amazi")
     XIII_8_source_a_capter = models.CharField(max_length=32, verbose_name="Nom de la source d'eau à capter(isoko rihegereye wokurako amazi)")
     XIII_9_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
-
-    def __str__(self):
-        return self.nom
     
     class Meta:
         verbose_name_plural = "Villages collinaires"
