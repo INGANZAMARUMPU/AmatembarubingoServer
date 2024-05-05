@@ -74,7 +74,7 @@ class ReseauDAlimentation(models.Model):
     longitude = models.FloatField()
     altitude = models.FloatField(null=True, blank=True)
     precision = models.FloatField(null=True, blank=True)
-    nom = models.CharField(max_length=32, verbose_name="Nom du réseau AEP (Izina ry'umugende)")
+    nomination = models.CharField(max_length=32, verbose_name="Nom du réseau AEP (Izina ry'umugende)")
     type = models.CharField(max_length=64, choices=TYPE.choices, verbose_name="Autres types d'ouvrage")
     date = models.DateField(default=timezone.localdate, editable=False)
     observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
@@ -140,7 +140,7 @@ class BranchementPrive(models.Model):
     altitude = models.FloatField(null=True, blank=True)
     precision = models.FloatField(null=True, blank=True)
     place = models.CharField(max_length=32, choices=PLACE.choices, verbose_name="Type de BRANCHEMENT PRIVE (IMIHANA CANKE INYUBAKWA RUSANGI IFISE AMAZI I WABO)")
-    nom = models.CharField(max_length=32, verbose_name="Nom/ Le nom du proprietaire/ Abonné")
+    nomination = models.CharField(max_length=32, verbose_name="Nom/ Le nom du proprietaire/ Abonné")
     umugende = models.CharField(max_length=32, verbose_name="Nom du réseau AEP (Izina ry'umugende ayo mazi yamukako)")
     date = models.DateField(default=timezone.localdate, editable=False)
     fonctionnel = models.BooleanField(
@@ -175,7 +175,7 @@ class Captage(models.Model):
     altitude = models.FloatField(null=True, blank=True)
     precision = models.FloatField(null=True, blank=True)
     umugende = models.CharField(max_length=32, verbose_name="Nom réseau AEP (Izina ry'umugende ayo mazi yamukako)")
-    nom = models.CharField(max_length=32, verbose_name="Nom du captage")
+    nomination = models.CharField(max_length=32, verbose_name="Nom du captage")
     date = models.DateField(default=timezone.localdate, editable=False)
     systeme = models.CharField(max_length=32, choices=SYSTEME.choices, verbose_name="Système de captage")
     fonctionnel = models.BooleanField(
@@ -204,7 +204,7 @@ class Pompe(models.Model):
     longitude = models.FloatField()
     altitude = models.FloatField(null=True, blank=True)
     precision = models.FloatField(null=True, blank=True)
-    nom = models.CharField(max_length=32, verbose_name="Nom du réseau (Izina ry'umugende)")
+    nomination = models.CharField(max_length=32, verbose_name="Nom du réseau (Izina ry'umugende)")
     date = models.DateField(default=timezone.localdate, editable=False)
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
@@ -230,7 +230,7 @@ class Puit(models.Model):
     longitude = models.FloatField()
     altitude = models.FloatField(null=True, blank=True)
     precision = models.FloatField(null=True, blank=True)
-    nom = models.CharField(max_length=32, verbose_name="Nom de la sous colline (Izina ry'agacimbiri kimbweko iryo riba)")
+    nomination = models.CharField(max_length=32, verbose_name="Nom de la sous colline (Izina ry'agacimbiri kimbweko iryo riba)")
     date = models.DateField(default=timezone.localdate, editable=False)
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Harakoreshwa",
@@ -266,7 +266,7 @@ class Forage(models.Model):
     altitude = models.FloatField(null=True, blank=True)
     precision = models.FloatField(null=True, blank=True)
     type = models.CharField(max_length=32, choices=TYPE.choices)
-    nom = models.CharField(max_length=32, verbose_name="Nom de la sous colline (Izina ry'agacimbiri kimbweko iryo riba)")
+    nomination = models.CharField(max_length=32, verbose_name="Nom de la sous colline (Izina ry'agacimbiri kimbweko iryo riba)")
     date = models.DateField(default=timezone.localdate, editable=False)
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Harakoreshwa",
@@ -296,9 +296,9 @@ class Reservoir(models.Model):
     longitude = models.FloatField()
     altitude = models.FloatField(null=True, blank=True)
     precision = models.FloatField(null=True, blank=True)
-    nom = models.CharField(max_length=32, verbose_name="nom du réseau")
+    nomination = models.CharField(max_length=32, verbose_name="nom du réseau")
     fonctionnel = models.BooleanField(
-        default=False, verbose_name="Fonctionnel / Irakoresha",
+        default=False, verbose_name="Fonctionnel / Irakora",
         help_text='''{
             "false":["volume"],
             "true":[]
@@ -321,7 +321,7 @@ class SourceAmenagee(models.Model):
     longitude = models.FloatField()
     altitude = models.FloatField(null=True, blank=True)
     precision = models.FloatField(null=True, blank=True)
-    nom = models.CharField(max_length=32, verbose_name="Nom de la SA(Izina ry'iryo soko)")
+    nomination = models.CharField(max_length=32, verbose_name="Nom de la SA(Izina ry'iryo soko)")
     sous_colline = models.CharField(max_length=32, verbose_name="Emplacement de la SA(sous-colline)/ Agacimbiri karimwo iryo soko")
     date = models.DateField(default=timezone.localdate, editable=False)
     fonctionnel = models.BooleanField(
@@ -356,7 +356,7 @@ class SourceNonAmenagee(models.Model):
     longitude = models.FloatField()
     altitude = models.FloatField(null=True, blank=True)
     precision = models.FloatField(null=True, blank=True)
-    nom = models.CharField(max_length=32, verbose_name="Nom de la SNA(Izina ry'iryo soko)")
+    nomination = models.CharField(max_length=32, verbose_name="Nom de la SNA(Izina ry'iryo soko)")
     fonctionnel = fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
         help_text='''{
@@ -386,7 +386,7 @@ class VillageModerne(models.Model):
     longitude = models.FloatField()
     altitude = models.FloatField(null=True, blank=True)
     precision = models.FloatField(null=True, blank=True)
-    nom = models.CharField(max_length=32, verbose_name="Nom du village (Izina ry'ikigwati)")
+    nomination = models.CharField(max_length=32, verbose_name="Nom du village (Izina ry'ikigwati)")
     date = models.DateField(default=timezone.localdate, editable=False)
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Le village est-il alimenté en eau potable/Ico kigwati kirafise amazi?",
@@ -421,7 +421,7 @@ class VillageCollinaire(models.Model):
     altitude = models.FloatField(null=True, blank=True)
     precision = models.FloatField(null=True, blank=True)
     date = models.DateField(default=timezone.localdate, editable=False)
-    nom = models.CharField(max_length=32, verbose_name="Nom du village (Izina ry'ikigwati)")
+    nomination = models.CharField(max_length=32, verbose_name="Nom du village (Izina ry'ikigwati)")
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Le village est-il alimenté en eau potable/Ico kigwati kirafise amazi?",
         help_text='''{
