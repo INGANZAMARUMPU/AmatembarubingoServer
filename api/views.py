@@ -23,7 +23,7 @@ class MinimalMetadata(SimpleMetadata):
     def determine_metadata(self, request, view):
         default = super().determine_metadata(request, view)
         post = dict(default["actions"]["POST"])
-        to_exclude = { "longitude",  "latitude",  "altitude",  "precision",  "colline"}
+        to_exclude = {"longitude", "latitude", "altitude", "precision", "colline", "nom", "prenom", "sexe", "telephone"}
         new_post = {}
         for item in post:
             if item in to_exclude or post[item]["read_only"]: continue

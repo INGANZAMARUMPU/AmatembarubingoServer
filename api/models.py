@@ -49,17 +49,6 @@ class Colline(models.Model):
     def __str__(self):
         return f"{self.nom} - {self.zone}"
 
-class Enqueteur(models.Model):
-    class SEXE(models.TextChoices):
-        HOMME = "homme"
-        FEMME = "femme"
-
-    id = models.AutoField(primary_key=True)
-    nom = models.CharField(max_length=32)
-    prenom = models.CharField(max_length=32)
-    sexe = models.CharField(max_length=8, choices=SEXE.choices)
-    telephone = models.CharField(max_length=12)
-
 class ReseauDAlimentation(models.Model):
     class TYPE(models.TextChoices):
         DEPART = "chambre départ"
@@ -72,7 +61,10 @@ class ReseauDAlimentation(models.Model):
         PURGE = "chambre de purge"
 
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
+    nom = models.CharField(max_length=32)
+    prenom = models.CharField(max_length=32)
+    sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    telephone = models.CharField(max_length=12)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -102,7 +94,10 @@ class PLACE(models.TextChoices):
 
 class Ibombo(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
+    nom = models.CharField(max_length=32)
+    prenom = models.CharField(max_length=32)
+    sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    telephone = models.CharField(max_length=12)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -131,7 +126,10 @@ class Ibombo(models.Model):
 
 class BranchementPrive(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
+    nom = models.CharField(max_length=32)
+    prenom = models.CharField(max_length=32)
+    sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    telephone = models.CharField(max_length=12)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -162,7 +160,10 @@ class Captage(models.Model):
         GRAVITAIRE = "Système gravitaire"
         POMPAGE = "Pompage"
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
+    nom = models.CharField(max_length=32)
+    prenom = models.CharField(max_length=32)
+    sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    telephone = models.CharField(max_length=12)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -189,7 +190,10 @@ class Captage(models.Model):
 
 class Pompe(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
+    nom = models.CharField(max_length=32)
+    prenom = models.CharField(max_length=32)
+    sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    telephone = models.CharField(max_length=12)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -212,7 +216,10 @@ class Pompe(models.Model):
 
 class Puit(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
+    nom = models.CharField(max_length=32)
+    prenom = models.CharField(max_length=32)
+    sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    telephone = models.CharField(max_length=12)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -244,7 +251,10 @@ class Forage(models.Model):
         SOLAIRE = "Solaire"
 
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
+    nom = models.CharField(max_length=32)
+    prenom = models.CharField(max_length=32)
+    sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    telephone = models.CharField(max_length=12)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -272,7 +282,10 @@ class Forage(models.Model):
 
 class Reservoir(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
+    nom = models.CharField(max_length=32)
+    prenom = models.CharField(max_length=32)
+    sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    telephone = models.CharField(max_length=12)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -294,7 +307,10 @@ class Reservoir(models.Model):
 
 class SourceAmenagee(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
+    nom = models.CharField(max_length=32)
+    prenom = models.CharField(max_length=32)
+    sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    telephone = models.CharField(max_length=12)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -325,7 +341,10 @@ class SourceAmenagee(models.Model):
 
 class SourceNonAmenagee(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
+    nom = models.CharField(max_length=32)
+    prenom = models.CharField(max_length=32)
+    sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    telephone = models.CharField(max_length=12)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -352,7 +371,10 @@ class SourceNonAmenagee(models.Model):
 
 class VillageModerne(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
+    nom = models.CharField(max_length=32)
+    prenom = models.CharField(max_length=32)
+    sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    telephone = models.CharField(max_length=12)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -383,7 +405,10 @@ class VillageModerne(models.Model):
 
 class VillageCollinaire(models.Model):
     id = models.BigAutoField(primary_key=True)
-    enqueteur = models.ForeignKey(Enqueteur, editable=False, null=True, on_delete=models.PROTECT)
+    nom = models.CharField(max_length=32)
+    prenom = models.CharField(max_length=32)
+    sexe = models.CharField(max_length=8, choices=SEXE.choices)
+    telephone = models.CharField(max_length=12)
     colline = models.ForeignKey(Colline, on_delete=models.PROTECT)
     latitude = models.FloatField()
     longitude = models.FloatField()

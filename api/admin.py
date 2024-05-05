@@ -24,11 +24,6 @@ class CollineAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = "nom", "zone"
     search_fields = "nom", "zone__nom", "zone__commune__nom"
 
-@admin.register(Enqueteur)
-class EnqueteurAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    resource_class = EnqueteurResource
-    list_display = "nom", "prenom", "telephone", "sexe"
-
 @admin.register(ReseauDAlimentation)
 class ReseauDAlimentationAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = ReseauDAlimentationResource
