@@ -127,7 +127,7 @@ class Ibombo(models.Model):
         verbose_name_plural = "amabombo"
 
     def __str__(self):
-        return self.nom
+        return self.place
 
 class BranchementPrive(models.Model):
     id = models.BigAutoField(primary_key=True)
