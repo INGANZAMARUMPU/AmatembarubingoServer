@@ -327,12 +327,13 @@ class SourceAmenagee(models.Model):
     fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
         help_text='''{
-            "false":["coloration","nb_menages","nb_menages_500","tarissement","protection"],
+            "false":["coloration","nb_menages","nb_menages_500","tarissement","protection","debit"],
             "true":[]
         }'''
     )
     coloration = models.BooleanField(default=False, verbose_name="Cette eau est-elle colorée (amazi arafise ibara)?")
     tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
+    debit = models.FloatField(verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
     protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
     nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
@@ -387,7 +388,7 @@ class VillageModerne(models.Model):
     precision = models.FloatField(null=True, blank=True)
     nom = models.CharField(max_length=32, verbose_name="Nom du village (Izina ry'ikigwati)")
     date = models.DateField(default=timezone.localdate, editable=False)
-    fonctionnel = fonctionnel = models.BooleanField(
+    fonctionnel = models.BooleanField(
         default=False, verbose_name="Le village est-il alimenté en eau potable/Ico kigwati kirafise amazi?",
         help_text='''{
             "false":["province","commune","source"],
@@ -421,7 +422,7 @@ class VillageCollinaire(models.Model):
     precision = models.FloatField(null=True, blank=True)
     date = models.DateField(default=timezone.localdate, editable=False)
     nom = models.CharField(max_length=32, verbose_name="Nom du village (Izina ry'ikigwati)")
-    fonctionnel = fonctionnel = models.BooleanField(
+    fonctionnel = models.BooleanField(
         default=False, verbose_name="Le village est-il alimenté en eau potable/Ico kigwati kirafise amazi?",
         help_text='''{
             "false":["province","commune","source"],
