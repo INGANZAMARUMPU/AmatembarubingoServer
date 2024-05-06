@@ -14,10 +14,14 @@ class CommuneAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register(Zone)
 class ZoneAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = ZoneResource
+    list_display = "nom", "commune"
+    list_filter = "commune",
 
 @admin.register(Colline)
 class CollineAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = CollineResource
+    list_display = "nom", "zone"
+    list_filter = "zone",
 
 @admin.register(ReseauDAlimentation)
 class ReseauDAlimentationAdmin(ImportExportModelAdmin, admin.ModelAdmin):
