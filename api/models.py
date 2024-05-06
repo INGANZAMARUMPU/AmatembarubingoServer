@@ -378,7 +378,7 @@ class VillageModerne(models.Model):
     XII_6_province_a_capter = models.CharField(null=True, max_length=32, verbose_name="Emplacement de la source d'eau(Province)/Intara ihegereye wokurako amazi")
     XII_7_commune_a_capter = models.CharField(null=True, max_length=32, verbose_name="Emplacement de la source d'eau(Commune)/Ikomine ihegereye wokurako amazi")
     XII_9_source_a_capter = models.CharField(null=True, max_length=32, verbose_name="Nom de la source d'eau à capter(isoko rihegereye wokurako amazi)")
-    XII_10_observations = models.CharField(null=True, max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    XII_10_observations = models.CharField(null=True, max_length=128, blank=True, verbose_name="Observations (ivyihwejwe)")
     
     class Meta:
         verbose_name_plural = "villages modernes"
@@ -409,7 +409,7 @@ class VillageCollinaire(models.Model):
     XIII_6_province_a_capter = models.CharField(null=True, max_length=32, verbose_name="Emplacement de la source d'eau(Province)/Intara ihegereye wokurako amazi")
     XIII_7_commune_a_capter = models.CharField(null=True, max_length=32, verbose_name="Emplacement de la source d'eau(Commune)/Ikomine ihegereye wokurako amazi")
     XIII_8_source_a_capter = models.CharField(null=True, max_length=32, verbose_name="Nom de la source d'eau à capter(isoko rihegereye wokurako amazi)")
-    XIII_9_observations = models.CharField(null=True, max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    XIII_9_observations = models.CharField(null=True, max_length=128, blank=True, verbose_name="Observations (ivyihwejwe)")
     
     class Meta:
         verbose_name_plural = "Villages collinaires"
