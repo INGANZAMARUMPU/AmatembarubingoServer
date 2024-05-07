@@ -28,13 +28,13 @@ for table in tables:
             if key not in titles:
                 titles.append(key)
         content = list(titles)
-        content.insert(0, table.META.verbose_name_plural)
+        item["Formulaire"] = table._meta.verbose_name_plural
         for i, key in enumerate(content):
             content[i] = item.get(key) or ""
         contents.append(content)
     
-print("ENREGISTREMENT")
-with open("one_file.csv", "w") as file:
-    print("\t".join(titles), file=file)
-    for line in tqdm(contents):
-        print("\t".join([str(x) for x in line]), file=file)
+# print("ENREGISTREMENT")
+# with open("one_file.csv", "w") as file:
+#     print("\t".join(titles), file=file)
+#     for line in tqdm(contents):
+#         print("\t".join([str(x) for x in line]), file=file)
