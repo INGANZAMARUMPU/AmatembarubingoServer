@@ -92,7 +92,7 @@ class ReseauDAlimentation(models.Model):
     II_6_milieu = models.CharField(max_length=32, default=MILIEU.RURAL, choices=MILIEU.choices, verbose_name="Milieu")
     XV_1_nomination = models.CharField(max_length=32, verbose_name="Nom du réseau AEP (Izina ry'umugende)")
     XV_2_type = models.CharField(max_length=64, choices=TYPE.choices, verbose_name="Autres types d'ouvrage")
-    XV_4_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    XV_4_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
     
     class Meta:
         verbose_name_plural = "reseaux d'alimentation"
@@ -121,7 +121,7 @@ class Ibombo(models.Model):
     )
     IV_5_nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     IV_6_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
-    IV_7_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    IV_7_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
     
     class Meta:
         verbose_name_plural = "amabombo"
@@ -152,7 +152,7 @@ class BranchementPrive(models.Model):
     V_6_nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     V_7_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     V_8_suffisante = models.BooleanField(default=False, verbose_name="L'eau est-elle suffisante(amazi arakwiye)?")
-    V_9_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    V_9_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
 class Captage(models.Model):
     class SYSTEME(models.TextChoices):
@@ -183,7 +183,7 @@ class Captage(models.Model):
     VI_5_tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     VI_6_protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
     VI_7_debit = models.FloatField(verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
-    VI_8_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    VI_8_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
 class Pompe(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -206,7 +206,7 @@ class Pompe(models.Model):
         }'''
     )
     VII_3_debit = models.FloatField(verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
-    VII_4_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    VII_4_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
 class Puit(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -233,7 +233,7 @@ class Puit(models.Model):
     VII_5_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     VII_6_tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     VII_7_protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
-    VII_8_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    VII_8_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
 class Forage(models.Model):
     class TYPE(models.TextChoices):
@@ -266,7 +266,7 @@ class Forage(models.Model):
     XIV_6_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     XIV_7_tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     XIV_8_protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
-    XIV_9_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    XIV_9_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
 class Reservoir(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -289,7 +289,7 @@ class Reservoir(models.Model):
         }'''
     )
     IX_3_volume = models.FloatField(null=True, verbose_name="le volume du réservoir en mettres cube (ubwaguke bw'ikigega)")
-    IX_4_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    IX_4_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
 class SourceAmenagee(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -318,7 +318,7 @@ class SourceAmenagee(models.Model):
     X_7_protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
     X_8_nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     X_9_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
-    X_10_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    X_10_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
     
     class Meta:
         verbose_name_plural = "Sources aménagées"
@@ -347,7 +347,7 @@ class SourceNonAmenagee(models.Model):
     X_4_tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     X_5_debit = models.FloatField(null=True, verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
     X_6_sous_colline = models.CharField(max_length=32, verbose_name="Emplacement de la SA(sous-colline)/ Agacimbiri karimwo iryo soko")
-    X_7_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    X_7_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
     
     class Meta:
         verbose_name_plural = "Sources non-aménagées"
