@@ -36,4 +36,4 @@ print("ENREGISTREMENT")
 with open("db.csv", "w") as file:
     print("\t".join(titles), file=file)
     for line in tqdm(contents):
-        print("\t".join(line), file=file)
+        print("\t".join([str(x) for x in line]), file=file)
