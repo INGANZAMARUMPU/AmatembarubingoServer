@@ -14,7 +14,7 @@ tables:list[models.Model] = [
     ReseauDAlimentation, Ibombo, BranchementPrive, Captage, Pompe, Puit, Forage, Reservoir,
     SourceAmenagee, SourceNonAmenagee, VillageModerne, VillageCollinaire
 ]
-titles = ["Formulaire"]
+titles = []
 contents = []
 
 print("TRAITEMENT")
@@ -28,7 +28,7 @@ for table in tables:
             if key not in titles:
                 titles.append(key)
         content = list(titles)
-        item["Formulaire"] = table._meta.verbose_name_plural
+        item["id"] = table._meta.verbose_name_plural
         for i, key in enumerate(content):
             content[i] = item.get(key) or ""
         contents.append(content)
