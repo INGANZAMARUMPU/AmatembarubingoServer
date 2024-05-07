@@ -40,7 +40,6 @@ class MinimalMetadata(SimpleMetadata):
             # new_item["value"] = None
             new_post[item] = new_item
         default["actions"]["POST"] = new_post
-        print(view)
         return default
 
 def getCentre(queryset:models.QuerySet) -> tuple:
