@@ -17,12 +17,14 @@ class ZoneAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = "nom", "commune"
     list_filter = "commune",
 
-@class CollineAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+@admin.register(Colline)
+class CollineAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = CollineResource
     list_display = "nom", "zone"
     list_filter = "zone",
 
-@class ReseauDAlimentationAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+@admin.register(ReseauDAlimentation)
+class ReseauDAlimentationAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = ReseauDAlimentationResource
     list_display = "date", "I_1_nom_et_prenom", "I_2_sexe", "I_3_telephone", "II_1_province", "II_2_commune", "II_3_zone", "II_4_colline", "II_5_coordonnees", "II_6_milieu", "XV_1_nomination", "XV_2_type", "XV_4_observations"
     list_filter = "date", "I_1_nom_et_prenom", "II_1_province", "II_2_commune", "II_3_zone", "II_4_colline",
