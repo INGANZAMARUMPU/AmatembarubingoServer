@@ -136,9 +136,9 @@ class ReseauDAlimentationViewset(
         return 'OUVRAGES AEP'
 
     def perform_create(self, serializer):
-        if(not self.request.user.is_anonymous):
-            serializer.save(enqueteur = self.request.user)
-        else:
+        coords = serializer.validated_data["II_5_coordonnees"]
+        existings = self.queryset.filter(II_5_coordonnees = coords)
+        if not existings.exists():
             serializer.save()
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
@@ -168,9 +168,9 @@ class IbomboViewset(
         return 'Borne fontaine "BF" (IBOMBO RUSANGI)'
     
     def perform_create(self, serializer):
-        if(not self.request.user.is_anonymous):
-            serializer.save(enqueteur = self.request.user)
-        else:
+        coords = serializer.validated_data["II_5_coordonnees"]
+        existings = self.queryset.filter(II_5_coordonnees = coords)
+        if not existings.exists():
             serializer.save()
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
@@ -201,9 +201,9 @@ class BranchementPriveViewset(
         return 'BRANCHEMENT PRIVE (UMUHANA CANKE INYUBAKWA RUZANGI IFISE MAZI IWABO)'
 
     def perform_create(self, serializer):
-        if(not self.request.user.is_anonymous):
-            serializer.save(enqueteur = self.request.user)
-        else:
+        coords = serializer.validated_data["II_5_coordonnees"]
+        existings = self.queryset.filter(II_5_coordonnees = coords)
+        if not existings.exists():
             serializer.save()
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
@@ -234,9 +234,9 @@ class CaptageViewset(
         return 'CAPTAGE'
 
     def perform_create(self, serializer):
-        if(not self.request.user.is_anonymous):
-            serializer.save(enqueteur = self.request.user)
-        else:
+        coords = serializer.validated_data["II_5_coordonnees"]
+        existings = self.queryset.filter(II_5_coordonnees = coords)
+        if not existings.exists():
             serializer.save()
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
@@ -267,9 +267,9 @@ class PompeViewset(
         return 'SYSTÈME DE POMPAGE'
 
     def perform_create(self, serializer):
-        if(not self.request.user.is_anonymous):
-            serializer.save(enqueteur = self.request.user)
-        else:
+        coords = serializer.validated_data["II_5_coordonnees"]
+        existings = self.queryset.filter(II_5_coordonnees = coords)
+        if not existings.exists():
             serializer.save()
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
@@ -300,9 +300,9 @@ class PuitViewset(
         return "PUITS (IRIBA RY'AMAZI RYUBAKIYE)"
 
     def perform_create(self, serializer):
-        if(not self.request.user.is_anonymous):
-            serializer.save(enqueteur = self.request.user)
-        else:
+        coords = serializer.validated_data["II_5_coordonnees"]
+        existings = self.queryset.filter(II_5_coordonnees = coords)
+        if not existings.exists():
             serializer.save()
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
@@ -333,9 +333,9 @@ class ForageViewset(
         return 'FORAGE'
 
     def perform_create(self, serializer):
-        if(not self.request.user.is_anonymous):
-            serializer.save(enqueteur = self.request.user)
-        else:
+        coords = serializer.validated_data["II_5_coordonnees"]
+        existings = self.queryset.filter(II_5_coordonnees = coords)
+        if not existings.exists():
             serializer.save()
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
@@ -366,9 +366,9 @@ class ReservoirViewset(
         return "RESERVOIR (Ikigega c'amazi)"
 
     def perform_create(self, serializer):
-        if(not self.request.user.is_anonymous):
-            serializer.save(enqueteur = self.request.user)
-        else:
+        coords = serializer.validated_data["II_5_coordonnees"]
+        existings = self.queryset.filter(II_5_coordonnees = coords)
+        if not existings.exists():
             serializer.save()
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
@@ -399,9 +399,9 @@ class SourceAmenageeViewset(
         return 'Source Aménagée (Isoko ritunganijwe)'
 
     def perform_create(self, serializer):
-        if(not self.request.user.is_anonymous):
-            serializer.save(enqueteur = self.request.user)
-        else:
+        coords = serializer.validated_data["II_5_coordonnees"]
+        existings = self.queryset.filter(II_5_coordonnees = coords)
+        if not existings.exists():
             serializer.save()
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
@@ -432,9 +432,9 @@ class SourceNonAmenageeViewset(
         return 'Source Non Aménagée (Isoko ridatunganijwe)'
 
     def perform_create(self, serializer):
-        if(not self.request.user.is_anonymous):
-            serializer.save(enqueteur = self.request.user)
-        else:
+        coords = serializer.validated_data["II_5_coordonnees"]
+        existings = self.queryset.filter(II_5_coordonnees = coords)
+        if not existings.exists():
             serializer.save()
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
@@ -465,9 +465,9 @@ class VillageModerneViewset(
         return 'Village Moderne (Ikigwati ca kijambere)'
 
     def perform_create(self, serializer):
-        if(not self.request.user.is_anonymous):
-            serializer.save(enqueteur = self.request.user)
-        else:
+        coords = serializer.validated_data["II_5_coordonnees"]
+        existings = self.queryset.filter(II_5_coordonnees = coords)
+        if not existings.exists():
             serializer.save()
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
@@ -498,9 +498,9 @@ class VillageCollinaireViewset(
         return 'Village collinaire (Ikigwati co ku mutumba)'
 
     def perform_create(self, serializer):
-        if(not self.request.user.is_anonymous):
-            serializer.save(enqueteur = self.request.user)
-        else:
+        coords = serializer.validated_data["II_5_coordonnees"]
+        existings = self.queryset.filter(II_5_coordonnees = coords)
+        if not existings.exists():
             serializer.save()
 
     @action( methods=["GET"], detail=False, url_name=r"grouped", url_path=r"grouped" )
