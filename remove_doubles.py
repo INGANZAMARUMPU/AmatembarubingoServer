@@ -21,7 +21,7 @@ with open("db.csv", "+a") as file:
     for table in tables:
         table.objects.filter(date__lt=datetime.date(2024, 5, 7)).delete()
         for coords in tqdm(table.objects.values('II_5_coordonnees').distinct()):
-            object = table.objects.filter(II_5_coordonnees = coords).first()
+            object = table.objects.filter(II_5_coordonnees = coords["II_5_coordonnees"]).first()
             item = model_to_dict(object)
             # wrongs = table.objects.filter(II_5_coordonnees=item["II_5_coordonnees"]).exclude(id=item.id).delete()
             for key, value in item.items():
