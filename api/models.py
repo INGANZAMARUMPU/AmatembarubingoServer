@@ -17,8 +17,8 @@ class SEXE(models.TextChoices):
     FEMME = "femme"
 
 class MILIEU(models.TextChoices):
-    RURAL = "urbain"
-    URBAIN = "rural"
+    RURAL = "rural"
+    URBAIN = "urbain"
 
 class PLACE(models.TextChoices):
     MENAGE = "menage"
@@ -89,10 +89,10 @@ class ReseauDAlimentation(models.Model):
     II_3_zone = models.CharField(max_length=32, verbose_name="zone")
     II_4_colline = models.CharField(max_length=32, verbose_name="colline")
     II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
-    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
+    II_6_milieu = models.CharField(max_length=32, default=MILIEU.RURAL, choices=MILIEU.choices, verbose_name="Milieu")
     XV_1_nomination = models.CharField(max_length=32, verbose_name="Nom du réseau AEP (Izina ry'umugende)")
     XV_2_type = models.CharField(max_length=64, choices=TYPE.choices, verbose_name="Autres types d'ouvrage")
-    XV_4_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    XV_4_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
     
     class Meta:
         verbose_name_plural = "reseaux d'alimentation"
@@ -108,7 +108,7 @@ class Ibombo(models.Model):
     II_3_zone = models.CharField(max_length=32, verbose_name="zone")
     II_4_colline = models.CharField(max_length=32, verbose_name="colline")
     II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
-    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
+    II_6_milieu = models.CharField(max_length=32, default=MILIEU.RURAL, choices=MILIEU.choices, verbose_name="Milieu")
     IV_1_place = models.CharField(max_length=32, choices=PLACE.choices, verbose_name="Borne fontaine proche de(Ibombo rusangi ryegereye he)")
     IV_2_identification = models.CharField(max_length=32, verbose_name="Identification de la BORNE FONTAINE(Izina ry'iryo bombo rusangi)")
     IV_3_umugende = models.CharField(max_length=32, verbose_name="Nom réseau AEP")
@@ -121,7 +121,7 @@ class Ibombo(models.Model):
     )
     IV_5_nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     IV_6_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
-    IV_7_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    IV_7_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
     
     class Meta:
         verbose_name_plural = "amabombo"
@@ -137,7 +137,7 @@ class BranchementPrive(models.Model):
     II_3_zone = models.CharField(max_length=32, verbose_name="zone")
     II_4_colline = models.CharField(max_length=32, verbose_name="colline")
     II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
-    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
+    II_6_milieu = models.CharField(max_length=32, default=MILIEU.RURAL, choices=MILIEU.choices, verbose_name="Milieu")
     V_1_place = models.CharField(max_length=32, choices=PLACE.choices, verbose_name="Type de BRANCHEMENT PRIVE (IMIHANA CANKE INYUBAKWA RUSANGI IFISE AMAZI I WABO)")
     V_2_nomination = models.CharField(max_length=32, verbose_name="Nom/ Le nom du proprietaire/ Abonné")
     V_3_umugende = models.CharField(max_length=32, verbose_name="Nom du réseau AEP (Izina ry'umugende ayo mazi yamukako)")
@@ -152,7 +152,7 @@ class BranchementPrive(models.Model):
     V_6_nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     V_7_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     V_8_suffisante = models.BooleanField(default=False, verbose_name="L'eau est-elle suffisante(amazi arakwiye)?")
-    V_9_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    V_9_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
 class Captage(models.Model):
     class SYSTEME(models.TextChoices):
@@ -169,7 +169,7 @@ class Captage(models.Model):
     II_3_zone = models.CharField(max_length=32, verbose_name="zone")
     II_4_colline = models.CharField(max_length=32, verbose_name="colline")
     II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
-    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
+    II_6_milieu = models.CharField(max_length=32, default=MILIEU.RURAL, choices=MILIEU.choices, verbose_name="Milieu")
     VI_1_umugende = models.CharField(max_length=32, verbose_name="Nom réseau AEP (Izina ry'umugende ayo mazi yamukako)")
     VI_2_nomination = models.CharField(max_length=32, verbose_name="Nom du captage")
     VI_3_systeme = models.CharField(max_length=32, choices=SYSTEME.choices, verbose_name="Système de captage")
@@ -183,7 +183,7 @@ class Captage(models.Model):
     VI_5_tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     VI_6_protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
     VI_7_debit = models.FloatField(verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
-    VI_8_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    VI_8_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
 class Pompe(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -196,7 +196,7 @@ class Pompe(models.Model):
     II_3_zone = models.CharField(max_length=32, verbose_name="zone")
     II_4_colline = models.CharField(max_length=32, verbose_name="colline")
     II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
-    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
+    II_6_milieu = models.CharField(max_length=32, default=MILIEU.RURAL, choices=MILIEU.choices, verbose_name="Milieu")
     VII_1_nomination = models.CharField(max_length=32, verbose_name="Nom du réseau (Izina ry'umugende)")
     VII_2_fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
@@ -206,7 +206,7 @@ class Pompe(models.Model):
         }'''
     )
     VII_3_debit = models.FloatField(verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
-    VII_4_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    VII_4_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
 class Puit(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -219,7 +219,7 @@ class Puit(models.Model):
     II_3_zone = models.CharField(max_length=32, verbose_name="zone")
     II_4_colline = models.CharField(max_length=32, verbose_name="colline")
     II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
-    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
+    II_6_milieu = models.CharField(max_length=32, default=MILIEU.RURAL, choices=MILIEU.choices, verbose_name="Milieu")
     VII_1_nomination = models.CharField(max_length=32, verbose_name="Nom de la sous colline (Izina ry'agacimbiri kimbweko iryo riba)")
     VII_2_fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Harakoreshwa",
@@ -233,7 +233,7 @@ class Puit(models.Model):
     VII_5_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     VII_6_tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     VII_7_protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
-    VII_8_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    VII_8_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
 class Forage(models.Model):
     class TYPE(models.TextChoices):
@@ -251,7 +251,7 @@ class Forage(models.Model):
     II_3_zone = models.CharField(max_length=32, verbose_name="zone")
     II_4_colline = models.CharField(max_length=32, verbose_name="colline")
     II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
-    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
+    II_6_milieu = models.CharField(max_length=32, default=MILIEU.RURAL, choices=MILIEU.choices, verbose_name="Milieu")
     XIV_1_type = models.CharField(max_length=32, choices=TYPE.choices)
     XIV_2_nomination = models.CharField(max_length=32, verbose_name="Nom de la sous colline (Izina ry'agacimbiri kimbweko iryo riba)")
     XIV_3_fonctionnel = models.BooleanField(
@@ -266,7 +266,7 @@ class Forage(models.Model):
     XIV_6_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     XIV_7_tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     XIV_8_protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
-    XIV_9_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    XIV_9_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
 class Reservoir(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -279,7 +279,7 @@ class Reservoir(models.Model):
     II_3_zone = models.CharField(max_length=32, verbose_name="zone")
     II_4_colline = models.CharField(max_length=32, verbose_name="colline")
     II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
-    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
+    II_6_milieu = models.CharField(max_length=32, default=MILIEU.RURAL, choices=MILIEU.choices, verbose_name="Milieu")
     IX_1_nomination = models.CharField(max_length=32, verbose_name="nom du réseau")
     IX_2_fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Irakora",
@@ -289,7 +289,7 @@ class Reservoir(models.Model):
         }'''
     )
     IX_3_volume = models.FloatField(null=True, verbose_name="le volume du réservoir en mettres cube (ubwaguke bw'ikigega)")
-    IX_4_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    IX_4_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
 class SourceAmenagee(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -302,7 +302,7 @@ class SourceAmenagee(models.Model):
     II_3_zone = models.CharField(max_length=32, verbose_name="zone")
     II_4_colline = models.CharField(max_length=32, verbose_name="colline")
     II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
-    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
+    II_6_milieu = models.CharField(max_length=32, default=MILIEU.RURAL, choices=MILIEU.choices, verbose_name="Milieu")
     X_1_nomination = models.CharField(max_length=32, verbose_name="Nom de la SA(Izina ry'iryo soko)")
     X_2_sous_colline = models.CharField(max_length=32, verbose_name="Emplacement de la SA(sous-colline)/ Agacimbiri karimwo iryo soko")
     X_3_fonctionnel = models.BooleanField(
@@ -318,7 +318,7 @@ class SourceAmenagee(models.Model):
     X_7_protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
     X_8_nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     X_9_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
-    X_10_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    X_10_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
     
     class Meta:
         verbose_name_plural = "Sources aménagées"
@@ -334,7 +334,7 @@ class SourceNonAmenagee(models.Model):
     II_3_zone = models.CharField(max_length=32, verbose_name="zone")
     II_4_colline = models.CharField(max_length=32, verbose_name="colline")
     II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
-    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
+    II_6_milieu = models.CharField(max_length=32, default=MILIEU.RURAL, choices=MILIEU.choices, verbose_name="Milieu")
     X_1_nomination = models.CharField(max_length=32, verbose_name="Nom de la SNA(Izina ry'iryo soko)")
     X_2_fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
@@ -347,7 +347,7 @@ class SourceNonAmenagee(models.Model):
     X_4_tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     X_5_debit = models.FloatField(null=True, verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
     X_6_sous_colline = models.CharField(max_length=32, verbose_name="Emplacement de la SA(sous-colline)/ Agacimbiri karimwo iryo soko")
-    X_7_observations = models.CharField(max_length=128, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    X_7_observations = models.CharField(max_length=256, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
     
     class Meta:
         verbose_name_plural = "Sources non-aménagées"
@@ -363,7 +363,7 @@ class VillageModerne(models.Model):
     II_3_zone = models.CharField(max_length=32, verbose_name="zone")
     II_4_colline = models.CharField(max_length=32, verbose_name="colline")
     II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
-    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
+    II_6_milieu = models.CharField(max_length=32, default=MILIEU.RURAL, choices=MILIEU.choices, verbose_name="Milieu")
     XII_1_nomination = models.CharField(max_length=32, verbose_name="Nom du village (Izina ry'ikigwati)")
     XII_2_fonctionnel = models.BooleanField(
         default=False, verbose_name="Le village est-il alimenté en eau potable/Ico kigwati kirafise amazi?",
@@ -394,7 +394,7 @@ class VillageCollinaire(models.Model):
     II_3_zone = models.CharField(max_length=32, verbose_name="zone")
     II_4_colline = models.CharField(max_length=32, verbose_name="colline")
     II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
-    II_6_milieu = models.CharField(max_length=32, choices=MILIEU.choices, verbose_name="Milieu")
+    II_6_milieu = models.CharField(max_length=32, default=MILIEU.RURAL, choices=MILIEU.choices, verbose_name="Milieu")
     XIII_1_nomination = models.CharField(max_length=32, verbose_name="Nom du village (Izina ry'ikigwati)")
     XIII_2_fonctionnel = models.BooleanField(
         default=False, verbose_name="Le village est-il alimenté en eau potable/Ico kigwati kirafise amazi?",
