@@ -182,7 +182,7 @@ class Captage(models.Model):
     )
     VI_5_tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     VI_6_protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
-    VI_7_debit = models.FloatField(verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
+    VI_7_debit = models.FloatField(null=True, verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
     VI_8_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
 class Pompe(models.Model):
@@ -205,7 +205,7 @@ class Pompe(models.Model):
             "true":[]
         }'''
     )
-    VII_3_debit = models.FloatField(verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
+    VII_3_debit = models.FloatField(null=True, verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
     VII_4_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
 class Puit(models.Model):
