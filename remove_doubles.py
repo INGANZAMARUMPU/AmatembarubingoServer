@@ -6,39 +6,58 @@ import django
 import csv
 django.setup()
 
-from api.models import *
+from api.views import *
 from django.forms.models import model_to_dict
 from tqdm import tqdm
 
-tables:list[models.Model] = [
-    ReseauDAlimentation, Ibombo, BranchementPrive, Captage, Pompe, Puit, Forage, Reservoir,
-    SourceAmenagee, SourceNonAmenagee, VillageModerne, VillageCollinaire
+list_viewsets:list[viewsets.ModelViewSet] = [
+    ReseauDAlimentationViewset, IbomboViewset, BranchementPriveViewset,
+    CaptageViewset, PompeViewset, PuitViewset, ForageViewset, ReservoirViewset, 
+    SourceAmenageeViewset, SourceNonAmenageeViewset, VillageModerneViewset, 
+    VillageCollinaireViewset
 ]
-titles = ["Formulaire"]
+
+titles = ["I. Formulaire"]
 contents = []
 
 print("TRAITEMENT")
-for table in tables:
-    table.objects.filter(date__lt=datetime.date(2024, 5, 7)).delete()
-    for coords in tqdm(table.objects.values('II_5_coordonnees').distinct()):
-        object = table.objects.filter(II_5_coordonnees = coords["II_5_coordonnees"]).first()
+for viewset_class in list_viewsets:
+    viewset = viewset_class()
+    table:models.QuerySet = viewset.get_queryset()
+    for coords in tqdm(table.values('II_5_coordonnees').distinct()):
+        object = table.filter(II_5_coordonnees = coords["II_5_coordonnees"]).first()
         item = model_to_dict(object)
         # wrongs = table.objects.filter(II_5_coordonnees=item["II_5_coordonnees"]).exclude(id=item.id).delete()
+        new_item = {}
         for key, value in item.items():
-            if key not in titles:
-                titles.append(key)
+            keys = key.split("_")
+            if len(keys) >= 3:
+                verbose_name = object._meta.get_field(key).verbose_name
+                if verbose_name[:4] != key[:4]:
+                    new_col_name = f"{keys[0]}.{keys[1]} {verbose_name}"
+                else:
+                    new_col_name = f"{keys[0]}.{keys[1]} {keys[2]}"
+            else:
+                new_col_name = key
+            if new_col_name not in titles:
+                titles.append(new_col_name)
                 if key == "II_5_coordonnees":
                     titles += ["lat", "long", "alt", "prec"]
+            new_item[new_col_name] = value
         content = list(titles)
-        item["Formulaire"] = table._meta.verbose_name_plural
+        new_item["I. Formulaire"] = viewset.get_view_name()
         for i, key in enumerate(content):
-            content[i] = item.get(key) or ""
-            if key == "II_5_coordonnees":
-                list_coords = item.get(key).split()
-                item["lat"] = list_coords[0]
-                item["long"] = list_coords[1]
-                item["alt"] = list_coords[2]
-                item["prec"] = list_coords[3]
+            value = new_item.get(key)
+            if value != None:
+                content[i] = new_item.get(key)
+            else:
+                content[i] = ""
+            if key.startswith("II.5"):
+                list_coords = new_item.get(key).split()
+                new_item["lat"] = list_coords[0]
+                new_item["long"] = list_coords[1]
+                new_item["alt"] = list_coords[2]
+                new_item["prec"] = list_coords[3]
 
         contents.append(content)
     
