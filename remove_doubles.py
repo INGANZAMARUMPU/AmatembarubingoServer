@@ -27,10 +27,19 @@ for table in tables:
         for key, value in item.items():
             if key not in titles:
                 titles.append(key)
+                if key == "II_5_coordonnees":
+                    titles += ["lat", "long", "alt", "prec"]
         content = list(titles)
         item["Formulaire"] = table._meta.verbose_name_plural
         for i, key in enumerate(content):
             content[i] = item.get(key) or ""
+            if key == "II_5_coordonnees":
+                list_coords = item.get(key).split()
+                content["lat"] = list_coords[0]
+                content["long"] = list_coords[1]
+                content["alt"] = list_coords[2]
+                content["prec"] = list_coords[3]
+
         contents.append(content)
     
 print("ENREGISTREMENT")

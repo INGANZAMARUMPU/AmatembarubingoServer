@@ -119,7 +119,7 @@ class Ibombo(models.Model):
             "true":[]
         }'''
     )
-    IV_5_nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
+    IV_5_nb_menages = models.PositiveIntegerField(null=True, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     IV_6_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     IV_7_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
     
@@ -149,7 +149,7 @@ class BranchementPrive(models.Model):
         }'''
     )
     V_5_avec_eau = models.BooleanField(default=False, verbose_name="Y'a-t-il de l'eau(Barafise amazi)?")
-    V_6_nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
+    V_6_nb_menages = models.PositiveIntegerField(null=True, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     V_7_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     V_8_suffisante = models.BooleanField(default=False, verbose_name="L'eau est-elle suffisante(amazi arakwiye)?")
     V_9_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
@@ -229,7 +229,7 @@ class Puit(models.Model):
         }'''
     )
     VII_3_coloration = models.BooleanField(default=False, verbose_name="Cette eau est-elle colorée (amazi arafise ibara)?")
-    VII_4_nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
+    VII_4_nb_menages = models.PositiveIntegerField(null=True, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     VII_5_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     VII_6_tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     VII_7_protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
@@ -262,7 +262,7 @@ class Forage(models.Model):
         }'''
     )
     XIV_4_coloration = models.BooleanField(default=False)
-    XIV_5_nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
+    XIV_5_nb_menages = models.PositiveIntegerField(null=True, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     XIV_6_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     XIV_7_tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     XIV_8_protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
@@ -316,7 +316,7 @@ class SourceAmenagee(models.Model):
     X_5_tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
     X_6_debit = models.FloatField(null=True, verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
     X_7_protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
-    X_8_nb_menages = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
+    X_8_nb_menages = models.PositiveIntegerField(null=True, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     X_9_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     X_10_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
     
