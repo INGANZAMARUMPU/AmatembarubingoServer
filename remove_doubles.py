@@ -35,10 +35,10 @@ for table in tables:
             content[i] = item.get(key) or ""
             if key == "II_5_coordonnees":
                 list_coords = item.get(key).split()
-                content[i]["lat"] = list_coords[0]
-                content[i]["long"] = list_coords[1]
-                content[i]["alt"] = list_coords[2]
-                content[i]["prec"] = list_coords[3]
+                item["lat"] = list_coords[0]
+                item["long"] = list_coords[1]
+                item["alt"] = list_coords[2]
+                item["prec"] = list_coords[3]
 
         contents.append(content)
     
