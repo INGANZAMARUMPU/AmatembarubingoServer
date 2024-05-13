@@ -180,7 +180,7 @@ class Captage(models.Model):
             "true":[]
         }'''
     )
-    VI_5_tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
+    VI_5_tarissement = models.BooleanField(null=True, verbose_name="Tarissement(Iryo riba rirakama)?")
     VI_6_protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
     VI_7_debit = models.FloatField(null=True, verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
     VI_8_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
@@ -228,10 +228,10 @@ class Puit(models.Model):
             "true":[]
         }'''
     )
-    VII_3_coloration = models.BooleanField(default=False, verbose_name="Cette eau est-elle colorée (amazi arafise ibara)?")
+    VII_3_coloration = models.BooleanField(null=True, verbose_name="Cette eau est-elle colorée (amazi arafise ibara)?")
     VII_4_nb_menages = models.PositiveIntegerField(null=True, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     VII_5_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
-    VII_6_tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
+    VII_6_tarissement = models.BooleanField(null=True, verbose_name="Tarissement(Iryo riba rirakama)?")
     VII_7_protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
     VII_8_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
@@ -261,10 +261,9 @@ class Forage(models.Model):
             "true":[]
         }'''
     )
-    XIV_4_coloration = models.BooleanField(default=False)
-    XIV_5_nb_menages = models.PositiveIntegerField(null=True, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
+    XIV_4_coloration = models.BooleanField(null=True,     XIV_5_nb_menages = models.PositiveIntegerField(null=True, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     XIV_6_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
-    XIV_7_tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
+    XIV_7_tarissement = models.BooleanField(null=True, verbose_name="Tarissement(Iryo riba rirakama)?")
     XIV_8_protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
     XIV_9_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
 
@@ -304,7 +303,7 @@ class SourceAmenagee(models.Model):
     II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
     II_6_milieu = models.CharField(max_length=32, default=MILIEU.RURAL, choices=MILIEU.choices, verbose_name="Milieu")
     X_1_nomination = models.CharField(max_length=64, verbose_name="Nom de la SA(Izina ry'iryo soko)")
-    X_2_sous_colline = models.CharField(max_length=32, verbose_name="Emplacement de la SA(sous-colline)/ Agacimbiri karimwo iryo soko")
+    X_2_sous_colline = models.CharField(null=True, max_length=32, verbose_name="Emplacement de la SA(sous-colline)/ Agacimbiri karimwo iryo soko")
     X_3_fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
         help_text='''{
@@ -312,8 +311,8 @@ class SourceAmenagee(models.Model):
             "true":[]
         }'''
     )
-    X_4_coloration = models.BooleanField(default=False, verbose_name="Cette eau est-elle colorée (amazi arafise ibara)?")
-    X_5_tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
+    X_4_coloration = models.BooleanField(null=True, verbose_name="Cette eau est-elle colorée (amazi arafise ibara)?")
+    X_5_tarissement = models.BooleanField(null=True, verbose_name="Tarissement(Iryo riba rirakama)?")
     X_6_debit = models.FloatField(null=True, verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
     X_7_protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
     X_8_nb_menages = models.PositiveIntegerField(null=True, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
@@ -343,10 +342,10 @@ class SourceNonAmenagee(models.Model):
             "true":[]
         }'''
     )
-    X_3_coloration = models.BooleanField(default=False, verbose_name="Cette eau est-elle colorée (amazi arafise ibara)?")
-    X_4_tarissement = models.BooleanField(default=False, verbose_name="Tarissement(Iryo riba rirakama)?")
+    X_3_coloration = models.BooleanField(null=True, verbose_name="Cette eau est-elle colorée (amazi arafise ibara)?")
+    X_4_tarissement = models.BooleanField(null=True, verbose_name="Tarissement(Iryo riba rirakama)?")
     X_5_debit = models.FloatField(null=True, verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
-    X_6_sous_colline = models.CharField(max_length=32, verbose_name="Emplacement de la SA(sous-colline)/ Agacimbiri karimwo iryo soko")
+    X_6_sous_colline = models.CharField(null=True, max_length=32, verbose_name="Emplacement de la SA(sous-colline)/ Agacimbiri karimwo iryo soko")
     X_7_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
     
     class Meta:

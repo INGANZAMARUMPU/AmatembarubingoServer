@@ -11,19 +11,27 @@ from django.forms.models import model_to_dict
 from tqdm import tqdm
 
 list_viewsets:list[viewsets.ModelViewSet] = [
-    ReseauDAlimentationViewset, IbomboViewset, BranchementPriveViewset,
-    CaptageViewset, PompeViewset, PuitViewset, ForageViewset, ReservoirViewset, 
-    SourceAmenageeViewset, SourceNonAmenageeViewset, VillageModerneViewset, 
-    VillageCollinaireViewset
+    IbomboViewset,
+    BranchementPriveViewset,
+    CaptageViewset,
+    PompeViewset,
+    PuitViewset,
+    ReservoirViewset,
+    SourceAmenageeViewset,
+    SourceNonAmenageeViewset,
+    VillageModerneViewset,
+    VillageCollinaireViewset,
+    ForageViewset,
+    ReseauDAlimentationViewset,
 ]
 
-titles = ["I. Formulaire"]
+titles = ["I. Formulaire", "date"]
 contents = []
 
 print("TRAITEMENT")
 for viewset_class in list_viewsets:
     viewset = viewset_class()
-    table:models.QuerySet = viewset.get_queryset()
+    table:models.QuerySet = viewset.get_queryset().filter(date__gt=datetime.date(2024, 5, 11))
     for coords in tqdm(table.values('II_5_coordonnees').distinct()):
         object = table.filter(II_5_coordonnees = coords["II_5_coordonnees"]).first()
         item = model_to_dict(object)
@@ -46,6 +54,7 @@ for viewset_class in list_viewsets:
             new_item[new_col_name] = value
         content = list(titles)
         new_item["I. Formulaire"] = viewset.get_view_name()
+        new_item["date"] = object.date
         for i, key in enumerate(content):
             value = new_item.get(key)
             if value != None:
@@ -58,7 +67,6 @@ for viewset_class in list_viewsets:
                 new_item["long"] = list_coords[1]
                 new_item["alt"] = list_coords[2]
                 new_item["prec"] = list_coords[3]
-
         contents.append(content)
     
 print("ENREGISTREMENT")
