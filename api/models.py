@@ -261,7 +261,8 @@ class Forage(models.Model):
             "true":[]
         }'''
     )
-    XIV_4_coloration = models.BooleanField(null=True,     XIV_5_nb_menages = models.PositiveIntegerField(null=True, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
+    XIV_4_coloration = models.BooleanField(default=False)
+    XIV_5_nb_menages = models.PositiveIntegerField(null=True, verbose_name="nombre de menages utilisant cette source se trouvant à moins de 500m")
     XIV_6_nb_menages_500 = models.PositiveIntegerField(default=0, verbose_name="nombre de menages utilisant cette source se trouvant à plus de 500m")
     XIV_7_tarissement = models.BooleanField(null=True, verbose_name="Tarissement(Iryo riba rirakama)?")
     XIV_8_protection = models.BooleanField(default=False, verbose_name="Existence d'une zone de protection(Hoba hariho uruzitiro rukingira iryo riba?)")
