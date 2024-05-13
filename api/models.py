@@ -111,7 +111,7 @@ class Ibombo(models.Model):
     II_6_milieu = models.CharField(max_length=32, default=MILIEU.RURAL, choices=MILIEU.choices, verbose_name="Milieu")
     IV_1_place = models.CharField(max_length=32, choices=PLACE.choices, verbose_name="Borne fontaine proche de(Ibombo rusangi ryegereye he)")
     IV_2_identification = models.CharField(max_length=32, verbose_name="Identification de la BORNE FONTAINE(Izina ry'iryo bombo rusangi)")
-    IV_3_umugende = models.CharField(max_length=32, verbose_name="Nom réseau AEP")
+    IV_3_umugende = models.CharField(max_length=64, verbose_name="Nom réseau AEP")
     IV_4_fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
         help_text='''{
@@ -140,7 +140,7 @@ class BranchementPrive(models.Model):
     II_6_milieu = models.CharField(max_length=32, default=MILIEU.RURAL, choices=MILIEU.choices, verbose_name="Milieu")
     V_1_place = models.CharField(max_length=32, choices=PLACE.choices, verbose_name="Type de BRANCHEMENT PRIVE (IMIHANA CANKE INYUBAKWA RUSANGI IFISE AMAZI I WABO)")
     V_2_nomination = models.CharField(max_length=64, verbose_name="Nom/ Le nom du proprietaire/ Abonné")
-    V_3_umugende = models.CharField(max_length=32, verbose_name="Nom du réseau AEP (Izina ry'umugende ayo mazi yamukako)")
+    V_3_umugende = models.CharField(max_length=64, verbose_name="Nom du réseau AEP (Izina ry'umugende ayo mazi yamukako)")
     V_4_fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
         help_text='''{
@@ -170,7 +170,7 @@ class Captage(models.Model):
     II_4_colline = models.CharField(max_length=32, verbose_name="colline")
     II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
     II_6_milieu = models.CharField(max_length=32, default=MILIEU.RURAL, choices=MILIEU.choices, verbose_name="Milieu")
-    VI_1_umugende = models.CharField(max_length=32, verbose_name="Nom réseau AEP (Izina ry'umugende ayo mazi yamukako)")
+    VI_1_umugende = models.CharField(max_length=64, verbose_name="Nom réseau AEP (Izina ry'umugende ayo mazi yamukako)")
     VI_2_nomination = models.CharField(max_length=64, verbose_name="Nom du captage")
     VI_3_systeme = models.CharField(max_length=32, choices=SYSTEME.choices, verbose_name="Système de captage")
     VI_4_fonctionnel = models.BooleanField(
