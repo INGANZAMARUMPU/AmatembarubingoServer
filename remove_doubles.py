@@ -31,7 +31,10 @@ contents = []
 print("TRAITEMENT")
 for viewset_class in list_viewsets:
     viewset = viewset_class()
-    table:models.QuerySet = viewset.get_queryset().filter(date__gt=datetime.date(2024, 5, 11))
+    table:models.QuerySet = viewset.get_queryset().filter(
+        date__gte = datetime.date(2024, 5, 15),
+        date__lte = datetime.date(2024, 5, 16)
+    )
     for coords in tqdm(table.values('II_5_coordonnees').distinct()):
         object = table.filter(II_5_coordonnees = coords["II_5_coordonnees"]).first()
         item = model_to_dict(object)
