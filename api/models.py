@@ -110,7 +110,7 @@ class Ibombo(models.Model):
     II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
     II_6_milieu = models.CharField(max_length=32, default=MILIEU.RURAL, choices=MILIEU.choices, verbose_name="Milieu")
     IV_1_place = models.CharField(max_length=32, choices=PLACE.choices, verbose_name="Borne fontaine proche de(Ibombo rusangi ryegereye he)")
-    IV_2_identification = models.CharField(max_length=32, verbose_name="Identification de la BORNE FONTAINE(Izina ry'iryo bombo rusangi)")
+    IV_2_identification = models.CharField(max_length=64, verbose_name="Identification de la BORNE FONTAINE(Izina ry'iryo bombo rusangi)")
     IV_3_umugende = models.CharField(max_length=64, verbose_name="Nom réseau AEP")
     IV_4_fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
