@@ -335,19 +335,19 @@ class SourceNonAmenagee(models.Model):
     II_4_colline = models.CharField(max_length=32, verbose_name="colline")
     II_5_coordonnees = models.CharField(max_length=64, verbose_name="latitude")
     II_6_milieu = models.CharField(max_length=32, default=MILIEU.RURAL, choices=MILIEU.choices, verbose_name="Milieu")
-    X_1_nomination = models.CharField(max_length=128, verbose_name="Nom de la SNA(Izina ry'iryo soko)")
-    X_2_fonctionnel = models.BooleanField(
+    XI_1_nomination = models.CharField(max_length=128, verbose_name="Nom de la SNA(Izina ry'iryo soko)")
+    XI_2_fonctionnel = models.BooleanField(
         default=False, verbose_name="Fonctionnel / Rirakora",
         help_text='''{
             "false":["X_3_coloration","X_4_tarissement","X_5_debit","X_6_sous_colline"],
             "true":[]
         }'''
     )
-    X_3_coloration = models.BooleanField(null=True, verbose_name="Cette eau est-elle colorée (amazi arafise ibara)?")
-    X_4_tarissement = models.BooleanField(null=True, verbose_name="Tarissement(Iryo riba rirakama)?")
-    X_5_debit = models.FloatField(null=True, verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
-    X_6_sous_colline = models.CharField(null=True, max_length=32, verbose_name="Emplacement de la SA(sous-colline)/ Agacimbiri karimwo iryo soko")
-    X_7_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
+    XI_3_coloration = models.BooleanField(null=True, verbose_name="Cette eau est-elle colorée (amazi arafise ibara)?")
+    XI_4_tarissement = models.BooleanField(null=True, verbose_name="Tarissement(Iryo riba rirakama)?")
+    XI_5_debit = models.FloatField(null=True, verbose_name="Debit de l'eau du système(nombre de littres par seconde)/amalitiro y'amazi yisuka ku musegonda")
+    XI_6_sous_colline = models.CharField(null=True, max_length=32, verbose_name="Emplacement de la SA(sous-colline)/ Agacimbiri karimwo iryo soko")
+    XI_7_observations = models.CharField(max_length=512, blank=True, null=True, verbose_name="Observations (ivyihwejwe)")
     
     class Meta:
         verbose_name_plural = "Sources non-aménagées"
