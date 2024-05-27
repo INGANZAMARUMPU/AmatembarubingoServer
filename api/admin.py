@@ -84,7 +84,7 @@ class SourceAmenageeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 class SourceNonAmenageeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = SourceNonAmenageeResource
     list_display = "date", "I_1_nom_et_prenom", "I_2_sexe", "I_3_telephone", "II_1_province", "II_2_commune", "II_3_zone", "II_4_colline", "II_5_coordonnees", "II_6_milieu", "XI_1_nomination", "XI_2_fonctionnel", "XI_3_coloration", "XI_4_tarissement", "XI_5_debit", "XI_6_sous_colline", "XI_7_observations"
-    list_filter = "date", "I_1_nom_et_prenom", "II_1_province", "II_2_commune", "II_3_zone", "II_4_colline", "X_2_fonctionnel"
+    list_filter = "date", "I_1_nom_et_prenom", "II_1_province", "II_2_commune", "II_3_zone", "II_4_colline", "XI_2_fonctionnel"
 
 
 @admin.register(VillageModerne)
