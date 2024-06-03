@@ -1,9 +1,8 @@
 import datetime
+
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "AmatembarubingoServer.settings")
-
 import django
-import csv
 django.setup()
 
 from api.views import *
@@ -32,8 +31,8 @@ print("TRAITEMENT")
 for viewset_class in list_viewsets:
     viewset = viewset_class()
     table:models.QuerySet = viewset.get_queryset().filter(
-        date__gte = datetime.date(2024, 5, 23),
-        date__lte = datetime.date(2024, 5, 28)
+#        date__gte = datetime.date(2024, 5, 23),
+        date__lte = datetime.date(2024, 5, 30)
     )
     for coords in tqdm(table.values('II_5_coordonnees').distinct()):
         object = table.filter(II_5_coordonnees = coords["II_5_coordonnees"]).first()
