@@ -99,3 +99,8 @@ class VillageCollinaireAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = VillageCollinaireResource
     list_display = "date", "I_1_nom_et_prenom", "I_2_sexe", "I_3_telephone", "II_1_province", "II_2_commune", "II_3_zone", "II_4_colline", "II_5_coordonnees", "II_6_milieu", "XIII_1_nomination", "XIII_2_fonctionnel", "XIII_3_province", "XIII_4_commune", "XIII_5_source", "XIII_6_province_a_capter", "XIII_7_commune_a_capter", "XIII_8_source_a_capter", "XIII_9_observations"
     list_filter = "date", "I_1_nom_et_prenom", "II_1_province", "II_2_commune", "II_3_zone", "II_4_colline", "XIII_2_fonctionnel"
+
+
+@admin.register(CarteThematique)
+class CarteThematiqueAdmin(admin.ModelAdmin):
+    list_display = "theme", "carte", "details"

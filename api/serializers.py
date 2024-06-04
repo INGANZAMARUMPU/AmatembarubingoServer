@@ -102,3 +102,8 @@ class VillageCollinaireSerializer(serializers.ModelSerializer):
     class Meta:
         model = VillageCollinaire
         fields = "__all__"
+
+class CarteThematiqueSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CarteThematique
+        fields = "__all__"

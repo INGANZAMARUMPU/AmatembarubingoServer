@@ -18,6 +18,7 @@ router.register("sourceamenagees", SourceAmenageeViewset)
 router.register("sourcenonamenagees", SourceNonAmenageeViewset)
 router.register("villagemodernes", VillageModerneViewset)
 router.register("villagecollinaires", VillageCollinaireViewset)
+router.register("cartethematiques", CarteThematiqueViewset)
 
 urlpatterns = [
 	path("", include(router.urls)),

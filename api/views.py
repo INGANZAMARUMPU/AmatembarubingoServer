@@ -515,3 +515,9 @@ class VillageCollinaireViewset(
         except Exception as e:
                 return Response({"status": str(e)}, 400)
 
+
+class CarteThematiqueViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+    permission_classes = AllowAny,
+    queryset = CarteThematique.objects.all()
+    serializer_class = CarteThematiqueSerializer
+

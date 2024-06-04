@@ -413,3 +413,9 @@ class VillageCollinaire(models.Model):
     
     class Meta:
         verbose_name_plural = "Villages collinaires"
+
+class CarteThematique(models.Model):
+    id = models.AutoField(primary_key=True)
+    theme = models.CharField(max_length=128)
+    carte = models.ImageField(upload_to="cartes/")
+    details = models.CharField(max_length=256, null=True, blank=True)
