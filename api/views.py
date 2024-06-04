@@ -14,6 +14,7 @@ from tqdm import tqdm
 
 from .models import *
 from .serializers import *
+from .read_serializers import *
 
 class MinimalMetadata(SimpleMetadata):
     """
@@ -135,6 +136,12 @@ class ReseauDAlimentationViewset(
     def get_view_name(self):
         return 'OUVRAGES AEP'
 
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return ReseauDAlimentationReadSerializer
+
+        return super().get_serializer_class()
+
     def perform_create(self, serializer):
         coords = serializer.validated_data["II_5_coordonnees"]
         existings = self.queryset.filter(II_5_coordonnees = coords)
@@ -166,7 +173,13 @@ class IbomboViewset(
 
     def get_view_name(self):
         return 'Borne fontaine "BF" (IBOMBO RUSANGI)'
-    
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return IbomboReadSerializer
+
+        return super().get_serializer_class()
+
     def perform_create(self, serializer):
         coords = serializer.validated_data["II_5_coordonnees"]
         existings = self.queryset.filter(II_5_coordonnees = coords)
@@ -199,6 +212,12 @@ class BranchementPriveViewset(
 
     def get_view_name(self):
         return 'BRANCHEMENT PRIVE (UMUHANA CANKE INYUBAKWA RUZANGI IFISE MAZI IWABO)'
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return BranchementPriveReadSerializer
+
+        return super().get_serializer_class()
 
     def perform_create(self, serializer):
         coords = serializer.validated_data["II_5_coordonnees"]
@@ -233,6 +252,12 @@ class CaptageViewset(
     def get_view_name(self):
         return 'CAPTAGE'
 
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return CaptageReadSerializer
+
+        return super().get_serializer_class()
+
     def perform_create(self, serializer):
         coords = serializer.validated_data["II_5_coordonnees"]
         existings = self.queryset.filter(II_5_coordonnees = coords)
@@ -265,6 +290,12 @@ class PompeViewset(
 
     def get_view_name(self):
         return 'SYSTÈME DE POMPAGE'
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return PompeReadSerializer
+
+        return super().get_serializer_class()
 
     def perform_create(self, serializer):
         coords = serializer.validated_data["II_5_coordonnees"]
@@ -299,6 +330,12 @@ class PuitViewset(
     def get_view_name(self):
         return "PUITS (IRIBA RY'AMAZI RYUBAKIYE)"
 
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return PuitReadSerializer
+
+        return super().get_serializer_class()
+
     def perform_create(self, serializer):
         coords = serializer.validated_data["II_5_coordonnees"]
         existings = self.queryset.filter(II_5_coordonnees = coords)
@@ -331,6 +368,12 @@ class ForageViewset(
 
     def get_view_name(self):
         return 'FORAGE'
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return ForageReadSerializer
+
+        return super().get_serializer_class()
 
     def perform_create(self, serializer):
         coords = serializer.validated_data["II_5_coordonnees"]
@@ -365,6 +408,12 @@ class ReservoirViewset(
     def get_view_name(self):
         return "RESERVOIR (Ikigega c'amazi)"
 
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return ReservoirReadSerializer
+
+        return super().get_serializer_class()
+
     def perform_create(self, serializer):
         coords = serializer.validated_data["II_5_coordonnees"]
         existings = self.queryset.filter(II_5_coordonnees = coords)
@@ -397,6 +446,12 @@ class SourceAmenageeViewset(
 
     def get_view_name(self):
         return 'Source Aménagée (Isoko ritunganijwe)'
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return SourceAmenageeReadSerializer
+
+        return super().get_serializer_class()
 
     def perform_create(self, serializer):
         coords = serializer.validated_data["II_5_coordonnees"]
@@ -431,6 +486,12 @@ class SourceNonAmenageeViewset(
     def get_view_name(self):
         return 'Source Non Aménagée (Isoko ridatunganijwe)'
 
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return SourceNonAmenageeReadSerializer
+
+        return super().get_serializer_class()
+
     def perform_create(self, serializer):
         coords = serializer.validated_data["II_5_coordonnees"]
         existings = self.queryset.filter(II_5_coordonnees = coords)
@@ -464,6 +525,12 @@ class VillageModerneViewset(
     def get_view_name(self):
         return 'Village Moderne (Ikigwati ca kijambere)'
 
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return VillageModerneReadSerializer
+
+        return super().get_serializer_class()
+
     def perform_create(self, serializer):
         coords = serializer.validated_data["II_5_coordonnees"]
         existings = self.queryset.filter(II_5_coordonnees = coords)
@@ -496,6 +563,12 @@ class VillageCollinaireViewset(
 
     def get_view_name(self):
         return 'Village collinaire (Ikigwati co ku mutumba)'
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return VillageCollinaireReadSerializer
+
+        return super().get_serializer_class()
 
     def perform_create(self, serializer):
         coords = serializer.validated_data["II_5_coordonnees"]
