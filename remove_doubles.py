@@ -31,9 +31,11 @@ print("TRAITEMENT")
 for viewset_class in list_viewsets:
     viewset = viewset_class()
     table:models.QuerySet = viewset.get_queryset().filter(
-#        date__gte = datetime.date(2024, 5, 23),
-        date__lte = datetime.date(2024, 5, 30)
+#        date__gte = datetime.date(2024, 6, 23),
+        date__lt = datetime.date(2024, 7, 1)
     )
+    table.delete()
+    continue
     for coords in tqdm(table.values('II_5_coordonnees').distinct()):
         object = table.filter(II_5_coordonnees = coords["II_5_coordonnees"]).first()
         item = model_to_dict(object)
@@ -75,4 +77,4 @@ print("ENREGISTREMENT")
 with open("one_file.csv", "w") as file:
     print("\t".join(titles), file=file)
     for line in tqdm(contents):
-        print("\t".join([str(x) for x in line]), file=file)
+        print("\t".join([str(x) if x not in {True, False} else "OUI" if x else "NON" for x in line]), file=file)

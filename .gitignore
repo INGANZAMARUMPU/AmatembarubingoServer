@@ -12,16 +12,4 @@
 /media
 /templates
 *.zip
-
-BranchementPrive
-Captage
-Forage
-Ibombo
-Pompe
-Puit
-ReseauDAlimentation
-Reservoir
-SourceAmenagee
-SourceNonAmenagee
-VillageCollinaire
-VillageModerne
+*csv
