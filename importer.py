@@ -1,4 +1,5 @@
 from pprint import pprint
+import sys
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils import get_column_letter
 from tqdm import tqdm
@@ -13,7 +14,7 @@ django.setup()
 
 from api.models import *
 
-wb = load_workbook("merged_file.xlsx")
+wb = load_workbook(sys.argv[1])
 sheet = wb.active
 
 corespondances = {
@@ -23,11 +24,13 @@ corespondances = {
     'BRANCHEMENT PRIVE (IMIHANA CANKE INYUBAKWA RUSANGI IFISE AMAZI I WABO )': BranchementPrive,
     "RESERVOIR (Ikigega c'amazi)": Reservoir,
     'Source Non Aménagée(Isoko ridatunganijwe)': SourceNonAmenagee,
+    'Source Non Aménagée (Isoko ridatunganijwe)': SourceNonAmenagee,
     'OUVRAGES AEP': ReseauDAlimentation,
     'CAPTAGE': Captage,
     'SYSTÈME DE POMPAGE': Pompe,
     "PUITS (IRIBA RY'AMAZI RYUBAKIYE)": Puit,
     'FORAGES': Forage,
+    'FORAGE': Forage,
     'Village Moderne (Ikigwati ca kijambere)': VillageModerne,
     'BRANCHEMENT PRIVE (UMIHANA CANKE INYUBAKWA RUSANGI IFISE AMAZI I WABO )': BranchementPrive
 }
@@ -40,6 +43,7 @@ def predictDBCollumnName(Table:Model, key:str) -> str:
     if "ibombo rusangi ryegereye he" in lower : return "IV_1_place", 100
     if "type de branchement prive" in lower : return "V_1_place", 100
     if "prénom" in lower : return "I_1_nom_et_prenom", 100
+    if "latitude" in lower : return "II_5_coordonnees", 100
     
     if not key[0].isalpha() or key[0] != key[0].upper(): return False, 0
 
@@ -47,6 +51,7 @@ def predictDBCollumnName(Table:Model, key:str) -> str:
     if "identification" in lower : key = "identification"
     if "volume" in lower : key = "volume"
     if "nombre de ménages" in lower : key = "nb_menages"
+    if "nombre de menages" in lower : key = "nb_menages"
     if "débit" in lower : key = "debit"
     ratio = 0
     prediction = ""
@@ -76,11 +81,11 @@ for i, ligne in tqdm(enumerate(sheet.iter_rows(min_row=2, values_only=True))):
     i += 1
     data = {}
     confidences = {}
-    table_name = sheet[f"Q{i+1}"].value
+    table_name = sheet[f"A{i+1}"].value
     table:Model = corespondances[table_name]
     for j, col in enumerate(ligne):
         letter = get_column_letter(j+1)
-        if letter == "Q": continue
+        if letter == "A": continue
         valeur = sheet[f"{letter}{i+1}"].value
         if valeur == "-": continue
         valeur = forceBoolean(valeur)
@@ -96,7 +101,13 @@ for i, ligne in tqdm(enumerate(sheet.iter_rows(min_row=2, values_only=True))):
                     confidences[db_column_name] = confidence
 
     try:
+        to_delete = ["date"]
+        for key in data.keys():
+            if data[key] == None: to_delete.append(key)
+        for x in to_delete:
+            del data[x]
         table.objects.create(**data)
-    except Exception:
+    except Exception as e:
         pprint(data)
+        print(e)
 

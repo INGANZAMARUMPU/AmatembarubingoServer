@@ -11,5 +11,6 @@
 /static
 /media
 /templates
+/files
 *.zip
 *csv
