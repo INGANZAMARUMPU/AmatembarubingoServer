@@ -417,7 +417,7 @@ class VillageCollinaire(models.Model):
 class CarteThematique(models.Model):
     id = models.AutoField(primary_key=True)
     theme = models.CharField(max_length=128)
-    carte = models.FieldFile(upload_to="cartes/")
+    carte = models.FileField(upload_to="cartes/")
     details = models.CharField(max_length=256, null=True, blank=True)
 
     def __str__(self) -> str:
