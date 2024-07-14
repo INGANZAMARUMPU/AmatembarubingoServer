@@ -594,3 +594,15 @@ class CarteThematiqueViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, v
     queryset = CarteThematique.objects.all()
     serializer_class = CarteThematiqueSerializer
 
+
+class ApplicationViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+    permission_classes = AllowAny,
+    queryset = Application.objects.all()
+    serializer_class = ApplicationSerializer
+
+
+class ManuelViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+    permission_classes = AllowAny,
+    queryset = Manuel.objects.all()
+    serializer_class = ManuelSerializer
+

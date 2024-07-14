@@ -107,3 +107,13 @@ class CarteThematiqueSerializer(serializers.ModelSerializer):
     class Meta:
         model = CarteThematique
         fields = "__all__"
+
+class ManuelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Manuel
+        fields = "__all__"
+
+class ApplicationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Application
+        fields = "__all__"
