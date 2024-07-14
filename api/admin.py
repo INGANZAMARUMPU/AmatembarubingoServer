@@ -3,6 +3,15 @@ from django.utils.safestring import mark_safe
 from import_export.admin import ImportExportModelAdmin
 from .ressources import *
 
+
+@admin.site.register(Application)
+class ApplicationAdmin(admin.ModelAdmin):
+    list_display = "nom", "fichier", "details"
+
+@admin.site.register(Manuel)
+class ManuelAdmin(admin.ModelAdmin):
+    list_display = "nom", "fichier", "details"
+
 @admin.register(Province)
 class ProvinceAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = ProvinceResource

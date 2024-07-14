@@ -37,6 +37,33 @@ for value, key in GROUPS.choices:
         Group.objects.get_or_create(name=value)
     except: continue
 
+class Manuel(models.Model):
+    id = models.SmallAutoField(primary_key=True)
+    nom = models.CharField(max_length=16)
+    fichier = models.FileField(upload_to="manuels/")
+    details = models.CharField(max_length=256, null=True, blank=True)
+
+    def __str__(self):
+        return self.nom
+
+class Application(models.Model):
+    id = models.SmallAutoField(primary_key=True)
+    nom = models.CharField(max_length=16)
+    fichier = models.FileField(upload_to="applications/")
+    details = models.CharField(max_length=256, null=True, blank=True)
+
+    def __str__(self):
+        return self.nom
+
+class CarteThematique(models.Model):
+    id = models.AutoField(primary_key=True)
+    theme = models.CharField(max_length=128)
+    carte = models.FileField(upload_to="cartes/")
+    details = models.CharField(max_length=256, null=True, blank=True)
+
+    def __str__(self) -> str:
+        return self.theme
+
 class Province(models.Model):
     id = models.SmallAutoField(primary_key=True)
     nom = models.CharField(max_length=16)
@@ -413,12 +440,3 @@ class VillageCollinaire(models.Model):
     
     class Meta:
         verbose_name_plural = "Villages collinaires"
-
-class CarteThematique(models.Model):
-    id = models.AutoField(primary_key=True)
-    theme = models.CharField(max_length=128)
-    carte = models.FileField(upload_to="cartes/")
-    details = models.CharField(max_length=256, null=True, blank=True)
-
-    def __str__(self) -> str:
-        return self.theme

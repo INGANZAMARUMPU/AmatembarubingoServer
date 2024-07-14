@@ -20,8 +20,10 @@ sheet = wb.active
 corespondances = {
     'Source Aménagée (Isoko ritunganijwe)': SourceAmenagee,
     'Borne fontaine "BF" (IBOMBO RUSANGI )': Ibombo,
+    'Borne fontaine "BF" (IBOMBO RUSANGI)': Ibombo,
     'Village collinaire (Ikigwati co ku mutumba)': VillageCollinaire,
     'BRANCHEMENT PRIVE (IMIHANA CANKE INYUBAKWA RUSANGI IFISE AMAZI I WABO )': BranchementPrive,
+    'BRANCHEMENT PRIVE (UMUHANA CANKE INYUBAKWA RUZANGI IFISE MAZI IWABO)': BranchementPrive,
     "RESERVOIR (Ikigega c'amazi)": Reservoir,
     'Source Non Aménagée(Isoko ridatunganijwe)': SourceNonAmenagee,
     'Source Non Aménagée (Isoko ridatunganijwe)': SourceNonAmenagee,
@@ -44,6 +46,8 @@ def predictDBCollumnName(Table:Model, key:str) -> str:
     if "type de branchement prive" in lower : return "V_1_place", 100
     if "prénom" in lower : return "I_1_nom_et_prenom", 100
     if "latitude" in lower : return "II_5_coordonnees", 100
+    if "type de branchement prive" in lower : return "V_1_place", 100
+    if "borne fontaine proche de" in lower : return "IV_1_place", 100
     
     if not key[0].isalpha() or key[0] != key[0].upper(): return False, 0
 
@@ -53,6 +57,11 @@ def predictDBCollumnName(Table:Model, key:str) -> str:
     if "nombre de ménages" in lower : key = "nb_menages"
     if "nombre de menages" in lower : key = "nb_menages"
     if "débit" in lower : key = "debit"
+    if "debit" in lower : key = "debit"
+    if "ibara" in lower : key = "coloration"
+    if "tarissement" in lower : key = "tarissement"
+    if "agacimbiri" in lower : key = "sous_colline"
+    if "ivyihwejwe" in lower : key = "observations"
     ratio = 0
     prediction = ""
     for column in [x.name for x in Table._meta.get_fields(include_hidden=True)]:
@@ -71,9 +80,9 @@ def forceBoolean(valeur:str):
         lower = valeur.lower()
     except Exception:
         return valeur
-    if "(ntirikora)" in lower or "(oya)" in lower:
+    if "(ntirikora)" in lower or "(oya)" in lower or "nom" == lower:
         return False
-    if "irakora)" in lower or "(ego)" in lower:
+    if "irakora)" in lower or "(ego)" in lower or "oui" == lower:
         return True
     return valeur
 
@@ -99,7 +108,7 @@ for i, ligne in tqdm(enumerate(sheet.iter_rows(min_row=2, values_only=True))):
                 if confidences[db_column_name] < confidence:
                     data[db_column_name] = valeur
                     confidences[db_column_name] = confidence
-
+    copie = dict(data)
     try:
         to_delete = ["date"]
         for key in data.keys():
@@ -108,6 +117,6 @@ for i, ligne in tqdm(enumerate(sheet.iter_rows(min_row=2, values_only=True))):
             del data[x]
         table.objects.create(**data)
     except Exception as e:
-        pprint(data)
+        pprint(copie)
         print(e)
 
